@@ -1,19 +1,12 @@
 package com.spill.beans.dto;
 
-import java.sql.Date;
-
 public class CategoryDTO {
   private int no;
-  private String nickname;
-  private String email;
-  private String password;
-  private Date registeredDate;
-  private int active;
+  private String label;
 
   @Override
   public String toString() {
-    return "MemberDTO [no=" + no + ", nickname=" + nickname + ", email=" + email + ", password="
-        + password + ", registeredDate=" + registeredDate + ", active=" + active + "]";
+    return "CategoryDTO [no=" + no + ", label=" + label + "]";
   }
 
   public int getNo() {
@@ -24,44 +17,12 @@ public class CategoryDTO {
     this.no = no;
   }
 
-  public String getNickname() {
-    return nickname;
+  public String getLabel() {
+    return label;
   }
 
-  public void setNickname(String nickname) {
-    this.nickname = nickname;
-  }
-
-  public String getEmail() {
-    return email;
-  }
-
-  public void setEmail(String email) {
-    this.email = email;
-  }
-
-  public String getPassword() {
-    return password;
-  }
-
-  public void setPassword(String password) {
-    this.password = password;
-  }
-
-  public Date getRegisteredDate() {
-    return registeredDate;
-  }
-
-  public void setRegisteredDate(Date registeredDate) {
-    this.registeredDate = registeredDate;
-  }
-
-  public int getActive() {
-    return active;
-  }
-
-  public void setActive(int active) {
-    this.active = active;
+  public void setLabel(String label) {
+    this.label = label;
   }
 
 }
