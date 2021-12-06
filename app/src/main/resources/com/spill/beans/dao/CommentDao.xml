@@ -53,7 +53,7 @@
      values(#{boardNo}, #{comment.writer.no}, #{comment.content}, #{comment.registeredDate}, #{comment.isPublic}, #{comment.replyCount})
   </insert>
   
-  <update id="update" parameterType="Comment">
+  <update id="update" parameterType="CommentDTO">
     update comment set
      <set>
 	     <if test="content != null">
@@ -63,7 +63,8 @@
 	       isPublic=#{isPublic}
 	     </if>
      </set>
-    where comment_no=#{commentNo}
+    where
+      comment_no=#{commentNo}
   </update>
   
   <delete id="delete" parameterType="int">
