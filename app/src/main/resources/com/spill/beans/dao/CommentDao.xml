@@ -12,8 +12,15 @@
     <result column="created_dt" property="password"/>
     <result column="isPublic" property="photo"/>
     <result column="replyCount" property="replyCount"/>
-  </resultMap>
+  
 
+  <association property="writer" javaType="MemberDTO">
+      <id column="member_no" property="perNo"/> 
+      <result column="member_nickname" property="perNickname"/>
+      <result column="active" property="perStatus"/>
+  </association>
+  
+  </resultMap>
 </mapper>
 
 
