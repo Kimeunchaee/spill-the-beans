@@ -1,14 +1,14 @@
 -- 회원
-DROP TABLE IF EXISTS Member RESTRICT;
+DROP TABLE IF EXISTS member RESTRICT;
 
 -- 댓글
-DROP TABLE IF EXISTS Comment RESTRICT;
+DROP TABLE IF EXISTS comment RESTRICT;
 
 -- 카테고리
-DROP TABLE IF EXISTS Category RESTRICT;
+DROP TABLE IF EXISTS category RESTRICT;
 
 -- 게시판
-DROP TABLE IF EXISTS Board RESTRICT;
+DROP TABLE IF EXISTS board RESTRICT;
 
 -- 레벨
 DROP TABLE IF EXISTS level RESTRICT;
@@ -17,7 +17,7 @@ DROP TABLE IF EXISTS level RESTRICT;
 DROP TABLE IF EXISTS file RESTRICT;
 
 -- 회원
-CREATE TABLE Member (
+CREATE TABLE member (
   member_no  INTEGER      NOT NULL COMMENT '회원번호', -- 회원번호
   nickname   VARCHAR(50)  NOT NULL COMMENT '닉네임', -- 닉네임
   email      VARCHAR(40)  NOT NULL COMMENT '이메일', -- 이메일
@@ -28,17 +28,17 @@ CREATE TABLE Member (
 COMMENT '회원';
 
 -- 회원
-ALTER TABLE Member
-  ADD CONSTRAINT PK_Member -- 회원 기본키
+ALTER TABLE member
+  ADD CONSTRAINT PK_member -- 회원 기본키
     PRIMARY KEY (
       member_no -- 회원번호
     );
 
-ALTER TABLE Member
+ALTER TABLE member
   MODIFY COLUMN member_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '회원번호';
 
 -- 댓글
-CREATE TABLE Comment (
+CREATE TABLE comment (
   comment_no INTEGER      NOT NULL COMMENT '댓글번호', -- 댓글번호
   member_no  INTEGER      NULL     COMMENT '회원번호', -- 회원번호
   board_no   INTEGER      NOT NULL COMMENT '게시글번호', -- 게시글번호
@@ -50,31 +50,31 @@ CREATE TABLE Comment (
 COMMENT '댓글';
 
 -- 댓글
-ALTER TABLE Comment
-  ADD CONSTRAINT PK_Comment -- 댓글 기본키
+ALTER TABLE comment
+  ADD CONSTRAINT PK_comment -- 댓글 기본키
     PRIMARY KEY (
       comment_no -- 댓글번호
     );
 
-ALTER TABLE Comment
+ALTER TABLE comment
   MODIFY COLUMN comment_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '댓글번호';
 
 -- 카테고리
-CREATE TABLE Category (
+CREATE TABLE category (
   category_no INTEGER      NOT NULL COMMENT '카테고리 번호', -- 카테고리 번호
   label       VARCHAR(255) NOT NULL COMMENT '카데고리 이름' -- 카데고리 이름
 )
 COMMENT '카테고리';
 
 -- 카테고리
-ALTER TABLE Category
-  ADD CONSTRAINT PK_Category -- 카테고리 기본키
+ALTER TABLE category
+  ADD CONSTRAINT PK_category -- 카테고리 기본키
     PRIMARY KEY (
       category_no -- 카테고리 번호
     );
 
 -- 게시판
-CREATE TABLE Board (
+CREATE TABLE board (
   board_no     INTEGER      NOT NULL COMMENT '게시글번호', -- 게시글번호
   member_no    INTEGER      NOT NULL COMMENT '회원번호', -- 회원번호
   category_no  INTEGER      NULL     COMMENT '카테고리 번호', -- 카테고리 번호
@@ -88,13 +88,13 @@ CREATE TABLE Board (
 COMMENT '게시판';
 
 -- 게시판
-ALTER TABLE Board
-  ADD CONSTRAINT PK_Board -- 게시판 기본키
+ALTER TABLE board
+  ADD CONSTRAINT PK_board -- 게시판 기본키
     PRIMARY KEY (
       board_no -- 게시글번호
     );
 
-ALTER TABLE Board
+ALTER TABLE board
   MODIFY COLUMN board_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '게시글번호';
 
 -- 레벨
@@ -127,41 +127,43 @@ ALTER TABLE file
     );
 
 -- 댓글
-ALTER TABLE Comment
-  ADD CONSTRAINT FK_Board_TO_Comment -- 게시판 -> 댓글
+ALTER TABLE comment
+  ADD CONSTRAINT FK_board_TO_comment -- 게시판 -> 댓글
     FOREIGN KEY (
       board_no -- 게시글번호
     )
-    REFERENCES Board ( -- 게시판
+    REFERENCES board ( -- 게시판
       board_no -- 게시글번호
     );
 
 -- 댓글
-ALTER TABLE Comment
-  ADD CONSTRAINT FK_Member_TO_Comment -- 회원 -> 댓글
+ALTER TABLE comment
+  ADD CONSTRAINT FK_member_TO_comment -- 회원 -> 댓글
     FOREIGN KEY (
       member_no -- 회원번호
     )
-    REFERENCES Member ( -- 회원
+    REFERENCES member ( -- 회원
       member_no -- 회원번호
     );
 
 -- 게시판
-ALTER TABLE Board
-  ADD CONSTRAINT FK_Member_TO_Board -- 회원 -> 게시판
+ALTER TABLE board
+  ADD CONSTRAINT FK_member_TO_board -- 회원 -> 게시판
     FOREIGN KEY (
       member_no -- 회원번호
     )
-    REFERENCES Member ( -- 회원
+    REFERENCES member ( -- 회원
       member_no -- 회원번호
     );
 
 -- 게시판
-ALTER TABLE Board
-  ADD CONSTRAINT FK_Category_TO_Board -- 카테고리 -> 게시판
+ALTER TABLE board
+  ADD CONSTRAINT FK_category_TO_board -- 카테고리 -> 게시판
     FOREIGN KEY (
       category_no -- 카테고리 번호
     )
-    REFERENCES Category ( -- 카테고리
+    REFERENCES category ( -- 카테고리
       category_no -- 카테고리 번호
     );
+    
+    
