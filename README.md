@@ -20,6 +20,18 @@
 	- 공용 깃허브 생성
     - .gitignore 설정
     - gradle eclipse 설정
+    - 테이블 설정
+    - DB 설정
+        - 로컬 MySQL 서버에 접속
+            > mysql -u root -p
+        - MySQL 사용자 추가
+            > CREATE USER 'ear'@'localhost' IDENTIFIED BY '1111';
+        - MySQL 데이터베이스 생성
+            > CREATE DATABASE eardb
+              DEFAULT CHARACTER SET utf8
+              DEFAULT COLLATE utf8_general_ci;
+        - MySQL 사용자에게 데이터베이스 사용 권한 부여
+            > GRANT ALL ON eardb.* TO 'ear'@'localhost';
 - 회의 내용
     - 도메인 추가
     - 테이블 추가
