@@ -14,88 +14,14 @@
     <result column="likeCount" property="likeCount"/>
     <result column="commentCount" property="commentCount"/>
     <result column="category_no" property="categoryNo"/>
-  </resultMap>
   
   <association property="writer" javaType="MemberDTO">
       <id column="member_no" property="no"/>
       <result column="nickname" property="nickname"/>
   </association>
   
-  <select id="findAll" resultMap="BoardMap">
-    select 
-      member_no,
-      name,
-      email,
-      tel,
-      created_dt 
-    from 
-      pms_member 
-    order by 
-      name asc
-  </select>
+  </resultMap>
   
-  <select id="findByNo" resultMap="BoardMap" parameterType="int">
-    select 
-      member_no,
-      name,
-      email,
-      photo,
-      tel,
-      created_dt 
-    from 
-      pms_member 
-    where 
-      member_no=#{no}
-  </select>
-
-  <insert id="insert" parameterType="board">
-    insert into pms_member(name,email,password,photo,tel) 
-    values(#{name},#{email},password(#{password}),#{photo},#{tel})
-  </insert>
-  
-  <update id="update" parameterType="board">
-    update pms_member set
-      name=#{name},
-      email=#{email},
-      password=password(#{password}),
-      photo=#{photo},
-      tel=#{tel}
-    where 
-      member_no=#{no}
-  </update>
-  
-  <delete id="delete" parameterType="int">
-    delete from pms_member 
-    where member_no=#{value}
-  </delete>
-  
-  <select id="findByEmailAndPassword" resultMap="BoardMap">
-    select 
-      member_no,
-      name,
-      email,
-      photo,
-      tel,
-      created_dt 
-    from 
-      pms_member
-    where 
-      email=#{email} and password=password(#{password})
-  </select>
-  
-  <select id="findByName" resultMap="BoardMap" parameterType="string">
-    select 
-      member_no,
-      name,
-      email,
-      photo,
-      tel,
-      created_dt 
-    from 
-      pms_member
-    where 
-      name=#{value}
-  </select>
 </mapper>
 
 
