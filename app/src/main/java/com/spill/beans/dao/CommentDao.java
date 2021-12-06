@@ -1,15 +1,18 @@
 package com.spill.beans.dao;
 
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 import com.spill.beans.dto.CommentDTO;
 
-// 역할
-// - 회원 데이터를 처리하는 객체 사용법을 정의한다.
 public interface CommentDao {
-  void insert(CommentDTO comment) throws Exception;
-  List<CommentDTO> findAll() throws Exception;
-  CommentDTO findByNo(int no) throws Exception;
-  CommentDTO findByName(String name) throws Exception;
-  void update(CommentDTO member) throws Exception;
-  void delete(int no) throws Exception;
+
+  List<CommentDTO> findAll(int boarNo) throws Exception;
+  CommentDTO findByNo(int commentNo) throws Exception;
+
+  void insert(@Param("boardNo")int boardNo, @Param("comment")CommentDTO comment) throws Exception;
+  void update(CommentDTO comment) throws Exception;
+
+  void delete(int commentNo) throws Exception;            // 관리자가 삭제
+  void deleteByMemberNo(int memberNo) throws Exception;   // 내가 쓴 댓글만 삭제
+
 }
