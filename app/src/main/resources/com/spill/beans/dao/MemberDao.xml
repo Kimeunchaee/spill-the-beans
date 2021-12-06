@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.spill.beans.dao.MemberDao">
+  
+  <resultMap type="Member" id="MemberMap">
+    <id column="member_no" property="no"/> 
+    <result column="nickname" property="nickname"/>
+    <result column="email" property="email"/>
+    <result column="password" property="password"/>
+    <result column="created_dt" property="registeredDate"/>
+    <result column="active" property="active"/>
+  </resultMap>
+  
+  <sql id="select1">
+    select
+      member_no,
+      nickname,
+      email,
+      password,
+      created_dt,
+      active
+    from
+      member  
+  </sql>
+  
+  <select id="findAll" resultMap="MemberMap">
+  <include refid="select1"/>
+    order by
+      member_no asc
+  </select>
+  
+  <select id="findByNo" resultMap="MemberMap" parameterType="int">
+  <include refid="select1"/>
+    where
+      member_no=#{no}
+  </select>
+  
+  <select id="findByNickName" resultMap="MemberMap" parameterType="string">
+  <include refid="select1"/>
+    where
+      nickname=#{nickname}
+  </select>
+  
+  <select id="findByEmail" resultMap="MemberMap" parameterType="string">
+  <include refid="select1"/>
+    where
+      email=#{email}
+  </select>
+  
+  <select id="findByEmailAndPassword" resultMap="MemberMap">
+  <include refid="select1"/>
+    where
+      email=#{email} and password=password(#{password})
+  </select>
+  
+  <insert id="insert" parameterType="member">
+    insert into member(nickname,email,password)
+    values(#{nickname},#{email},password(#{password}))
+  </insert>
+  
+  <update id="updateMember" parameterType="member">
+	  update member
+	  <set>
+	    <if test="nickname != null">
+	      nickname=#{nickname},
+	    </if>
+	    <if test="email != null">
+	      email=#{email},
+	    </if>
+	    <if test="password != null">
+	      password=password(#{password})
+	    </if>
+	  </set>
+    where
+      member_no=#{no}
+  </update>
+  
+  <update id="updateActive" parameterType="member">
+    update member set
+      nickname=#{nickname},
+      email=#{email},
+      password=password(#{password}),
+      active=2
+    where
+      member_no=#{no}
+  </update>
+  
+</mapper>
