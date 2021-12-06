@@ -1,4 +1,4 @@
-package com.spill.beans.vo;
+package com.spill.beans.dto;
 
 import java.sql.Date;
 

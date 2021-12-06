@@ -54,7 +54,7 @@ public class RootConfig {
     LogFactory.useLog4J2Logging();
     SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
     sqlSessionFactoryBean.setDataSource(dataSource);
-    sqlSessionFactoryBean.setTypeAliasesPackage("com.spill.beans.vo");
+    sqlSessionFactoryBean.setTypeAliasesPackage("com.spill.beans.dto");
     sqlSessionFactoryBean.setMapperLocations(
         appCtx.getResources("classpath:com/spill/beans/dao/*Dao.xml"));
     return sqlSessionFactoryBean.getObject();

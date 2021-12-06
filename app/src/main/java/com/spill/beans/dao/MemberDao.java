@@ -2,7 +2,7 @@ package com.spill.beans.dao;
 
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
-import com.spill.beans.vo.Member;
+import com.spill.beans.dto.Member;
 
 // 역할
 // - 회원 데이터를 처리하는 객체 사용법을 정의한다.

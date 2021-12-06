@@ -93,7 +93,7 @@ public class AppConfig {
     // mybatis 설정 파일을 XML 파일로 따로 두지 말고,
     // 다음과 같이 자바 코드로 설정하면 편하다.
     // 
-    sqlSessionFactoryBean.setTypeAliasesPackage("com.spill.beans.vo");
+    sqlSessionFactoryBean.setTypeAliasesPackage("com.spill.beans.dto");
     sqlSessionFactoryBean.setMapperLocations(
         appCtx.getResources("classpath:com/spill/beans/dao/*Dao.xml"));
     return sqlSessionFactoryBean.getObject();
