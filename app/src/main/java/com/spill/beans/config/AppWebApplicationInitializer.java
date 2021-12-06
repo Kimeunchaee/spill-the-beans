@@ -1,4 +1,4 @@
-package com.eomcs.pms.config;
+package com.spill.beans.config;
 
 import java.io.File;
 import javax.servlet.Filter;

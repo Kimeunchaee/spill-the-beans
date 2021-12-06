@@ -1,4 +1,4 @@
-package com.eomcs.pms.web;
+package com.spill.beans.web;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.Cookie;
@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-import com.eomcs.pms.domain.Member;
 import com.eomcs.pms.service.MemberService;
 
 @Controller

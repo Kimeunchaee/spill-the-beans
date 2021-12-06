@@ -1,4 +1,4 @@
-package com.eomcs.pms.config;
+package com.spill.beans.config;
 
 import javax.sql.DataSource;
 import org.apache.ibatis.logging.LogFactory;

@@ -1,4 +1,4 @@
-package com.eomcs.pms.config;
+package com.spill.beans.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
