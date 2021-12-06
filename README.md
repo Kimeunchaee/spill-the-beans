@@ -32,6 +32,8 @@
               DEFAULT COLLATE utf8_general_ci;
         - MySQL 사용자에게 데이터베이스 사용 권한 부여
             > GRANT ALL ON eardb.* TO 'ear'@'localhost';
+        - MySQL 사용자 목록 조회
+            > select user from mysql.user;
 - 회의 내용
     - 도메인 추가
     - 테이블 추가
