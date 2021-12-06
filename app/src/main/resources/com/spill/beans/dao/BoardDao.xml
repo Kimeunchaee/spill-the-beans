@@ -22,6 +22,11 @@
   
   </resultMap>
   
+  <insert id="insert" parameterType="BoardDTO">
+    insert into board(title,content,member_no) 
+    values(#{title},#{content},#{writer.no})
+  </insert>
+  
 </mapper>
 
 

@@ -40,7 +40,7 @@ ALTER TABLE member
 -- 댓글
 CREATE TABLE comment (
   comment_no INTEGER      NOT NULL COMMENT '댓글번호', -- 댓글번호
-  member_no  INTEGER      NULL     COMMENT '회원번호', -- 회원번호
+  member_no  INTEGER      NOT NULL COMMENT '회원번호', -- 회원번호
   board_no   INTEGER      NOT NULL COMMENT '게시글번호', -- 게시글번호
   content    VARCHAR(255) NOT NULL COMMENT '내용', -- 내용
   created_dt DATE         NOT NULL DEFAULT curdate() COMMENT '등록일', -- 등록일
@@ -77,7 +77,7 @@ ALTER TABLE category
 CREATE TABLE board (
   board_no     INTEGER      NOT NULL COMMENT '게시글번호', -- 게시글번호
   member_no    INTEGER      NOT NULL COMMENT '회원번호', -- 회원번호
-  category_no  INTEGER      NULL     COMMENT '카테고리 번호', -- 카테고리 번호
+  category_no  INTEGER      NOT NULL COMMENT '카테고리 번호', -- 카테고리 번호
   title        VARCHAR(255) NOT NULL COMMENT '제목', -- 제목
   content      VARCHAR(255) NOT NULL COMMENT '내용', -- 내용
   viewCount    INTEGER      NOT NULL COMMENT '조회수', -- 조회수
@@ -165,5 +165,4 @@ ALTER TABLE board
     REFERENCES category ( -- 카테고리
       category_no -- 카테고리 번호
     );
-    
     
