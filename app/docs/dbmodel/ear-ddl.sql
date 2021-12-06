@@ -40,6 +40,7 @@ ALTER TABLE Member
 -- 댓글
 CREATE TABLE Comment (
   comment_no INTEGER      NOT NULL COMMENT '댓글번호', -- 댓글번호
+  member_no  INTEGER      NULL     COMMENT '회원번호', -- 회원번호
   board_no   INTEGER      NOT NULL COMMENT '게시글번호', -- 게시글번호
   content    VARCHAR(255) NOT NULL COMMENT '내용', -- 내용
   created_dt DATE         NOT NULL DEFAULT curdate() COMMENT '등록일', -- 등록일
@@ -61,7 +62,6 @@ ALTER TABLE Comment
 -- 카테고리
 CREATE TABLE Category (
   category_no INTEGER      NOT NULL COMMENT '카테고리 번호', -- 카테고리 번호
-  board_no    INTEGER      NOT NULL COMMENT '게시글번호', -- 게시글번호
   label       VARCHAR(255) NOT NULL COMMENT '카데고리 이름' -- 카데고리 이름
 )
 COMMENT '카테고리';
@@ -77,6 +77,7 @@ ALTER TABLE Category
 CREATE TABLE Board (
   board_no     INTEGER      NOT NULL COMMENT '게시글번호', -- 게시글번호
   member_no    INTEGER      NOT NULL COMMENT '회원번호', -- 회원번호
+  category_no  INTEGER      NULL     COMMENT '카테고리 번호', -- 카테고리 번호
   title        VARCHAR(255) NOT NULL COMMENT '제목', -- 제목
   content      VARCHAR(255) NOT NULL COMMENT '내용', -- 내용
   viewCount    INTEGER      NOT NULL COMMENT '조회수', -- 조회수
@@ -135,14 +136,14 @@ ALTER TABLE Comment
       board_no -- 게시글번호
     );
 
--- 카테고리
-ALTER TABLE Category
-  ADD CONSTRAINT FK_Board_TO_Category -- 게시판 -> 카테고리
+-- 댓글
+ALTER TABLE Comment
+  ADD CONSTRAINT FK_Member_TO_Comment -- 회원 -> 댓글
     FOREIGN KEY (
-      board_no -- 게시글번호
+      member_no -- 회원번호
     )
-    REFERENCES Board ( -- 게시판
-      board_no -- 게시글번호
+    REFERENCES Member ( -- 회원
+      member_no -- 회원번호
     );
 
 -- 게시판
@@ -153,4 +154,14 @@ ALTER TABLE Board
     )
     REFERENCES Member ( -- 회원
       member_no -- 회원번호
+    );
+
+-- 게시판
+ALTER TABLE Board
+  ADD CONSTRAINT FK_Category_TO_Board -- 카테고리 -> 게시판
+    FOREIGN KEY (
+      category_no -- 카테고리 번호
+    )
+    REFERENCES Category ( -- 카테고리
+      category_no -- 카테고리 번호
     );
