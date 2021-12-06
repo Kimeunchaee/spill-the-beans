@@ -81,7 +81,7 @@ public class MemberController {
 
     member.setRegisteredDate(oldMember.getRegisteredDate());
 
-    memberDao.update(member);
+    memberDao.updateMember(member);
     sqlSessionFactory.openSession().commit();
 
     ModelAndView mv = new ModelAndView();
@@ -96,7 +96,12 @@ public class MemberController {
       throw new Exception("해당 번호의 회원이 없습니다.");
     }
 
-    memberDao.delete(no);
+    member.setNickname("Deleted Member("+ member.getNickname() +")");
+    member.setEmail("Deleted Email");
+    member.setPassword("Deleted Password");
+    member.setActive(2);
+
+    memberDao.updateActive(member);
     sqlSessionFactory.openSession().commit();
 
     ModelAndView mv = new ModelAndView();

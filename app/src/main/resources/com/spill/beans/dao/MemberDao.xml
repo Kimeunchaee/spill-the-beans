@@ -27,31 +27,33 @@
   </sql>
   
   <select id="findAll" resultMap="MemberMap">
-      select
-      member_no,
-      nickname,
-      email,
-      password,
-      created_dt,
-      active
-    from
-      member
+  <include refid="select1"/>
     order by
       member_no asc
   </select>
   
   <select id="findByNo" resultMap="MemberMap" parameterType="int">
-    select
-      member_no,
-      nickname,
-      email,
-      password,
-      created_dt,
-      active
-    from
-      member
+  <include refid="select1"/>
     where
       member_no=#{no}
+  </select>
+  
+  <select id="findByNickName" resultMap="MemberMap" parameterType="string">
+  <include refid="select1"/>
+    where
+      nickname=#{nickname}
+  </select>
+  
+  <select id="findByEmail" resultMap="MemberMap" parameterType="string">
+  <include refid="select1"/>
+    where
+      email=#{email}
+  </select>
+  
+  <select id="findByEmailAndPassword" resultMap="MemberMap">
+  <include refid="select1"/>
+    where
+      email=#{email} and password=password(#{password})
   </select>
   
   <insert id="insert" parameterType="member">
@@ -59,6 +61,31 @@
     values(#{nickname},#{email},password(#{password}))
   </insert>
   
+  <update id="updateMember" parameterType="member">
+	  update member
+	  <set>
+	    <if test="nickname != null">
+	      nickname=#{nickname},
+	    </if>
+	    <if test="email != null">
+	      email=#{email},
+	    </if>
+	    <if test="password != null">
+	      password=password(#{password})
+	    </if>
+	  </set>
+    where
+      member_no=#{no}
+  </update>
   
+  <update id="updateActive" parameterType="member">
+    update member set
+      nickname=#{nickname},
+      email=#{email},
+      password=password(#{password}),
+      active=2
+    where
+      member_no=#{no}
+  </update>
   
 </mapper>
