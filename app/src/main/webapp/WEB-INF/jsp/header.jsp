@@ -10,10 +10,13 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="${contextPath}/board/list">게시글</a>
+          <a class="nav-link active" aria-current="page" href="${contextPath}/board/list">게시판</a>
         </li>
         <li class="nav-item">
           <a class="nav-link active" href="${contextPath}/member/list">회원</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="${contextPath}/comment/list">댓글(TEST)</a>
         </li>
       </ul>
     </div>
