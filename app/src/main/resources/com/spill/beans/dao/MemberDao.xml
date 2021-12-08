@@ -56,12 +56,12 @@
       email=#{email} and password=password(#{password})
   </select>
   
-  <insert id="insert" parameterType="member">
+  <insert id="insert" parameterType="MemberDTO">
     insert into member(nickname,email,password)
     values(#{nickname},#{email},password(#{password}))
   </insert>
   
-  <update id="updateMember" parameterType="member">
+  <update id="updateMember" parameterType="MemberDTO">
 	  update member
 	  <set>
 	    <if test="nickname != null">
@@ -78,7 +78,7 @@
       member_no=#{no}
   </update>
   
-  <update id="updateActive" parameterType="member">
+  <update id="updateActive" parameterType="MemberDTO">
     update member set
       nickname=#{nickname},
       email=#{email},
