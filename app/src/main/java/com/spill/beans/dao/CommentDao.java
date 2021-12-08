@@ -6,7 +6,7 @@ import com.spill.beans.dto.CommentDTO;
 
 public interface CommentDao {
 
-  List<CommentDTO> findAll(int boarNo) throws Exception;
+  List<CommentDTO> findAll(int boardNo) throws Exception;
   CommentDTO findByNo(int commentNo) throws Exception;
 
   void insert(@Param("boardNo")int boardNo, @Param("comment")CommentDTO comment) throws Exception;
