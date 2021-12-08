@@ -23,9 +23,24 @@
   </resultMap>
   
   <insert id="insert" parameterType="BoardDTO">
-    insert into board(title,content,member_no) 
-    values(#{title},#{content},#{writer.no})
+    insert into board(title,content,viewCount,likeCount,commentCount,category_no,member_no) 
+    values(#{title},#{content},#{viewCount},#{likeCount},#{commentCount},#{categoryNo},#{member_no})
   </insert>
+  
+   <select id="findAll" resultMap="BoardMap">
+    select
+      b.board_no,
+      b.title,
+      b.content,
+      b.viewCount,
+      b.likeCount,
+      b.commentCount,
+      m.nickname,
+      m.email
+    from
+      board b
+      inner join member m on b.member_no=m.member_no
+  </select>
   
 </mapper>
 
