@@ -5,7 +5,7 @@
 
 <mapper namespace="com.spill.beans.dao.CategoryDao">
   
-  <resultMap type="Category" id="CategoryMap">
+  <resultMap type="CategoryDTO" id="CategoryMap">
     <id column="category_no" property="no"/> 
     <result column="label" property="label"/>
 
