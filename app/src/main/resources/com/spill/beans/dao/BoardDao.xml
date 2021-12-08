@@ -18,6 +18,7 @@
   <association property="writer" javaType="MemberDTO">
       <id column="member_no" property="no"/>
       <result column="nickname" property="nickname"/>
+      <result column="email" property="email"/>
   </association>
   
   </resultMap>
@@ -35,6 +36,7 @@
       b.viewCount,
       b.likeCount,
       b.commentCount,
+      m.member_no,
       m.nickname,
       m.email
     from
@@ -47,6 +49,23 @@
       viewCount = viewCount + 1
     where board_no=#{no}
   </update>
+  
+  <select id="findByNo" resultMap="BoardMap" parameterType="int">
+    select
+      b.board_no,
+      b.title,
+      b.content,
+      b.viewCount,
+      b.likeCount,
+      b.commentCount,
+      m.member_no,
+      m.nickname,
+      m.email
+    from
+      board b
+      inner join member m on b.member_no=m.member_no
+    where board_no=#{no}
+  </select>
   
 </mapper>
 

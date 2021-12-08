@@ -43,7 +43,6 @@ public class BoardController {
   @GetMapping("/board/list")
   public ModelAndView list() throws Exception {
     Collection<BoardDTO> boardList = boardDao.findAll();
-
     ModelAndView mv = new ModelAndView();
     mv.addObject("boardList", boardList);
     mv.addObject("pageTitle", "게시글목록");
