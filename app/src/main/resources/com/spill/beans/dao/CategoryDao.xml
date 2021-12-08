@@ -26,12 +26,12 @@
   </select>
   
 <!-- 번호 자동 증가 할 건지 안 할 건지 수요일에 이야기하기(CRUD 할 거면 테이블 고쳐야 함) -->
-  <insert id="insert" parameterType="category">
+  <insert id="insert" parameterType="CategoryDTO">
     insert into category(label)
     values(#{label})
   </insert>
   
-  <update id="update" parameterType="category">
+  <update id="update" parameterType="CategoryDTO">
 	  update category
 	  <set>
 	    <if test="label != null">

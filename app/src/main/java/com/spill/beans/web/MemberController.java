@@ -17,7 +17,7 @@ public class MemberController {
 
   @Autowired SqlSessionFactory sqlSessionFactory;
   @Autowired MemberDao memberDao;
-  @Autowired MemberDTO memberDTO;
+  //  @Autowired MemberDTO memberDTO;
   @Autowired ServletContext sc;
 
   @GetMapping("/member/form")
@@ -32,7 +32,7 @@ public class MemberController {
   @PostMapping("/member/add")
   public ModelAndView add(MemberDTO member, Part photoFile) throws Exception {
 
-    memberDao.insert(memberDTO);
+    //    memberDao.insert(memberDTO);
     sqlSessionFactory.openSession().commit();
 
     ModelAndView mv = new ModelAndView();
@@ -64,7 +64,7 @@ public class MemberController {
     }
 
     ModelAndView mv = new ModelAndView();
-    mv.addObject("member", memberDTO);
+    //    mv.addObject("member", memberDTO);
     mv.addObject("pageTitle", "회원정보");
     mv.addObject("contentUrl", "member/MemberDetail.jsp");
     mv.setViewName("template1");
