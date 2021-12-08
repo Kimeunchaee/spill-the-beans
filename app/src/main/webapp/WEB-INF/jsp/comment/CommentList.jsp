@@ -14,10 +14,11 @@
      <span style="font-size: 12px;">${comment.writer.nickname} | ${comment.registeredDate}</span>
      
      <div class="btn-group" role="group" aria-label="Basic outlined example">
-       <c:if test="${comment.writer.no eq loginUser.no}">
+       <!-- <c:if test="${comment.writer.no eq loginUser.no}"> -->
        
-       <!-- 댓글 수정 -->
-       <button class="btn btn-link" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo" style="font-size: 12px; padding: 3px 6px;">수정</button>
+       
+       <button class="btn btn-link" data-bs-toggle="modal" data-bs-target="#exampleModal"
+       data-bs-whatever="@mdo" style="font-size: 12px; padding: 3px 6px;">수정</button>
        
        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
          <div class="modal-dialog">
@@ -27,29 +28,24 @@
                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                </div>
                <div class="modal-body">
-                 <!-- <form> -->
+                 <!-- form -->
                  <form action='comment/update' method="post">
-                   <input type='hidden' name='studyNo' value='${comment.studyNo}'/>
-                   <input type='hidden' name='boardNo' value='${comment.boardNo}'/>
-                   <input type='hidden' name='commentNo' value='${comment.commentNo}'/>
+                   <input type='hidden' name='commentNo' value='${comment.no}'/>
                    <div class="mb-3">
                      <label for="message-text" class="col-form-label">내용</label>
-                     <!-- <textarea class="form-control" id="message-text"></textarea> -->
-                     <textarea type="text" class="form-control" id='f-commentText' name='commentText' ></textarea>
+                     <textarea type="text" class="form-control" id='f-commentText' name='comment'></textarea>
                    </div>
-                   <button type="button" class="btn btn-light" data-bs-dismiss="modal">취소</button>
+                   <button class="btn btn-dark" data-bs-dismiss="modal">취소</button>
                    <button class="btn btn-dark">수정</button>
                  </form>
                </div>
-               <!-- <div class="modal-footer">
-               </div> -->
-             <!-- </form> -->
            </div>
          </div>
        </div>
-         <a href='comment/delete?studyno=${freeBoard.studyNo}&freeboardno=${freeBoard.freeBoardNo}&commentno=${comment.commentNo}' class="btn btn-link" style="font-size: 12px; padding: 3px 6px;">삭제</a>
-       </c:if>
+         <a href='comment/delete?commentno=${comment.no}' class="btn btn-dark"">삭제</a>
+       <!-- </c:if> -->
      </div>
      </div>
     </div>
    </c:forEach>
+  </div>
