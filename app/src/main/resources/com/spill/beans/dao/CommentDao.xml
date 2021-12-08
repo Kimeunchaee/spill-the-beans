@@ -48,9 +48,9 @@
        comment_no=#{commentNo}
   </select>
   
-  <insert id="insert" parameterType="CommentDTO">
+  <insert id="insert">
      insert into comment(board_no, member_no, content, isPublic, replyCount)
-     values(#{boardNo}, #{comment.writer.no}, #{comment.content, #{comment.isPublic}, #{comment.replyCount})
+     values(#{boardNo}, #{comment.writer.no}, #{comment.content}, #{comment.isPublic}, #{comment.replyCount})
   </insert>
   
   <update id="update" parameterType="CommentDTO">
