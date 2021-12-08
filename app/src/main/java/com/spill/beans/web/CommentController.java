@@ -18,8 +18,8 @@ public class CommentController {
   @Autowired CommentDao commentDao;  
   @Autowired ServletContext sc;
 
-  @GetMapping("/comment/list")
-  public ModelAndView form() throws Exception {
+  @GetMapping("board/comment/list")
+  public ModelAndView list(/* int boardNo */) throws Exception {
     ModelAndView mv = new ModelAndView();
 
     int boardNo = 1;    // 임시
@@ -27,14 +27,14 @@ public class CommentController {
     List<CommentDTO> commentList = commentDao.findAll(boardNo);
 
     mv.addObject("commentList", commentList);
-    mv.addObject("pageTitle", "댓글 목록(보드 디테일에서 봐야함)");
+    mv.addObject("pageTitle", "댓글 목록(보드 디테일)");
     mv.addObject("contentUrl", "comment/CommentList.jsp");      // 임시
     //    mv.addObject("contentUrl", "board/boardDetail.jsp");
     mv.setViewName("template1");
     return mv;
   }
 
-  @PostMapping("/comment/update")
+  @PostMapping("board/comment/update")
   public ModelAndView update(CommentDTO commentDTO) throws Exception {
     CommentDTO oldComment = commentDao.findByNo(commentDTO.getNo());
 
@@ -48,8 +48,11 @@ public class CommentController {
     ModelAndView mv = new ModelAndView();
 
     mv.addObject("comment", commentDTO);
-    mv.setViewName("redirect:../detail?freeboardno="+ commentDTO.getBoardNo());
+    //mv.setViewName("redirect:../list?boardNo="+ commentDTO.getBoardNo());
 
+    mv.addObject("pageTitle", "댓글 목록(보드 디테일)");
+    mv.addObject("contentUrl", "comment/CommentList.jsp");
+    mv.setViewName("template1");
     return mv;
   }
 
