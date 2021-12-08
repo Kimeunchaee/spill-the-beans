@@ -14,7 +14,6 @@ tr a:visited {
 </style>
 
 <h1>회원 목록</h1>
-<a href='form' class="btn btn-outline-primary btn-sm">회원 등록</a><br>
 
 <table class="table table-hover">
 <thead>
