@@ -7,7 +7,7 @@
   <properties resource="com/spill/beans/config/jdbc.properties"></properties>
 
   <typeAliases>
-    <package name="com.spill.beans.vo"/>
+    <package name="com.spill.beans.dto"/>
   </typeAliases>
 
   <environments default="development">
