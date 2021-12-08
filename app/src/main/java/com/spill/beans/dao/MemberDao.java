@@ -5,7 +5,7 @@ import org.apache.ibatis.annotations.Param;
 import com.spill.beans.dto.MemberDTO;
 
 // 역할
-// - 회원 데이터를 처리하는 객체 사용법을 정의한다.
+// - 회원 데이터를 처리하는 객체 사용법 정의
 public interface MemberDao {
   List<MemberDTO> findAll() throws Exception;
   MemberDTO findByNo(int no) throws Exception;

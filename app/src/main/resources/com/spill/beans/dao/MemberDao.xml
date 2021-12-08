@@ -5,7 +5,7 @@
 
 <mapper namespace="com.spill.beans.dao.MemberDao">
   
-  <resultMap type="Member" id="MemberMap">
+  <resultMap type="MemberDTO" id="MemberMap">
     <id column="member_no" property="no"/> 
     <result column="nickname" property="nickname"/>
     <result column="email" property="email"/>

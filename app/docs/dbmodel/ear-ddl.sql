@@ -44,7 +44,7 @@ CREATE TABLE comment (
   board_no   INTEGER      NOT NULL COMMENT '게시글번호', -- 게시글번호
   content    VARCHAR(255) NOT NULL COMMENT '내용', -- 내용
   created_dt DATE         NOT NULL DEFAULT curdate() COMMENT '등록일', -- 등록일
-  isPublic   BOOLEAN      NOT NULL DEFAULT 1 COMMENT '공개여부', -- 공개여부
+  isPublic   INTEGER      NOT NULL DEFAULT 1 COMMENT '공개여부', -- 공개여부
   replyCount INTEGER      NOT NULL COMMENT '리댓 수' -- 리댓 수
 )
 COMMENT '댓글';
@@ -72,6 +72,9 @@ ALTER TABLE category
     PRIMARY KEY (
       category_no -- 카테고리 번호
     );
+
+ALTER TABLE category
+  MODIFY COLUMN category_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '카테고리 번호';
 
 -- 게시판
 CREATE TABLE board (
@@ -165,4 +168,3 @@ ALTER TABLE board
     REFERENCES category ( -- 카테고리
       category_no -- 카테고리 번호
     );
-    
