@@ -12,6 +12,7 @@ public interface BoardDao {
   BoardDTO findByNo(int no) throws Exception;
   BoardDTO findByName(String name) throws Exception;
   void update(BoardDTO boardDTO) throws Exception;
+  void updateCount(int no) throws Exception;
   void delete(int no) throws Exception;
 
 }

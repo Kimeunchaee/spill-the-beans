@@ -22,7 +22,6 @@ tr:hover {
   <tr>
     <th>번호</th>
     <th>제목</th>
-    <th>작성자</th>
     <th>등록일</th>
     <th>조회수</th>
   </tr>
@@ -33,7 +32,6 @@ tr:hover {
 <tr data-no="${board.no}">
     <td>${board.no}</td>
     <td><a href='detail?no=${board.no}'>${board.title}</a></td> 
-    <td>${board.writer.name}</td> 
     <td>${board.registeredDate}</td> 
     <td>${board.viewCount}</td>
 </tr>

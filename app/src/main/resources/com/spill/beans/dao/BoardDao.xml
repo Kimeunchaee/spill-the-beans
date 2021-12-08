@@ -42,6 +42,12 @@
       inner join member m on b.member_no=m.member_no
   </select>
   
+  <update id="updateCount" parameterType="int">
+    update board set
+      viewCount = viewCount + 1
+    where board_no=#{no}
+  </update>
+  
 </mapper>
 
 

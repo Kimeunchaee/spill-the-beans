@@ -52,23 +52,23 @@ public class BoardController {
     return mv;
   }
 
-  //  @GetMapping("/board/detail")
-  //  public ModelAndView detail(int no) throws Exception {
-  //    BoardDTO board = boardDao.findByNo(no);
-  //
-  //    if (board == null) {
-  //      throw new Exception("해당 번호의 게시글이 없습니다.");
-  //    }
-  //
-  //    boardDao.updateCount(no);
-  //
-  //    ModelAndView mv = new ModelAndView();
-  //    mv.addObject("board", board);
-  //    mv.addObject("pageTitle", "게시글");
-  //    mv.addObject("contentUrl", "board/BoardDTODetail.jsp");
-  //    mv.setViewName("template1");
-  //    return mv;
-  //  }
+  @GetMapping("/board/detail")
+  public ModelAndView detail(int no) throws Exception {
+    BoardDTO board = boardDao.findByNo(no);
+
+    if (board == null) {
+      throw new Exception("해당 번호의 게시글이 없습니다.");
+    }
+
+    boardDao.updateCount(no);
+
+    ModelAndView mv = new ModelAndView();
+    mv.addObject("board", board);
+    mv.addObject("pageTitle", "게시글");
+    mv.addObject("contentUrl", "board/BoardDetail.jsp");
+    mv.setViewName("template1");
+    return mv;
+  }
 
   @PostMapping("/board/update")
   public ModelAndView update(BoardDTO board) throws Exception {
