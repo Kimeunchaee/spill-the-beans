@@ -2,17 +2,46 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<div id="empty-comment">
- <c:if test="${empty commentList}">등록된 댓글이 없습니다.</c:if>
-</div>
-  
-<div class="commentList-wrap">
-   <c:forEach items="${commentList}" var="comment">
-   <div class="card2">
-   <div class="card-body" style="padding: 5px 23px;">
-     <span style="font-size: 15px;">${comment.content}</span><br>
-     <span style="font-size: 12px;">${comment.writer.nickname} | ${comment.registeredDate}</span>
-     
+
+  <div id="empty-comment">
+   <c:if test="${empty commentList}">등록된 댓글이 없습니다.</c:if>
+  </div>
+    
+  <div class="commentList-wrap">
+     <c:forEach items="${commentList}" var="comment">
+       <div class="card2">
+         <div class="card-body" style="padding: 5px 0;">
+         
+		        <span style="font-size: 14px; color: gray;">${comment.writer.nickname} | ${comment.registeredDate}</span><br>
+				           
+	          <c:choose>
+		           <c:when test="${comment.isPublic == 2}">
+		             <c:if test="${comment.writer.no == loginUser.no}">
+		                <span style="color: gray">[비밀]</span> <span>${comment.content} </span><br>
+		             </c:if>
+		             
+		             <c:if test="${comment.writer.no != loginUser.no}">
+	                   <span> 🔒 비밀 댓글 입니다.</span><br>
+	               </c:if>
+	             </c:when>
+		           <c:otherwise>
+				         <span>${comment.content}</span><br>
+		           </c:otherwise>
+	          </c:choose>
+	          
+				    <span style="font-size: 14px; color: gray;">답글 ${comment.replyCount}개 ▼ | 답글 쓰기</span>
+				    
+				    <c:if test="${comment.writer.no == loginUser.no}">
+				      <button class="btn btn-primary">변경</button>
+							<a href='comment/delete?commentNo=${comment.no}' class="btn btn-primary">삭제</a>
+				    </c:if>
+				    
+         </div>
+       </div>
+     </c:forEach>
+  </div>
+
+<%-- 
      <div class="btn-group" role="group" aria-label="Basic outlined example">
        <!-- <c:if test="${comment.writer.no eq loginUser.no}"> -->
        
@@ -48,4 +77,4 @@
      </div>
     </div>
    </c:forEach>
-  </div>
+  </div> --%>

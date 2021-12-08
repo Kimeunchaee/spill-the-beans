@@ -2,6 +2,15 @@
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<style>
+.commet-btoom {
+  display: flex;
+  flex-direction: row;
+}
+
+</style>
+
 <h1>게시글</h1>
 <form id="member-form" action='update' method='post'>
 <div class="mb-3 row">
@@ -46,30 +55,43 @@
     <input id='f-like' type="text" readonly class="form-control-plaintext" value="${board.likeCount}">
   </div>
 </div>
-
-<!-- 댓글 -->
-<div class="mb-3 row">
-	<div id="empty-comment">
-	 <c:if test="${empty commentList}">등록된 댓글이 없습니다.</c:if>
-	</div>
-	  
-	<div class="commentList-wrap">
-	   <c:forEach items="${commentList}" var="comment">
-		   <div class="card2">
-			   <div class="card-body" style="padding: 5px 23px;">
-			     <span style="font-size: 15px;">${comment.content}</span><br>
-			     <span style="font-size: 12px;">${comment.writer.nickname} | ${comment.registeredDate}</span>
-				 </div>
-			 </div>
-	   </c:forEach>
-	</div>
-</div>
-<!-- 댓글 end -->
-
 <button class="btn btn-primary">변경</button>
 <a href='delete?no=${board.no}' class="btn btn-primary">삭제</a> 
 <a href='list' class="btn btn-primary">목록</a><br>
+<br><br>
 </form>
+
+<!-- 댓글 -->
+	<div class="mb-3 row">
+	  <label for='f-comment-title' class="col-form-label">[댓글]</label>
+		  
+	  <c:if test='${not empty loginUser}'>
+		  <div class="col-sm-11">
+		    <form action='comment/add' method="post">
+		      <input type="hidden" name="boardNo" value="${board.no}">
+		      <%-- <input name="writer" type="hidden" value="${loginUser}"> --%>
+			    <span>작성자 : ${loginUser.nickname}</span>
+			    <select name="isPublic">
+			      <option value="1">공개</option>
+			      <option value="2">비밀</option>
+			    </select>
+			    <div class="commet-btoom">
+				    <textarea id='f-comment-content' name='content' class="form-control col-md-6" rows="2" style="margin-right:5px;"></textarea>
+			      <button class="btn btn-primary col-md-2" style="padding: 9px; width: 55px; font-size: 14px;">등록</button>
+		      </div>
+		    </form>	    
+		  </div>
+	  </c:if>
+	  
+	  <div class="col-sm-12">
+      <jsp:include page="../comment/CommentList.jsp"/>
+	  </div>
+	  
+  </div>
+  
+  
+<!-- 댓글 end -->
+
 
 <script>
 document.querySelector("#member-form").onsubmit = () => {

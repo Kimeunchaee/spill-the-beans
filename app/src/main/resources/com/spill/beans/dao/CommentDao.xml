@@ -22,12 +22,12 @@
   
   <sql id="select1">
       select
-        b.board_no,
+        b.board_no board_no,
         c.comment_no,
         c.content,
         c.created_dt,
-        c.isPublic isPublic,
-        c.replyCount replyCount,
+        c.isPublic,
+        c.replyCount,
         m.member_no member_no,
         m.nickname nickname,
         m.active active
@@ -40,6 +40,7 @@
    <include refid="select1"/>
    where
       c.board_no=#{boardNo}
+   order by comment_no desc;
   </select>
   
   <select id="findByNo" resultMap="CommentMap" parameterType="int">
