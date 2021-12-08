@@ -24,7 +24,7 @@
 <div class="mb-3 row">
   <label for='f-writer' class="col-sm-2 col-form-label">작성자</label> 
   <div class="col-sm-10">
-    <input id='f-writer' type="text" readonly class="form-control-plaintext" value="${board.writer.name}">
+    <input id='f-writer' type="text" readonly class="form-control-plaintext" value="${board.writer.nickname}">
   </div>
 </div>
 <div class="mb-3 row">
@@ -42,7 +42,7 @@
 <div class="mb-3 row">
   <label for='f-like' class="col-sm-2 col-form-label">좋아요</label> 
   <div class="col-sm-10">
-    <input id='f-like' type="text" readonly class="form-control-plaintext" value="${board.like}">
+    <input id='f-like' type="text" readonly class="form-control-plaintext" value="${board.likeCount}">
   </div>
 </div>
 <button class="btn btn-primary">변경</button>
