@@ -168,3 +168,4 @@ ALTER TABLE board
     REFERENCES category ( -- 카테고리
       category_no -- 카테고리 번호
     );
+    
