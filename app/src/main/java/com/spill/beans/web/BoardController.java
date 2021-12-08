@@ -56,6 +56,8 @@ public class BoardController {
 
   @GetMapping("/board/detail")
   public ModelAndView detail(int no, HttpSession session) throws Exception {
+
+    MemberDTO member = (MemberDTO) session.getAttribute("loginUser");
     BoardDTO board = boardDao.findByNo(no);
 
     if (board == null) {
@@ -67,17 +69,7 @@ public class BoardController {
     ModelAndView mv = new ModelAndView();
     mv.addObject("board", board);
     mv.addObject("pageTitle", "게시글");
-
-    if (((MemberDTO) session.getAttribute("loginUser")).getNo() == board.getWriter().getNo()) {
-      mv.addObject("contentUrl", "board/MyBoardDetail.jsp");
-
-
-    } else if(((MemberDTO) session.getAttribute("loginUser")) == null || 
-        ((MemberDTO) session.getAttribute("loginUser")).getNo() != board.getWriter().getNo()) {
-
-      mv.addObject("contentUrl", "board/BoardDetail2.jsp");
-    }
-
+    mv.addObject("contentUrl", "board/MyBoardDetail.jsp");
     mv.setViewName("template1");
     return mv;
   }
