@@ -30,6 +30,9 @@ public class BoardController {
   @PostMapping("/board/add")
   public ModelAndView add(BoardDTO board, HttpSession session) throws Exception {
 
+    board.setViewCount(0);
+    board.setLikeCount(0);
+    board.setCommentCount(0);
     board.setWriter((MemberDTO) session.getAttribute("loginUser"));
 
     boardDao.insert(board);
@@ -52,7 +55,7 @@ public class BoardController {
   }
 
   @GetMapping("/board/detail")
-  public ModelAndView detail(int no) throws Exception {
+  public ModelAndView detail(int no, HttpSession session) throws Exception {
     BoardDTO board = boardDao.findByNo(no);
 
     if (board == null) {
@@ -64,7 +67,17 @@ public class BoardController {
     ModelAndView mv = new ModelAndView();
     mv.addObject("board", board);
     mv.addObject("pageTitle", "게시글");
-    mv.addObject("contentUrl", "board/BoardDetail.jsp");
+
+    if (((MemberDTO) session.getAttribute("loginUser")).getNo() == board.getWriter().getNo()) {
+      mv.addObject("contentUrl", "board/MyBoardDetail.jsp");
+
+
+    } else if(((MemberDTO) session.getAttribute("loginUser")) == null || 
+        ((MemberDTO) session.getAttribute("loginUser")).getNo() != board.getWriter().getNo()) {
+
+      mv.addObject("contentUrl", "board/BoardDetail2.jsp");
+    }
+
     mv.setViewName("template1");
     return mv;
   }

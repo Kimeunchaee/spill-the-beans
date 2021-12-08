@@ -13,7 +13,6 @@
     <result column="created_dt" property="registeredDate"/>
     <result column="likeCount" property="likeCount"/>
     <result column="commentCount" property="commentCount"/>
-    <result column="category_no" property="categoryNo"/>
   
   <association property="writer" javaType="MemberDTO">
       <id column="member_no" property="no"/>
@@ -21,11 +20,16 @@
       <result column="email" property="email"/>
   </association>
   
+  <association property="category" javaType="CategoryDTO">
+      <id column="category_no" property="no"/>
+      <result column="label" property="label"/>
+  </association>
+  
   </resultMap>
   
   <insert id="insert" parameterType="BoardDTO">
     insert into board(title,content,viewCount,likeCount,commentCount,category_no,member_no) 
-    values(#{title},#{content},#{viewCount},#{likeCount},#{commentCount},#{categoryNo},#{member_no})
+    values(#{title},#{content},#{viewCount},#{likeCount},#{commentCount},#{category.no},#{writer.no})
   </insert>
   
    <select id="findAll" resultMap="BoardMap">
@@ -36,12 +40,16 @@
       b.viewCount,
       b.likeCount,
       b.commentCount,
+      b.created_dt,
+      b.category_no,
       m.member_no,
       m.nickname,
-      m.email
+      m.email,
+      c.label
     from
       board b
       inner join member m on b.member_no=m.member_no
+      inner join category c on b.category_no=c.category_no
   </select>
   
   <update id="updateCount" parameterType="int">
@@ -57,15 +65,32 @@
       b.content,
       b.viewCount,
       b.likeCount,
+      b.created_dt,
       b.commentCount,
       m.member_no,
       m.nickname,
-      m.email
+      m.email,
+      c.label
     from
       board b
       inner join member m on b.member_no=m.member_no
+      inner join category c on b.category_no=c.category_no
     where board_no=#{no}
   </select>
+  
+  <update id="update" parameterType="BoardDTO">
+    update board set
+      title=#{title},
+      content=#{content},
+      category_no=#{category.no}
+    where 
+      board_no=#{no}
+  </update>
+  
+  <delete id="delete" parameterType="int">
+    delete from board 
+    where board_no=#{no}
+  </delete>
   
 </mapper>
 

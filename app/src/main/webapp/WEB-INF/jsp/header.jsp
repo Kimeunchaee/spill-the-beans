@@ -29,7 +29,12 @@
         <!-- 로그인 -->
         <li class="nav-item">
 	        <c:if test="${empty loginUser}">
-					  <a class="nav-link active" href="${contextPath}/app/auth/loginForm">로그인</a>
+	          <li class="nav-item">
+						  <a class="nav-link active" href="${contextPath}/app/auth/loginForm">로그인</a>
+						</li>
+						<li class="nav-item">
+						  <a href='${contextPath}/app/member/addForm' class="nav-link active">회원가입</a>
+						</li>
 					</c:if>
 					
 					<c:if test="${not empty loginUser}">

@@ -16,11 +16,17 @@ tr:hover {
 </style>
 
 <h1>게시글 목록</h1>
+
+<c:if test="${!empty loginUser}">
 <a href='form' class="btn btn-outline-primary btn-sm">새 글</a><br>
+</c:if>
+
+
 <table class="table table-hover">
 <thead>
   <tr>
     <th>번호</th>
+    <th>카테고리</th>
     <th>제목</th>
     <th>작성자</th>
     <th>등록일</th>
@@ -32,6 +38,7 @@ tr:hover {
 <c:forEach items="${boardList}" var="board">
 <tr data-no="${board.no}">
     <td>${board.no}</td>
+    <td>${board.category.label}</td>
     <td><a href='detail?no=${board.no}'>${board.title}</a></td> 
     <td>${board.writer.nickname}</td> 
     <td>${board.registeredDate}</td> 

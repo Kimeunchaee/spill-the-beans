@@ -9,3 +9,4 @@ insert into member(member_no, nickname, email, password, created_dt, active)
 values(4, '다이아몬드', 'dia@test.com', password('1111'), '2021-12-07', 1);
 insert into member(member_no, nickname, email, password, created_dt, active)
 values(5, '사과', 'apple@test.com', password('1111'), '2021-12-08', 1);
+
