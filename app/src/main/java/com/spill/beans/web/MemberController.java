@@ -2,10 +2,12 @@ package com.spill.beans.web;
 
 import java.util.Collection;
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 import com.spill.beans.dao.MemberDao;
 import com.spill.beans.dto.MemberDTO;
@@ -17,6 +19,7 @@ public class MemberController {
   @Autowired MemberDao memberDao;
   @Autowired ServletContext sc;
 
+  // 회원 목록
   @GetMapping("/member/list")
   public ModelAndView list() throws Exception {
 
@@ -30,20 +33,49 @@ public class MemberController {
     return mv;
   }
 
+  // 회원 상세
   @GetMapping("/member/detail")
-  public ModelAndView detail(int no) throws Exception {
+  public ModelAndView detail(HttpSession session) throws Exception {
 
-    MemberDTO member = memberDao.findByNo(no);
+    MemberDTO user = (MemberDTO) session.getAttribute("loginUser");
 
-    if (member == null) {
+    if (user == null) {
       throw new Exception("회원을 다시 선택해 주세요.");
     }
+
+    MemberDTO member = memberDao.findByNo(user.getNo());
 
     ModelAndView mv = new ModelAndView();
     mv.addObject("member", member);
     mv.addObject("pageTitle", "회원 상세");
     mv.addObject("contentUrl", "member/memberDetail.jsp");
     mv.setViewName("template1");
+    return mv;
+  }
+
+  // 회원 수정 폼
+  @PostMapping("/member/updateForm")
+  public ModelAndView updateForm(MemberDTO member, HttpSession session) throws Exception {
+
+    ModelAndView mv = new ModelAndView();
+
+    MemberDTO user = (MemberDTO) session.getAttribute("loginUser");
+
+    if (user == null) {
+      mv.addObject("pageTitle", "로그인");
+      mv.addObject("contentUrl", "login.jsp");
+      mv.setViewName("template1");
+    }
+
+    if (member == null) {
+      throw new Exception("다시 선택해 주세요.");
+    }
+
+    mv.addObject("member", member);
+    mv.addObject("pageTitle", "프로필 수정");
+    mv.addObject("contentUrl", "member/memberUpdateForm.jsp");
+    mv.setViewName("template1");
+
     return mv;
   }
 

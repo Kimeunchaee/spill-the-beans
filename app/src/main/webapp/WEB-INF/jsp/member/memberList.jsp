@@ -11,9 +11,6 @@ tr a {
 tr a:visited {
     color: black;
 }
-tr:hover {
-    cursor: pointer;
-}
 </style>
 
 <h1>회원 목록</h1>
