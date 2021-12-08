@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <h1>게시글</h1>
 <form id="member-form" action='update' method='post'>
 <div class="mb-3 row">
@@ -45,6 +46,26 @@
     <input id='f-like' type="text" readonly class="form-control-plaintext" value="${board.likeCount}">
   </div>
 </div>
+
+<!-- 댓글 -->
+<div class="mb-3 row">
+	<div id="empty-comment">
+	 <c:if test="${empty commentList}">등록된 댓글이 없습니다.</c:if>
+	</div>
+	  
+	<div class="commentList-wrap">
+	   <c:forEach items="${commentList}" var="comment">
+		   <div class="card2">
+			   <div class="card-body" style="padding: 5px 23px;">
+			     <span style="font-size: 15px;">${comment.content}</span><br>
+			     <span style="font-size: 12px;">${comment.writer.nickname} | ${comment.registeredDate}</span>
+				 </div>
+			 </div>
+	   </c:forEach>
+	</div>
+</div>
+<!-- 댓글 end -->
+
 <button class="btn btn-primary">변경</button>
 <a href='delete?no=${board.no}' class="btn btn-primary">삭제</a> 
 <a href='list' class="btn btn-primary">목록</a><br>
