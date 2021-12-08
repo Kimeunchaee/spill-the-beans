@@ -29,11 +29,11 @@
         <!-- 로그인 -->
         <li class="nav-item">
 	        <c:if test="${empty loginUser}">
-					  <a href="${contextPath}/app/auth/loginForm">로그인</a>
+					  <a class="nav-link active" href="${contextPath}/app/auth/loginForm">로그인</a>
 					</c:if>
 					
 					<c:if test="${not empty loginUser}">
-					  <a href="${contextPath}/app/auth/logout">${loginUser.nickname} | 로그아웃</a>
+					  <a class="nav-link active" href="${contextPath}/app/auth/logout">${loginUser.nickname} | 로그아웃</a>
 					</c:if>
         </li>
         

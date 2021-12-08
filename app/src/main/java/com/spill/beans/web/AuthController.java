@@ -47,7 +47,7 @@ public class AuthController {
 
     if (member != null && member.getActive() == 1) {
       session.setAttribute("loginUser", member);
-      mv.setViewName("redirect:../member/list");
+      mv.setViewName("redirect:../home");
 
     } else {
       mv.addObject("refresh", "2;url=loginForm");
