@@ -51,7 +51,7 @@ public class CommentController {
     sqlSessionFactory.openSession().commit();
 
     ModelAndView mv = new ModelAndView();
-    mv.setViewName("redirect:../detail2?no=" + comment.getBoardNo());
+    mv.setViewName("redirect:../detail?no=" + comment.getBoardNo());
     return mv;
   }
 
@@ -89,7 +89,7 @@ public class CommentController {
     sqlSessionFactory.openSession().commit();
 
     ModelAndView mv = new ModelAndView();
-    mv.setViewName("redirect:../detail2?no=" + comment.getBoardNo());
+    mv.setViewName("redirect:../detail?no=" + comment.getBoardNo());
     return mv;
   }
 
