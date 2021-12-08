@@ -3,21 +3,22 @@ package com.spill.beans.dto;
 import java.sql.Date;
 
 public class BoardDTO {
-  private int no;
-  private int viewCount;
-  private int likeCount;
-  private int commentCount;
-  private int categoryNo;
-  private String title;
-  private String content;
-  private Date registeredDate;
-  private MemberDTO writer;
+  private int no; // 
+  private int viewCount; // 
+  private int likeCount; // 
+  private int commentCount; //
+  private CategoryDTO category;
+  private String title; // 
+  private String content; // 
+  private Date registeredDate; // 
+  private MemberDTO writer; // 
 
   @Override
   public String toString() {
     return "BoardDTO [no=" + no + ", viewCount=" + viewCount + ", likeCount=" + likeCount
-        + ", commentCount=" + commentCount + ", categoryNo=" + categoryNo + ", title=" + title
-        + ", content=" + content + ", registeredDate=" + registeredDate + "]";
+        + ", commentCount=" + commentCount + ", category=" + category + ", title=" + title
+        + ", content=" + content + ", registeredDate=" + registeredDate + ", writer=" + writer
+        + "]";
   }
 
   public int getNo() {
@@ -52,12 +53,12 @@ public class BoardDTO {
     this.commentCount = commentCount;
   }
 
-  public int getCategoryNo() {
-    return categoryNo;
+  public CategoryDTO getCategory() {
+    return category;
   }
 
-  public void setCategoryNo(int categoryNo) {
-    this.categoryNo = categoryNo;
+  public void setCategory(CategoryDTO category) {
+    this.category = category;
   }
 
   public String getTitle() {
