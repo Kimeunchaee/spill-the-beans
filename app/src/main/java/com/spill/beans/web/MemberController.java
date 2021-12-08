@@ -23,10 +23,26 @@ public class MemberController {
     Collection<MemberDTO> memberList = memberDao.findAll();
 
     ModelAndView mv = new ModelAndView();
-
     mv.addObject("memberList", memberList);
     mv.addObject("pageTitle", "회원 목록");
     mv.addObject("contentUrl", "member/memberList.jsp");
+    mv.setViewName("template1");
+    return mv;
+  }
+
+  @GetMapping("/member/detail")
+  public ModelAndView detail(int no) throws Exception {
+
+    MemberDTO member = memberDao.findByNo(no);
+
+    if (member == null) {
+      throw new Exception("회원을 다시 선택해 주세요.");
+    }
+
+    ModelAndView mv = new ModelAndView();
+    mv.addObject("member", member);
+    mv.addObject("pageTitle", "회원 상세");
+    mv.addObject("contentUrl", "member/memberDetail.jsp");
     mv.setViewName("template1");
     return mv;
   }
