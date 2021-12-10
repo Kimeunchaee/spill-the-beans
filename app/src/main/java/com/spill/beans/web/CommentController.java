@@ -55,27 +55,30 @@ public class CommentController {
     return mv;
   }
 
-  //  @PostMapping("board/comment/update")
-  //  public ModelAndView update(CommentDTO commentDTO) throws Exception {
-  //    CommentDTO oldComment = commentDao.findByNo(commentDTO.getNo());
-  //
-  //    if (oldComment == null) {
-  //      throw new Exception("해당 번호의 댓글이 없습니다.");
-  //    }
-  //
-  //    commentDao.update(commentDTO);
-  //    sqlSessionFactory.openSession().commit();
-  //
-  //    ModelAndView mv = new ModelAndView();
-  //
-  //    mv.addObject("comment", commentDTO);
-  //    //mv.setViewName("redirect:../list?boardNo="+ commentDTO.getBoardNo());
-  //
-  //    mv.addObject("pageTitle", "댓글 목록(보드 디테일)");
-  //    mv.addObject("contentUrl", "comment/CommentList.jsp");
-  //    mv.setViewName("template1");
-  //    return mv;
-  //  }
+  @PostMapping("board/comment/updateForm")
+  public ModelAndView updateForm(CommentDTO comment, HttpSession session) throws Exception {
+
+    ModelAndView mv = new ModelAndView();
+
+    mv.setViewName("redirect:../detail?no=" + comment.getBoardNo());
+    return mv;
+  }
+
+  @PostMapping("board/comment/update")
+  public ModelAndView update(CommentDTO comment) throws Exception {
+
+    CommentDTO oldComment = commentDao.findByNo(comment.getNo());
+    if (oldComment == null) {
+      throw new Exception("해당 번호의 댓글이 없습니다.");
+    }
+
+    commentDao.update(comment);
+    sqlSessionFactory.openSession().commit();
+
+    ModelAndView mv = new ModelAndView();
+    mv.setViewName("redirect:../detail?no=" + comment.getBoardNo());
+    return mv;
+  }
 
   @GetMapping("board/comment/delete")
   public ModelAndView delete(int commentNo) throws Exception {
