@@ -45,7 +45,7 @@ public class AuthController {
 
     ModelAndView mv = new ModelAndView();
 
-    if (member != null && member.getActive() == 1) {
+    if (member != null && member.getActive() != 2) {
       session.setAttribute("loginUser", member);
       mv.setViewName("redirect:../home");
 

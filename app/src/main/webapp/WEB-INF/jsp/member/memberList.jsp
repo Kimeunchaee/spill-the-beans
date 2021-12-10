@@ -27,11 +27,11 @@ tr a:visited {
 	<tbody>
 	
 	<c:forEach items="${memberList}" var="member">
-	<tr data-no="${member.no}">
-	    <td>${member.no}</td>
-	    <td><a href='detail?no=${member.no}'>${member.nickname}</a></td> 
-	    <td>${member.email}</td> 
-	    <td>${member.registeredDate}</td>
+	<tr data-no="${loginUser.no}">
+	    <td>${loginUser.no}</td>
+	    <td><a href='detail?no=${loginUser.no}'>${loginUser.nickname}</a></td> 
+	    <td>${loginUser.email}</td> 
+	    <td>${loginUser.registeredDate}</td>
 	</tr>
 	</c:forEach>
 	

@@ -4,18 +4,18 @@
 <h1>내 프로필 수정</h1>
 
 <form action='update' name='memberInfo' method='post' enctype="multipart/form-data" onsubmit="return check()">
-  <input type='hidden' name='no' value='${member.no}'>
+  <input type='hidden' name='no' value='${loginUser.no}'>
   
 		<div class="mb-3 row">
 		  <label for='f-nickname' class="col-sm-2 col-form-label">닉네임</label>
 		  <div class="col-sm-6">
-		    <input id='f-nickname' type='text' name='nickname' class="form-control" value="${member.nickname}">
+		    <input id='f-nickname' type='text' name='nickname' class="form-control" value="${loginUser.nickname}">
 		  </div>
 		</div>
 		<div class="mb-3 row">
 		  <label for='f-email' class="col-sm-2 col-form-label">이메일</label>
 		  <div class="col-sm-10">
-		    <input id='f-email' type='email' name='email' class="form-control" value="${member.email}">
+		    <input id='f-email' type='email' name='email' class="form-control" value="${loginUser.email}">
 		  </div>
 		</div>
 		<div class="mb-3 row">

@@ -17,14 +17,17 @@
         </li>
         
         <!-- 회원 -->
-        <li class="nav-item">
-          <a class="nav-link active" href="${contextPath}/app/member/list">회원</a>
-        </li>
+        <c:if test="${loginUser.active == 3}">
+	        <li class="nav-item">
+	          <a class="nav-link active" href="${contextPath}/app/member/list">회원</a>
+	        </li>
+        </c:if>
         
-        <!-- 댓글 -->
-        <li class="nav-item">
-          <a class="nav-link active" href="${contextPath}/app/board/comment/list">댓글(TEST)</a>
-        </li>
+        <c:if test="${loginUser.active == 1}">
+          <li class="nav-item">
+            <a class="nav-link active" href="${contextPath}/app/member/detail">마이페이지</a>
+          </li>
+        </c:if>
         
         <!-- 로그인 -->
         <li class="nav-item">

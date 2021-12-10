@@ -8,7 +8,7 @@ public class MemberDTO {
   private String email;
   private String password;
   private Date registeredDate;
-  private int active; // 1: 멤버 2: 탈퇴
+  private int active; // 1: 멤버 2: 탈퇴 3: 관리자
 
   @Override
   public String toString() {

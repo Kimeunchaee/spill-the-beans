@@ -70,10 +70,7 @@ public class MemberController {
       throw new Exception("회원을 다시 선택해 주세요.");
     }
 
-    MemberDTO member = memberDao.findByNo(user.getNo());
-
     ModelAndView mv = new ModelAndView();
-    mv.addObject("member", member);
     mv.addObject("pageTitle", "회원 상세");
     mv.addObject("contentUrl", "member/memberDetail.jsp");
     mv.setViewName("template1");
@@ -98,7 +95,6 @@ public class MemberController {
       throw new Exception("다시 선택해 주세요.");
     }
 
-    mv.addObject("member", member);
     mv.addObject("pageTitle", "프로필 수정");
     mv.addObject("contentUrl", "member/memberUpdateForm.jsp");
     mv.setViewName("template1");
