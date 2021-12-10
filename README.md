@@ -34,7 +34,70 @@
             > GRANT ALL ON eardb.* TO 'ear'@'localhost';
         - MySQL 사용자 목록 조회
             > select user from mysql.user;
+
+- 프로젝트 시작
+    - DB 모델링
+        - 테이블 생성
+    - npm install
+    - Tomcat 서버 생성
+        - 클라이언트/서버 프로젝트 준비
+    - DTO 생성
+        - BoardDTO
+        - CategoryDTO
+        - CommnetDTO
+        - MemberDTO
+    - JSP 적용
+        - auth
+        - footer
+        - header
+        - home
+        - template1
+
 - 회의 내용
     - 도메인 추가
     - 테이블 추가
 
+## 2일차(2021-12-08, 수)
+- 파트 분배
+    - 혜연: 게시판
+    - 솔: 유저
+    - 은채: 댓글
+    - 공용: 카테고리, 로그인
+
+- DBMS(데이터베이스 관리 시스템: database management system)
+    - DQL, DML 작성
+    - BoardDao.xml
+    - CategoryDao.xml
+    - CommentDao.xml
+    - MemberDao.xml
+
+- Data SQL
+    - board-data.sql
+    - category-data.sql
+    - comment-data.sql
+    - member-data.sql
+
+- 서블릿(Spring WebMVC Framework 적용)
+    - AuthController
+    - BoardController
+    - CommentController
+    - HomeController
+    - MemberController
+
+- 서블릿 프로그래밍
+    - JSP 프로그래밍(통합)
+        - board
+        - comment
+        - member
+
+## 3일차(2021-12-10, 금)
+- 프로젝트 회의
+    - 관리자/유저 로그인 관련
+        - 사용자 인증: 로그인
+        - 사용자 인증: 내 정보 보기
+        - 사용자 인증: 로그인 정보 활용
+        - 사용자 인증: 로그인 여부에 따라 메뉴 출력 제어
+
+- Data SQL
+    - 관리자 추가
+    - member-data.sql 수정
