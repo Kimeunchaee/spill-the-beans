@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
     
-<form action='login' method='post'>
+<form action='login' method="post">
 	
 	<h2 class="major">로그인</h2>
     <div class="field half">
@@ -26,5 +26,4 @@
     </div>
     
   </br></br>
-  
 </form>
