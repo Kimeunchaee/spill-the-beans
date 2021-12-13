@@ -19,7 +19,8 @@ public class HomeController {
 
     mv.addObject("loginUser", member);
     mv.addObject("pageTitle", "메인화면");
-    mv.addObject("contentUrl", "home.jsp");
+    //mv.setViewName("../index");
+    //mv.addObject("contentUrl", "index.jsp");
     mv.setViewName("template1");
     return mv;
   }
