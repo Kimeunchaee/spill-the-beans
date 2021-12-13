@@ -41,7 +41,7 @@ public class MemberController {
     ModelAndView mv = new ModelAndView();
     mv.addObject("refresh", "2;url=list");
     mv.addObject("pageTitle", "신규 회원");
-    mv.addObject("contentUrl", "member/MemberAdd.jsp");
+    mv.addObject("contentUrl", "member/memberAdd.jsp");
     mv.setViewName("template1");
     return mv;
   }

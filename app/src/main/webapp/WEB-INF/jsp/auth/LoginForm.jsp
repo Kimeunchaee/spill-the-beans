@@ -2,32 +2,29 @@
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
     
-<h1>로그인</h1>
 <form action='login' method='post'>
-	<div class="mb-3 row">
-	  <label for='f-email' class="col-sm-2 col-form-label">이메일</label>
-	  <div class="col-sm-10">
-	    <input id='f-email' type='email' name='email' class="form-control" value="${cookie.email.value}">
-	  </div>
-	</div>
 	
-	<div class="mb-3 row">
-	  <label for='f-password' class="col-sm-2 col-form-label">비밀번호</label>
-	  <div class="col-sm-6">
-	    <input id='f-password' type='password' name='password' class="form-control">
-	  </div>
-	</div>
-	
-	<div class="mb-3 row">
-	  <label for='f-saveEmail' class="col-sm-2 col-form-label"></label>
-	  <div class="col-sm-10">
-	  <div class="form-check">
-	    <input id="f-saveEmail" class="form-check-input" 
-	    type="checkbox" name="saveEmail" ${not empty cookie.email ? "checked" : ""}>
-	    <label class="form-check-label" for="flexCheckDefault">이메일 저장</label>
-	  </div>
-	  </div>
-	</div>
-	
-	<button class="btn btn-primary btn-sm">로그인</button><br>
+	<h2 class="major">로그인</h2>
+    <div class="field half">
+      <label for="demo-email">이메일</label>
+      <input type="email" name="email" id="demo-email" value="${cookie.email.value}" placeholder="이메일을 입력하세요." />
+    </div>
+  </br>
+  
+    <div class="field half">
+      <label for="demo-password">비밀번호</label>
+      <input type="password" name="password" id="demo-password" placeholder="비밀번호를 입력하세요."/>
+    </div>
+  
+		<div class="field half" style="margin-top: 12px;">
+		  <input type="checkbox" id="demo-copy" name="saveEmail" ${not empty cookie.email ? "checked" : ""}>
+		  <label for="demo-copy">이메일 저장</label>
+		</div>
+  
+    <div class="ear-button" style="display: block; margin-top: 10px;">
+      <button class="button primary" style="width: 100%;">입장하기</button>
+    </div>
+    
+  </br></br>
+  
 </form>
