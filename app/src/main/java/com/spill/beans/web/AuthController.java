@@ -60,6 +60,7 @@ public class AuthController {
   @GetMapping("/auth/loginFail")
   public ModelAndView loginFail() throws Exception {
     ModelAndView mv = new ModelAndView();
+    mv.addObject("refresh", "2;url=../auth/loginForm#loginForm");
     mv.addObject("pageTitle", "로그인오류!");
     mv.addObject("contentID", "loginFail");
     mv.addObject("contentUrl", "auth/LoginFail.jsp");
