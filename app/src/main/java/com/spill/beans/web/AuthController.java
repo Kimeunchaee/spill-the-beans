@@ -7,7 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import com.spill.beans.dao.MemberDao;
 import com.spill.beans.dto.MemberDTO;
@@ -28,8 +28,9 @@ public class AuthController {
     return mv;
   }
 
-  @PostMapping("/auth/login")
-  public ModelAndView login(String email, String password, String saveEmail, HttpServletResponse response, HttpSession session) throws Exception {
+  @RequestMapping("/auth/login")
+  public ModelAndView login(String email, String password, String saveEmail,
+      HttpServletResponse response, HttpSession session) throws Exception {
     Cookie cookie = null;
     if (saveEmail != null) {
       cookie = new Cookie("email", email);
@@ -51,11 +52,18 @@ public class AuthController {
       mv.setViewName("redirect:../home");
 
     } else {
-      mv.addObject("refresh", "2;url=loginForm");
-      mv.addObject("pageTitle", "로그인오류!");
-      mv.addObject("contentUrl", "auth/LoginFail.jsp");
-      mv.setViewName("template1");
+      mv.setViewName("redirect:../auth/login#loginFail");
     }
+    return mv;
+  }
+
+  @GetMapping("/auth/login")
+  public ModelAndView loginFail() throws Exception {
+    ModelAndView mv = new ModelAndView();
+    mv.addObject("pageTitle", "로그인오류!");
+    mv.addObject("contentID", "loginFail");
+    mv.addObject("contentUrl", "auth/LoginFail.jsp");
+    mv.setViewName("template1");
     return mv;
   }
 

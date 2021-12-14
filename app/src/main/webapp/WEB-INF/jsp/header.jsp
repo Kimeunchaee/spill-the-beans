@@ -21,7 +21,7 @@
       <li><a href="#signup">회원가입</a></li>
       <li><a href="#findidpw">ID/PW 찾기</a></li>
       <li><a href="#board">입장하기</a></li>
-      <li><a href="${contextPath}/app/auth/fail#loginFail">로그인실패</a></li>
+      <%-- <li><a href="${contextPath}/app/auth/login#loginFail">로그인실패</a></li> --%>
     </ul>
   </c:if>
   

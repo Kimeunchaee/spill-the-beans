@@ -1,19 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
-    
-<form action='login' method="post">
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<form action='login' method="post" id="login-form">
 	
 	<h2 class="major">로그인</h2>
     <div class="field half">
-      <label for="demo-email">이메일</label>
-      <input type="email" name="email" id="demo-email" value="${cookie.email.value}" placeholder="이메일을 입력하세요." />
+      <label for="f-email">이메일</label>
+      <input type="email" name="email" id="f-email" value="${cookie.email.value}" placeholder="이메일을 입력하세요." />
     </div>
-  </br>
+  <br>
   
     <div class="field half">
-      <label for="demo-password">비밀번호</label>
-      <input type="password" name="password" id="demo-password" placeholder="비밀번호를 입력하세요."/>
+      <label for="f-password">비밀번호</label>
+      <input type="password" name="password" id="f-password" placeholder="비밀번호를 입력하세요."/>
     </div>
   
 		<div class="field half" style="margin-top: 12px;">
@@ -25,5 +25,15 @@
       <button class="button primary" style="width: 100%;">입장하기</button>
     </div>
     
-  </br></br>
+  <br><br>     
 </form>
+
+<script>
+document.querySelector("#login-form").onsubmit = () => {
+	  if (document.querySelector("#f-email").value == "" ||
+	      document.querySelector("#f-password").value == "") {
+	    window.alert("이메일, 패스워드를 입력해주세요.")
+	    return false;
+	  }
+	};
+</script>
