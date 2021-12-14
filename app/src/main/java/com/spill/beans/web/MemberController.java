@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import com.spill.beans.dao.MemberDao;
 import com.spill.beans.dto.MemberDTO;
@@ -144,6 +145,28 @@ public class MemberController {
     ModelAndView mv = new ModelAndView();
     mv.setViewName("redirect:../auth/logout");
     return mv;
+  }
+
+  @GetMapping("checkEmail")
+  @ResponseBody
+  public String checkEmail(String email) throws Exception {
+    MemberDTO member = memberDao.findByEmail(email);
+    if (member == null) {
+      return "false";
+    } else {
+      return "true";
+    }
+  }
+
+  @GetMapping("checkNickname")
+  @ResponseBody
+  public String checkNickname(String nickname) throws Exception {
+    MemberDTO member = memberDao.findByNickName(nickname);
+    if (member == null) {
+      return "false";
+    } else {
+      return "true";
+    }
   }
 
 }
