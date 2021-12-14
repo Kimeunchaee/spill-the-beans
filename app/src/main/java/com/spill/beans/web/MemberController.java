@@ -146,4 +146,80 @@ public class MemberController {
     return mv;
   }
 
+  // ------------------------------------------------------------------------------
+
+  // ID/PW 찾는 폼
+  @GetMapping("/member/findForm")
+  public ModelAndView findForm() throws Exception {
+
+    ModelAndView mv = new ModelAndView();
+
+    mv.addObject("pageTitle", "ID/PW 찾기");
+    mv.addObject("contentID", "findForm");
+    mv.addObject("contentUrl", "member/memberFindForm.jsp");
+    mv.setViewName("template1");
+    return mv;
+  }
+
+  // 이메일 찾는 폼
+  @PostMapping("/member/findID")
+  public ModelAndView findID(String nickname, HttpSession session) throws Exception {
+
+    MemberDTO member = memberDao.findByNickName(nickname);
+
+    ModelAndView mv = new ModelAndView();
+
+    if (member != null) {
+      session.setAttribute("findMemberID", member);
+    }
+
+    mv.setViewName("redirect:../member/completeID#findID");
+    return mv;
+  }
+
+  // 이메일 찾기 결과(성공, 실패)
+  @GetMapping("/member/completeID")
+  public ModelAndView completeID(HttpSession session) throws Exception {
+
+    ModelAndView mv = new ModelAndView();
+
+    mv.addObject("member", session.getAttribute("findMemberID"));
+    mv.addObject("pageTitle", "ID 찾기");
+    mv.addObject("contentID", "findID");
+    mv.addObject("contentUrl", "member/memberFindID.jsp");
+    mv.setViewName("template1");
+
+    session.invalidate();
+    return mv;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

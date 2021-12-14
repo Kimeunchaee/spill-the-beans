@@ -12,13 +12,13 @@
 		<div class="mb-3 row">
 		  <label for='f-nickname' class="col-sm-2 col-form-label">닉네임</label>
 			  <div class="col-sm-10">
-			    <input id='f-nickname' type='text' name='nickname' class="form-control" placeholder="* 필수 입력">
+			    <input id='f-nickname' type='text' name='nickname' class="form-control" placeholder="* 필수 입력" style="color: white;">
 			  </div>
 		</div>
 		<div class="mb-3 row">
 		  <label for='f-email' class="col-sm-2 col-form-label">이메일</label>
 			  <div class="col-sm-5">
-			    <input id='f-email' type='text' name='email' class="form-control" placeholder="* 필수 입력">
+			    <input id='f-email' type='text' name='email' class="form-control" placeholder="* 필수 입력" style="color: white;">
 			  </div>
        <div class="col-sm-5">
            <select name="site" id="f-site">
@@ -34,13 +34,13 @@
 			    <input id='f-password' type='password' name='password' class="form-control"
 	        pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{7,16}$"
 	        title="영어(대소문자), 숫자, 특수문자를 포함해 8자 이상 16자 이하로 입력해주세요."
-			    placeholder="* 필수 입력">
+			    placeholder="* 필수 입력" style="color: white;">
 			  </div>
 		</div>
 		<div class="mb-3 row">
       <label for='f-repassword' class="col-sm-2 col-form-label">비밀번호 확인</label>
 	      <div class="col-sm-10">
-	        <input id='f-password' type='password' name='repassword' class="form-control" placeholder="* 비밀번호 확인">
+	        <input id='f-password' type='password' name='repassword' class="form-control" placeholder="* 비밀번호 확인" style="color: white;">
 	      </div>
     </div>
   
