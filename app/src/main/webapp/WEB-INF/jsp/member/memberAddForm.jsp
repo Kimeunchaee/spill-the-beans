@@ -25,7 +25,7 @@
 		  <label for='f-email' class="col-sm-2 col-form-label">이메일</label>
 				  <div class="col-sm-3">
 				    <input id='f-email' type='text' name='email' class="form-control" placeholder="* 필수 입력" style="color: white;">
-				    <div class="invalid-feedback">
+				    <div class="invalid-feedback" style="width: 300px;">
             이미 존재하는 이메일입니다.
             </div>
 				  </div>
@@ -91,6 +91,7 @@ function check() {
 <script>
 var addBtn = document.querySelector("#x-add-btn");
 var emailTag = document.querySelector("#f-email");
+var siteTag = document.querySelector("#f-site");
 var nicknameTag = document.querySelector("#f-nickname");
 addBtn.setAttribute("disabled", "disabled");
 
@@ -105,7 +106,7 @@ document.querySelector("#x-email-check-btn").onclick = () => {
         emailTag.classList.add("is-invalid");
       }
     })
-    xhr.open("get", "checkEmail?email=" + emailTag.value);
+    xhr.open("get", "checkEmail?email=" + emailTag.value + "&site=" + siteTag.value);
     xhr.send();
 };
 
