@@ -8,7 +8,8 @@
 		<h2 class="major">ID 찾기 성공!</h2>
 		<p>[ ${member.nickname} ] 님의 이메일은 [ ${member.email} ]입니다.</p>
 		
-		<a href="${contextPath}/app/auth/loginForm#loginForm" class="button primary" style="width: 100%;">로그인</a>
+		<a href="${contextPath}/app/auth/loginForm#loginForm" class="button primary" style="width: 49%;">로그인</a>
+		<a href="${contextPath}/app/member/findForm#findForm" class="button primary" style="width: 49%;">비밀번호 찾기</a>
 		<br><br>
 	</c:when>
 	

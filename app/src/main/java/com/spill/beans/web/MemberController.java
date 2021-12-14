@@ -148,7 +148,7 @@ public class MemberController {
 
   // ------------------------------------------------------------------------------
 
-  // ID/PW 찾는 폼
+  // ID/PW 입력 폼
   @GetMapping("/member/findForm")
   public ModelAndView findForm() throws Exception {
 
@@ -193,12 +193,58 @@ public class MemberController {
     return mv;
   }
 
+  // ------------------------------------------------------------------------------
 
+  // 비밀번호 찾는 폼
+  @PostMapping("/member/findPW")
+  public ModelAndView findPW(MemberDTO member, HttpSession session) throws Exception {
 
+    MemberDTO findMember = memberDao.findByNickName(member.getNickname());
 
+    if (findMember != null && findMember.getEmail().equals(member.getEmail())) {
+      session.setAttribute("findMemberPW", findMember);
+    }
 
+    ModelAndView mv = new ModelAndView();
 
+    mv.setViewName("redirect:../member/completePW#findPW");
 
+    return mv;
+  }
+
+  // 비밀번호 찾기 결과(성공, 실패)
+  @GetMapping("/member/completePW")
+  public ModelAndView completePW(HttpSession session) throws Exception {
+
+    ModelAndView mv = new ModelAndView();
+
+    mv.addObject("member", session.getAttribute("findMemberPW"));
+    mv.addObject("pageTitle", "PW 찾기");
+    mv.addObject("contentID", "findPW");
+    mv.addObject("contentUrl", "member/memberFindPW.jsp");
+    mv.setViewName("template1");
+
+    session.invalidate();
+    return mv;
+  }
+
+  // 비밀번호 업데이트
+  @PostMapping("/member/updatePW")
+  public ModelAndView updatePW(MemberDTO member) throws Exception {
+
+    MemberDTO user = memberDao.findByNickName(member.getNickname());
+
+    if (user == null) {
+      throw new Exception("회원을 다시 선택해 주세요.");
+    }
+
+    memberDao.updateMember(member);
+    sqlSessionFactory.openSession().commit();
+
+    ModelAndView mv = new ModelAndView();
+    mv.setViewName("redirect:../auth/loginForm#loginForm");
+    return mv;
+  }
 
 
 

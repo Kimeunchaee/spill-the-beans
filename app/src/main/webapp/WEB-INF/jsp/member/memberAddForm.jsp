@@ -7,7 +7,7 @@
 
 <h2 class="major">회원가입</h2>
 
-<form action='add' method='post' name='memberInfo' enctype="multipart/form-data" onsubmit="return check()">
+<form action='add' method='post' name='memberInfo' onsubmit="return check()">
   
 		<div class="mb-3 row">
 		  <label for='f-nickname' class="col-sm-2 col-form-label">닉네임</label>
