@@ -22,10 +22,9 @@
 	    <ul> <!-- 비회원 -->
 	      <li><a href="#intro">소개</a></li>
 	      <li><a href="${contextPath}/app/auth/loginForm#loginForm">로그인</a></li>
-	      <li><a href="#signup">회원가입</a></li>
+	      <li><a href="${contextPath}/app/member/addForm#signup">회원가입</a></li>
 	      <li><a href="#findidpw">ID/PW 찾기</a></li>
 	      <li><a href="#board">입장하기</a></li>
-	      <%-- <li><a href="${contextPath}/app/auth/login#loginFail">로그인실패</a></li> --%>
 	    </ul>
 	  </c:if>
 	  

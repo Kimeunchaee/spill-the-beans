@@ -26,6 +26,7 @@ public class MemberController {
     ModelAndView mv = new ModelAndView();
 
     mv.addObject("pageTitle", "회원가입");
+    mv.addObject("contentID", "signup");
     mv.addObject("contentUrl", "member/memberAddForm.jsp");
     mv.setViewName("template1");
     return mv;
@@ -33,8 +34,10 @@ public class MemberController {
 
   // 회원가입
   @PostMapping("/member/add")
-  public ModelAndView add(MemberDTO member) throws Exception {
+  public ModelAndView add(MemberDTO member, String site) throws Exception {
 
+    member.setEmail(member.getEmail() + site);
+    System.out.println(member.getEmail());
     memberDao.insert(member);
     sqlSessionFactory.openSession().commit();
 
