@@ -150,7 +150,10 @@ public class MemberController {
   @GetMapping("/member/checkEmail")
   @ResponseBody
   public String checkEmail(String email, String site) throws Exception {
-    MemberDTO member = memberDao.findByEmail(email + site);
+
+    System.out.println(email+site);
+
+    MemberDTO member = memberDao.findByEmail(email+site);
     if (member == null) {
       return "false";
     } else {
