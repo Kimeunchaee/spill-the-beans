@@ -147,10 +147,10 @@ public class MemberController {
     return mv;
   }
 
-  @GetMapping("checkEmail")
+  @GetMapping("/member/checkEmail")
   @ResponseBody
-  public String checkEmail(String email) throws Exception {
-    MemberDTO member = memberDao.findByEmail(email);
+  public String checkEmail(String email, String site) throws Exception {
+    MemberDTO member = memberDao.findByEmail(email + site);
     if (member == null) {
       return "false";
     } else {
@@ -158,7 +158,7 @@ public class MemberController {
     }
   }
 
-  @GetMapping("checkNickname")
+  @GetMapping("/member/checkNickname")
   @ResponseBody
   public String checkNickname(String nickname) throws Exception {
     MemberDTO member = memberDao.findByNickName(nickname);

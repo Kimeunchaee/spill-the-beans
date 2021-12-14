@@ -13,32 +13,32 @@
 		  <label for='f-nickname' class="col-sm-2 col-form-label">닉네임</label>
 			  <div class="col-sm-7">
 			    <input id='f-nickname' type='text' name='nickname' class="form-control" placeholder="* 필수 입력" style="color: white;">
+			    <div class="invalid-feedback">
+          이미 존재하는 닉네임입니다.
+          </div>
 			   </div>
 			  <div class="col-sm-3">
 			    <button id="x-nickname-check-btn" type="button" class="button primary" style="width: 100%;">중복검사</button>
 			  </div>
-			  <div class="invalid-feedbackNickname">
-        이미 존재하는 닉네임입니다.
-        </div>
 		</div>
 		<div class="mb-3 row">
 		  <label for='f-email' class="col-sm-2 col-form-label">이메일</label>
-			  <div class="col-sm-3">
-			    <input id='f-email' type='text' name='email' class="form-control" placeholder="* 필수 입력" style="color: white;">
-			  </div>
-       <div class="col-sm-4">
-           <select name="site" id="f-site">
-             <option value="@naver.com">@ naver.com</option>
-             <option value="@daum.net">@ daum.net</option>
-             <option value="@gmail.com">@ gmail.com</option>
-           </select>
-      </div>
+				  <div class="col-sm-3">
+				    <input id='f-email' type='text' name='email' class="form-control" placeholder="* 필수 입력" style="color: white;">
+				    <div class="invalid-feedback">
+            이미 존재하는 이메일입니다.
+            </div>
+				  </div>
+	       <div class="col-sm-4">
+	           <select name="site" id="f-site">
+	             <option value="@naver.com">@ naver.com</option>
+	             <option value="@daum.net">@ daum.net</option>
+	             <option value="@gmail.com">@ gmail.com</option>
+	           </select>
+	      </div>
       <div class="col-sm-3">
       <button id="x-email-check-btn" type="button" class="button primary" style="width: 100%;">중복검사</button> 
       </div> 
-    <div class="invalid-feedbackEmail">
-        이미 존재하는 이메일입니다.
-    </div>
 		</div>
 		<div class="mb-3 row">
 		  <label for='f-password' class="col-sm-2 col-form-label">비밀번호</label>
