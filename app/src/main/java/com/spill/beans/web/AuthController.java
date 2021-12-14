@@ -52,12 +52,12 @@ public class AuthController {
       mv.setViewName("redirect:../home");
 
     } else {
-      mv.setViewName("redirect:../auth/login#loginFail");
+      mv.setViewName("redirect:../auth/loginFail#loginFail");
     }
     return mv;
   }
 
-  @GetMapping("/auth/login")
+  @GetMapping("/auth/loginFail")
   public ModelAndView loginFail() throws Exception {
     ModelAndView mv = new ModelAndView();
     mv.addObject("pageTitle", "로그인오류!");
