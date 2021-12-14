@@ -76,6 +76,7 @@ public class MemberController {
 
     ModelAndView mv = new ModelAndView();
     mv.addObject("pageTitle", "회원 상세");
+    mv.addObject("contentID", "detail");
     mv.addObject("contentUrl", "member/memberDetail.jsp");
     mv.setViewName("template1");
     return mv;

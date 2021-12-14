@@ -2,20 +2,38 @@
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<h1>내 프로필</h1>
 
-<form method='post' enctype="multipart/form-data">
+<style>
+
+input[type="text"] {
+  border: 0;
+  font-size: 18px;
+  line-height: 18px;
+  padding-bottom: 7px;
+}
+
+input[type="email"] {
+  border: 0;
+  font-size: 18px;
+  line-height: 18px;
+  padding-bottom: 7px;
+}
+
+input[type=text]:focus {
+  outline: none;
+}
+
+</style>
+
+<h2 class="major">마이페이지</h2>
+
+<form method='post'>
+
 	<input type='hidden' name='no' value='${loginUser.no}'>
 
 		<div class="mb-3 row">
-		  <label for='f-no' class="col-sm-2 col-form-label">번호</label>
-		  <div class="col-sm-6">
-		    <input id='f-no' type='text' name='no' class="form-control-plaintext" value='${loginUser.no}' readonly>
-		  </div>
-		</div>
-		<div class="mb-3 row">
 		  <label for='f-nickname' class="col-sm-2 col-form-label">닉네임</label>
-		  <div class="col-sm-6">
+		  <div class="col-sm-10">
 		    <input id='f-nickname' type='text' name='nickname' class="form-control-plaintext" value="${loginUser.nickname}" readonly>
 		  </div>
 		</div>
@@ -33,12 +51,12 @@
 		</div>
 	
 	<div class="btn_wrap">
-	  <input type="submit" value="프로필 수정" formaction="updateForm" class ="btn btn-outline-dark"/>
+	  <button type="submit" formaction="updateForm" class ="button" style="font-size: 16px; width: 49%;">내정보 수정</button>
 		  <c:if test="${loginUser.active == 1}">
-		    <a href='delete?no=${loginUser.no}' class ="btn btn-outline-dark">탈퇴</a>
+		    <a href='delete?no=${loginUser.no}' class ="button" style="font-size: 16px; width: 49%;">탈퇴</a>
 		  </c:if>
 		  <c:if test="${loginUser.active == 3}">
-	      <a href="list" class ="btn btn-outline-dark">회원 목록</a>
+	      <a href="list" class ="button" style="font-size: 16px; width: 49%;">회원 목록</a>
 	    </c:if>
 	</div>
 
