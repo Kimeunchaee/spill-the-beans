@@ -5,9 +5,8 @@
     
 <c:choose>
 	<c:when test="${not empty member}">
-		<h2 class="major">PW 찾기 성공!</h2>
+		<h2 class="major">PW 변경</h2>
 		<p>비밀번호를 다시 설정해 주세요.</p>
-		
 
   <form action='updatePW' method='post' name='memberInfo' onsubmit="return check()">
   <input type="hidden" name="no" value="${member.no}">
@@ -37,7 +36,7 @@
 	
 	<c:otherwise>
 		<h2 class="major">PW 찾기 실패!</h2>
-	  <p>해당 닉네임을 찾을 수 없습니다.</p>
+	  <p>해당 회원을 찾을 수 없습니다.</p>
 	  
 	  <a href="${contextPath}/app/member/findForm#findForm" class="button primary" style="width: 49%;">ID/PW 찾기</a>
 	  <a href="${contextPath}/app/member/addForm#signup" class="button primary" style="width: 49%;">회원가입</a>
