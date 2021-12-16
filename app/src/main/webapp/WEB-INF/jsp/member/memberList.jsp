@@ -11,6 +11,7 @@ tr a {
 tr a:visited {
     color: white;
 }
+
 </style>
 
 <h2 class="major">회원 목록</h2>
@@ -27,16 +28,36 @@ tr a:visited {
 	<tbody>
 	
 	<c:forEach items="${memberList}" var="member">
-	<tr data-no="${loginUser.no}">
-	    <td>${loginUser.no}</td>
-	    <td><a href='detail?no=${loginUser.no}'>${loginUser.nickname}</a></td> 
-	    <td>${loginUser.email}</td> 
-	    <td>${loginUser.registeredDate}</td>
+	<tr data-no="${member.no}">
+	    <td>${member.no}</td>
+	    <td><a href='detail?no=${member.no}'>${member.nickname}</a></td> 
+	    <td>${member.email}</td> 
+	    <td>${member.registeredDate}</td>
 	</tr>
 	</c:forEach>
 	
 	</tbody>
 </table>
+
+<nav>
+  <ul class="pagination">
+    <li>
+      <a href="#" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    <li><a href="#">1</a></li>
+    <li><a href="#">2</a></li>
+    <li><a href="#">3</a></li>
+    <li><a href="#">4</a></li>
+    <li><a href="#">5</a></li>
+    <li>
+      <a href="#" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+  </ul>
+</nav>
 
 <script>
 document.querySelectorAll("tbody a").forEach((aTag) => {
@@ -49,4 +70,11 @@ trList.forEach(function(trTag) {
     window.location.href = e.currentTarget.querySelector("a").href;
   };
 });
+
 </script>
+
+
+
+
+
+

@@ -56,12 +56,12 @@ textarea:focus {
 		</div>
 	
 	<div class="btn_wrap">
-	  <button type="submit" formaction="updateForm" class ="button" style="font-size: 16px; width: 49%;">내 정보 수정</button>
 		  <c:if test="${loginUser.active == 1}">
+			  <button type="submit" formaction="updateForm" class ="button" style="font-size: 16px; width: 49%;">내 정보 수정</button>
 		    <a href='deleteForm' class ="button" style="font-size: 16px; width: 49%;">탈퇴</a>
 		  </c:if>
 		  <c:if test="${loginUser.active == 3}">
-	      <a href="list" class ="button" style="font-size: 16px; width: 49%;">회원 목록</a>
+	       <button type="submit" formaction="updateForm" class ="button" style="font-size: 16px; width: 100%;">관리자 정보 수정</button>
 	    </c:if>
 	</div>
 

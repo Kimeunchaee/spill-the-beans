@@ -1,6 +1,6 @@
 package com.spill.beans.web;
 
-import java.util.Collection;
+import java.util.List;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -75,7 +75,7 @@ public class MemberController {
   @GetMapping("/member/list")
   public ModelAndView list() throws Exception {
 
-    Collection<MemberDTO> memberList = memberDao.findAll();
+    List<MemberDTO> memberList = memberDao.findAll();
 
     ModelAndView mv = new ModelAndView();
 

@@ -28,6 +28,8 @@
   
   <select id="findAll" resultMap="MemberMap">
   <include refid="select1"/>
+    where
+      active=1 or active=2
     order by
       member_no asc
   </select>
