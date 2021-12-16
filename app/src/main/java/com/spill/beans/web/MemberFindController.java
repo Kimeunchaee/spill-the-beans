@@ -122,7 +122,7 @@ public class MemberFindController {
 
     mv.addObject("member", session.getAttribute("findMemberPW"));
     //    mv.addObject("refresh", "1;url=auth/loginForm#loginForm");
-    mv.addObject("pageTitle", "PW 변경");
+    mv.addObject("pageTitle", "PW 수정");
     mv.addObject("contentID", "messagePW");
     mv.addObject("contentUrl", "member/memberPwUpdate.jsp");
     mv.setViewName("template1");
