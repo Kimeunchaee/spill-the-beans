@@ -6,16 +6,16 @@
 <style>
 tr a {
     text-decoration: none;
-    color: black;
+    color: white;
 }
 tr a:visited {
-    color: black;
+    color: white;
 }
 </style>
 
-<h1>회원 목록</h1>
+<h2 class="major">회원 목록</h2>
 
-<table class="table table-hover">
+<table class="table" style="color: white;">
 <thead>
   <tr>
     <th>번호</th>

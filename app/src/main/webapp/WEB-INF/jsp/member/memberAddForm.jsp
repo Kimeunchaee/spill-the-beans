@@ -13,7 +13,7 @@
 		  <label for='f-nickname' class="col-sm-2 col-form-label">닉네임</label>
 			  <div class="col-sm-7">
 			    <input id='f-nickname' type='text' name='nickname' class="form-control" placeholder="* 필수 입력" style="color: white;">
-			    <div class="invalid-feedback">
+			    <div class="invalid-feedback" style="color: #fbff00;">
           이미 존재하는 닉네임입니다.
           </div>
 			   </div>
@@ -25,7 +25,7 @@
 		  <label for='f-email' class="col-sm-2 col-form-label">이메일</label>
 				  <div class="col-sm-3">
 				    <input id='f-email' type='text' name='email' class="form-control" placeholder="* 필수 입력" style="color: white;">
-				    <div class="invalid-feedback" style="width: 300px;">
+				    <div class="invalid-feedback" style="width: 300px; color: #fbff00;">
             이미 존재하는 이메일입니다.
             </div>
 				  </div>

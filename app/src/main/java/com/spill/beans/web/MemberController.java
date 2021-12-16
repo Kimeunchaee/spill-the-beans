@@ -81,6 +81,7 @@ public class MemberController {
 
     mv.addObject("memberList", memberList);
     mv.addObject("pageTitle", "회원 목록");
+    mv.addObject("contentID", "memberList");
     mv.addObject("contentUrl", "member/memberList.jsp");
     mv.setViewName("template1");
 
