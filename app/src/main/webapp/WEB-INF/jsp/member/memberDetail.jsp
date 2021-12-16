@@ -4,7 +4,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <style>
-
 input[type="text"] {
   border: 0;
   font-size: 18px;
@@ -19,10 +18,16 @@ input[type="email"] {
   padding-bottom: 7px;
 }
 
-input[type=text]:focus {
-  outline: none;
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="email"]:focus,
+input[type="tel"]:focus,
+select:focus,
+textarea:focus {
+  background: transparent !important;
+  border:none !important;
 }
-
+    
 </style>
 
 <h2 class="major">마이페이지</h2>
@@ -34,26 +39,26 @@ input[type=text]:focus {
 		<div class="mb-3 row">
 		  <label for='f-nickname' class="col-sm-2 col-form-label">닉네임</label>
 		  <div class="col-sm-10">
-		    <input id='f-nickname' type='text' name='nickname' class="form-control-plaintext" value="${loginUser.nickname}" readonly>
+		    <input id='f-nickname' type='text' name='nickname' value="${loginUser.nickname}" readonly>
 		  </div>
 		</div>
 		<div class="mb-3 row">
 		  <label for='f-email' class="col-sm-2 col-form-label">이메일</label>
 		  <div class="col-sm-10">
-		    <input id='f-email' type='email' name='email' class="form-control-plaintext" value="${loginUser.email}" readonly>
+		    <input id='f-email' type='email' name='email' value="${loginUser.email}" readonly>
 		  </div>
 		</div>
 		<div class="mb-3 row">
 		  <label for='f-registeredDate' class="col-sm-2 col-form-label">가입일</label> 
 		  <div class="col-sm-10">
-		    <input id='f-registeredDate' type="text" readonly class="form-control-plaintext" value="${loginUser.registeredDate}">
+		    <input id='f-registeredDate' type="text" readonly value="${loginUser.registeredDate}">
 		  </div>
 		</div>
 	
 	<div class="btn_wrap">
 	  <button type="submit" formaction="updateForm" class ="button" style="font-size: 16px; width: 49%;">내정보 수정</button>
 		  <c:if test="${loginUser.active == 1}">
-		    <a href='delete?no=${loginUser.no}' class ="button" style="font-size: 16px; width: 49%;">탈퇴</a>
+		    <a href='deleteForm' class ="button" style="font-size: 16px; width: 49%;">탈퇴</a>
 		  </c:if>
 		  <c:if test="${loginUser.active == 3}">
 	      <a href="list" class ="button" style="font-size: 16px; width: 49%;">회원 목록</a>
