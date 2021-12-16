@@ -43,10 +43,12 @@ public class MemberController {
     memberDao.insert(member);
     sqlSessionFactory.openSession().commit();
 
-    session.setAttribute("addMember", member);
+    session.setAttribute("memberNickname", member.getNickname());
 
     ModelAndView mv = new ModelAndView();
+
     mv.setViewName("redirect:../member/add#add");
+
     return mv;
   }
 
@@ -56,6 +58,7 @@ public class MemberController {
 
     ModelAndView mv = new ModelAndView();
 
+    mv.addObject("memberNickname", session.getAttribute("memberNickname"));
     mv.addObject("contentID", "add");
     mv.addObject("pageTitle", "신규 회원");
     mv.addObject("contentUrl", "member/memberAdd.jsp");
@@ -75,10 +78,12 @@ public class MemberController {
     Collection<MemberDTO> memberList = memberDao.findAll();
 
     ModelAndView mv = new ModelAndView();
+
     mv.addObject("memberList", memberList);
     mv.addObject("pageTitle", "회원 목록");
     mv.addObject("contentUrl", "member/memberList.jsp");
     mv.setViewName("template1");
+
     return mv;
   }
 
@@ -89,14 +94,18 @@ public class MemberController {
     MemberDTO user = (MemberDTO) session.getAttribute("loginUser");
 
     if (user == null) {
+
       throw new Exception("해당 회원을 찾을 수 없습니다.");
+
     }
 
     ModelAndView mv = new ModelAndView();
+
     mv.addObject("pageTitle", "회원 상세");
     mv.addObject("contentID", "detail");
     mv.addObject("contentUrl", "member/memberDetail.jsp");
     mv.setViewName("template1");
+
     return mv;
   }
 
@@ -109,16 +118,20 @@ public class MemberController {
     ModelAndView mv = new ModelAndView();
 
     if (member == null) {
+
       throw new Exception("해당 회원을 찾을 수 없습니다.");
+
     }
 
     mv.setViewName("redirect:../member/updateForm#updateForm");
+
     return mv;
   }
 
   // 경로 주소는 같지만 Post, Get이 달라서 실행은 됨,,,,,,,,,,
   @GetMapping("/member/updateForm")
   public ModelAndView updateForm(HttpSession session) throws Exception {
+
     ModelAndView mv = new ModelAndView();
 
     // 멤버를 세션에 저장 (비밀번호 변경 할 때 필요 / MemberFindController:completePW#findPW)
@@ -128,6 +141,7 @@ public class MemberController {
     mv.addObject("contentID", "updateForm");
     mv.addObject("contentUrl", "member/memberUpdateForm.jsp");
     mv.setViewName("template1");
+
     return mv;
   }
   //----------------------------------------------------------------------------------------------------------
@@ -149,33 +163,42 @@ public class MemberController {
     session.setAttribute("loginUser", memberDao.findByNo(member.getNo()));
 
     ModelAndView mv = new ModelAndView();
+
     mv.setViewName("redirect:../member/detail#detail");
+
     return mv;
   }
 
 
 
-  //회원 탈퇴
+  // 회원 탈퇴 폼 열기
   @GetMapping("/member/deleteForm")
   public ModelAndView deleteForm() throws Exception {
+
     ModelAndView mv = new ModelAndView();
+
     mv.setViewName("redirect:../member/deletePopUp#deletePopUp");
+
     return mv;
   }
 
+  // 회원 탈퇴 폼
   @GetMapping("/member/deletePopUp")
   public ModelAndView deletePopUp() throws Exception {
+
     ModelAndView mv = new ModelAndView();
+
     mv.addObject("pageTitle", "회원 탈퇴");
     mv.addObject("contentID", "deletePopUp");
-    mv.addObject("contentUrl", "member/memberDelete.jsp");
+    mv.addObject("contentUrl", "member/memberDeleteForm.jsp");
     mv.setViewName("template1");
+
     return mv;
   }
 
   // 회원 탈퇴
   @PostMapping("/member/delete")
-  public ModelAndView delete(MemberDTO member) throws Exception {
+  public ModelAndView delete(MemberDTO member, HttpSession session) throws Exception {
 
     ModelAndView mv = new ModelAndView();
 
@@ -191,15 +214,34 @@ public class MemberController {
       memberDao.updateActive(member);
       sqlSessionFactory.openSession().commit();
 
-      mv.setViewName("redirect:../auth/logout");
+      session.setAttribute("loginUser", memberDao.findByNo(member.getNo()));
+      // mv.addObject("refresh", "2;url=../auth/logout");
+      // 방법 1) 원래 deleteMSG에서 if문을 사용하여 구현해 줘야 하지만
+      // 방법 2) jsp에서 refresh 조건문 사용하여 간결하게 구현 가능!
 
-    } else {
-      throw new Exception("비밀번호가 일치하지 않습니다.");
-    }
+    } 
+
+    mv.setViewName("redirect:../member/deleteMSG#deleteMSG");
 
     return mv;
   }
 
+  // 회원 탈퇴 결과(성공, 실패)
+  @GetMapping("/member/deleteMSG")
+  public ModelAndView deleteMSG() throws Exception {
+
+    ModelAndView mv = new ModelAndView();
+
+    mv.addObject("pageTitle", "회원 탈퇴");
+    mv.addObject("contentID", "deleteMSG");
+    mv.addObject("contentUrl", "member/memberDelete.jsp");
+    mv.setViewName("template1");
+    return mv;
+  }
+
+  // ------------------------------------------------------------------------------------------
+
+  // 멤버 이메일 중복 확인
   @GetMapping("/member/checkEmail")
   @ResponseBody
   public String checkEmail(String email, String site) throws Exception {
@@ -214,6 +256,7 @@ public class MemberController {
     }
   }
 
+  //멤버 닉네임 중복 확인
   @GetMapping("/member/checkNickname")
   @ResponseBody
   public String checkNickname(String nickname) throws Exception {

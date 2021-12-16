@@ -25,12 +25,12 @@
 		<div class="mb-3 row">
 		  <label for='f-password' class="col-sm-2 col-form-label">비밀번호</label>
 		  <div class="col-sm-10">
-		    <a href='completePW#findPW' class ="button" style="font-size: 16px; width: 100%;">비밀번호 수정</a><br>
+		    <a href='completePW#findPW' class ="button" style="font-size: 15px; width: 100%;">비밀번호 수정</a><br>
 		  </div>
 		</div>
   
-	<button type="submit" class ="button" style="font-size: 16px; width: 49%;">수정</button>
-	<a href='detail#detail' class ="button" style="font-size: 16px; width: 49%;">돌아가기</a><br>
+	<button type="submit" class ="button" style="font-size: 15px; width: 49%;">수정</button>
+	<a href='detail#detail' class ="button" style="font-size: 15px; width: 49%;">돌아가기</a><br>
 </form>
 
 <script type="text/javascript">

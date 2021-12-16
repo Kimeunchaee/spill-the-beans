@@ -6,14 +6,14 @@
 <style>
 input[type="text"] {
   border: 0;
-  font-size: 18px;
+  font-size: 15px;
   line-height: 18px;
   padding-bottom: 7px;
 }
 
 input[type="email"] {
   border: 0;
-  font-size: 18px;
+  font-size: 15px;
   line-height: 18px;
   padding-bottom: 7px;
 }
@@ -56,7 +56,7 @@ textarea:focus {
 		</div>
 	
 	<div class="btn_wrap">
-	  <button type="submit" formaction="updateForm" class ="button" style="font-size: 16px; width: 49%;">내정보 수정</button>
+	  <button type="submit" formaction="updateForm" class ="button" style="font-size: 16px; width: 49%;">내 정보 수정</button>
 		  <c:if test="${loginUser.active == 1}">
 		    <a href='deleteForm' class ="button" style="font-size: 16px; width: 49%;">탈퇴</a>
 		  </c:if>

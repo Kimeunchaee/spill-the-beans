@@ -20,17 +20,21 @@ public class AuthController {
 
   @GetMapping("/auth/loginForm")
   public ModelAndView loginForm() {
+
     ModelAndView mv = new ModelAndView();
+
     mv.addObject("pageTitle", "로그인");
     mv.addObject("contentID", "loginForm");
     mv.addObject("contentUrl", "auth/LoginForm.jsp");
     mv.setViewName("template1");
+
     return mv;
   }
 
   @RequestMapping("/auth/login")
   public ModelAndView login(String email, String password, String saveEmail,
       HttpServletResponse response, HttpSession session) throws Exception {
+
     Cookie cookie = null;
     if (saveEmail != null) {
       cookie = new Cookie("email", email);
@@ -59,20 +63,27 @@ public class AuthController {
 
   @GetMapping("/auth/loginFail")
   public ModelAndView loginFail() throws Exception {
+
     ModelAndView mv = new ModelAndView();
+
     mv.addObject("refresh", "2;url=../auth/loginForm#loginForm");
     mv.addObject("pageTitle", "로그인오류!");
     mv.addObject("contentID", "loginFail");
     mv.addObject("contentUrl", "auth/LoginFail.jsp");
     mv.setViewName("template1");
+
     return mv;
   }
 
   @GetMapping("/auth/logout")
   public ModelAndView logout(HttpSession session) throws Exception {
+
     session.invalidate();
+
     ModelAndView mv = new ModelAndView();
+
     mv.setViewName("redirect:loginForm");
+
     return mv;
   }
 
