@@ -11,6 +11,9 @@ tr a {
 tr a:visited {
     color: white;
 }
+#paging {
+  text-align: center;
+}
 
 </style>
 
@@ -22,7 +25,7 @@ tr a:visited {
     <th>번호</th>
     <th>닉네임</th>
     <th>이메일</th>
-    <th>등록일</th>
+    <th>가입일</th>
   </tr>
 </thead>
 	<tbody>
@@ -39,25 +42,21 @@ tr a:visited {
 	</tbody>
 </table>
 
-<nav>
-  <ul class="pagination">
-    <li>
-      <a href="#" aria-label="Previous">
-        <span aria-hidden="true">&laquo;</span>
-      </a>
-    </li>
-    <li><a href="#">1</a></li>
-    <li><a href="#">2</a></li>
-    <li><a href="#">3</a></li>
-    <li><a href="#">4</a></li>
-    <li><a href="#">5</a></li>
-    <li>
-      <a href="#" aria-label="Next">
-        <span aria-hidden="true">&raquo;</span>
-      </a>
-    </li>
-  </ul>
-</nav>
+<p id="paging">
+    <c:if test="${pageNo > 1}">
+      <a href="list?pageNo=${pageNo-1}&pageSize=${pageSize}">◀</a>
+    </c:if>
+    <c:if test="${pageNo <= 1}">
+     ◀
+    </c:if>
+    ${pageNo} / ${totalPage}
+    <c:if test="${pageNo < totalPage}">
+      <a href="list?pageNo=${pageNo+1}&pageSize=${pageSize}"> ▶</a>
+    </c:if>
+    <c:if test="${pageNo >= totalPage}">
+     ▶
+    </c:if>
+</p>
 
 <script>
 document.querySelectorAll("tbody a").forEach((aTag) => {

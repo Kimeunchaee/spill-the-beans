@@ -26,12 +26,13 @@
       member  
   </sql>
   
-  <select id="findAll" resultMap="MemberMap">
+  <select id="findAll" resultMap="MemberMap" parameterType="map">
   <include refid="select1"/>
     where
       active=1 or active=2
     order by
       member_no asc
+      limit #{offset}, #{length}
   </select>
   
   <select id="findByNo" resultMap="MemberMap" parameterType="int">
@@ -89,5 +90,11 @@
     where
       member_no=#{no}
   </update>
+  
+  <select id="count" resultType="int">
+    select
+      count(*)
+    from member
+  </select> 
   
 </mapper>

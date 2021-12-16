@@ -1,5 +1,6 @@
 package com.spill.beans.web;
 
+import java.util.HashMap;
 import java.util.List;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import com.spill.beans.dao.MemberDao;
@@ -73,13 +75,56 @@ public class MemberController {
 
   // 회원 목록
   @GetMapping("/member/list")
-  public ModelAndView list() throws Exception {
+  public ModelAndView list(@RequestParam(defaultValue = "1") int pageNo, 
+      @RequestParam(defaultValue = "8") int pageSize, HttpSession session) throws Exception {
 
-    List<MemberDTO> memberList = memberDao.findAll();
+    int count = memberDao.count();
+
+    if (pageSize < 5 || pageSize > 8) {
+      pageSize = 8;
+    }
+
+    int totalPage = count / pageSize + ((count % pageSize) > 0 ? 1 : 0);
+
+    if (pageNo < 1 || pageNo > totalPage) {
+      pageNo = 1;
+    }
+
+    HashMap<String,Object> params = new HashMap<>();
+
+    params.put("offset", pageSize * (pageNo - 1));
+    params.put("length", pageSize);
+
+    List<MemberDTO> memberList = memberDao.findAll(params);
 
     ModelAndView mv = new ModelAndView();
 
-    mv.addObject("memberList", memberList);
+    session.setAttribute("memberList", memberList);
+    session.setAttribute("totalPage", totalPage);
+    session.setAttribute("pageNo", pageNo);
+    session.setAttribute("pageSize", pageSize);
+
+    //    mv.addObject("memberList", memberList);
+    //    mv.addObject("totalPage", totalPage);
+    //    mv.addObject("pageNo", pageNo);
+    //    mv.addObject("pageSize", pageSize);
+
+    mv.setViewName("redirect:../member/listForm#memberList");
+
+    return mv;
+  }
+
+  // 회원 목록 폼
+  @GetMapping("/member/listForm")
+  public ModelAndView listForm(HttpSession session) throws Exception {
+
+    ModelAndView mv = new ModelAndView();
+
+    mv.addObject("memberList", session.getAttribute("memberList"));
+    mv.addObject("totalPage", session.getAttribute("totalPage"));
+    mv.addObject("pageNo", ((int) session.getAttribute("pageNo")));
+    mv.addObject("pageSize", ((int)session.getAttribute("pageSize")));
+
     mv.addObject("pageTitle", "회원 목록");
     mv.addObject("contentID", "memberList");
     mv.addObject("contentUrl", "member/memberList.jsp");
