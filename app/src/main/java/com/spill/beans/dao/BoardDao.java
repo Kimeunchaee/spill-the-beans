@@ -2,6 +2,7 @@ package com.spill.beans.dao;
 
 import java.util.List;
 import java.util.Map;
+import org.apache.ibatis.annotations.Param;
 import com.spill.beans.dto.BoardDTO;
 
 // 역할
@@ -16,6 +17,7 @@ public interface BoardDao {
   void update(BoardDTO boardDTO) throws Exception;
   void updateCount(int no) throws Exception;
   void delete(int no) throws Exception;
+  List<BoardDTO> findByKeyword(@Param("option") String option, @Param("keyword") String keyword) throws Exception;
 
   // 게시판 목록 페이징
   int count() throws Exception;

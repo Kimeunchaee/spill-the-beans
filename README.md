@@ -154,8 +154,13 @@
 
 - 게시판 목록
     - 게시판 목록 바로 가기 링크 연결
-    - 게시판 목록 검색 기능 구현 중
+    - 게시판 목록 검색 기능 구현 완료
+        - BoardController --> search() 추가
+        - BoardDao.xml --> findByKeyword 추가
+        - 전체 검색 기능
+        - 제목 검색 기능
+        - 작성자 검색 기능
 
-- Board 테스트 값 수정 중
+- Board 테스트 값 수정
 
 - Board 테이블 수정

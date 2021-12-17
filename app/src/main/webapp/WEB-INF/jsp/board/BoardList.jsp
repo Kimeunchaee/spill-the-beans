@@ -24,9 +24,9 @@ tbody {
   color: white;
 }
 .button {
-	font-size: 14px;
-	line-height: 30px;
-	height: auto;
+	line-height: 32px;
+  height: auto;
+  margin-left: 100px;
 }
 .search {
 	padding: 1px;
@@ -73,20 +73,19 @@ input[type=text] {
 </table>
 <br>
 
-<form id="search-form" action="${contextRoot}/app/search/all">
+<form id="search-form" action="search">
 
 <div class="row">
+	
+	<div class="col-3 search">
+	    <select class="search-item" name="option" id="demo-category">
+	      <option value="all">전체</option>
+	      <option value="title">제목</option>
+	      <option value="writer">작성자</option>
+	    </select>
+	</div>
 
-<div class="col-md-8">
-  <div class="col-md-4 search">
-    <select class="search-item" name="demo-category" id="demo-category">
-      <option value="all">전체</option>
-      <option value="title">제목</option>
-      <option value="writer">작성자</option>
-    </select>
-  </div>
-  
-    <div class="col-md-7 search">
+    <div class="col-md-6 search">
       <input class="search-item" type="text" placeholder="⌨ 키워드를 입력해 주세요!" name="keyword">
     </div>
     <div class="col-md-1 search">
@@ -94,13 +93,12 @@ input[type=text] {
          <i class="fas fa-search"></i>
       </button>
     </div>
-</div>
-    <div class="col-md-4 search">
-	    <c:if test="${!empty loginUser}">
-			<a href='form' class ="button" style="font-size: 14px;">속삭이기</a><br>
-			</c:if>
-		</div>
-		
+    
+	<div class="col-2 search">
+	   <c:if test="${!empty loginUser}">
+		<a href='form' class ="button" style="font-size: 14px;">속삭이기</a><br>
+		</c:if>
+	</div>
 </div>
 
 </form>

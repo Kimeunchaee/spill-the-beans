@@ -101,6 +101,30 @@
     from board
   </select> 
   
+   <select id="findByKeyword" resultMap="BoardMap" parameterType="String">
+    select
+      b.board_no,
+      b.title,
+      b.content,
+      b.viewCount,
+      b.likeCount,
+      b.commentCount,
+      b.created_dt,
+      b.category_no,
+      m.member_no,
+      m.nickname,
+      m.email,
+      c.label
+    from
+      board b
+      inner join member m on b.member_no=m.member_no
+      inner join category c on b.category_no=c.category_no
+    where
+      ${option}
+    order by
+      b.board_no desc
+  </select>
+  
 </mapper>
 
 

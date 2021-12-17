@@ -23,6 +23,7 @@ public class BoardController {
   @Autowired CommentDao commentDao;
   @Autowired BoardDao boardDao;
 
+  // 게시글 등록 폼
   @GetMapping("/board/form")
   public ModelAndView form() {
     ModelAndView mv = new ModelAndView();
@@ -32,6 +33,7 @@ public class BoardController {
     return mv;
   }
 
+  // 게시글 등록
   @PostMapping("/board/add")
   public ModelAndView add(BoardDTO board, HttpSession session) throws Exception {
 
@@ -48,6 +50,7 @@ public class BoardController {
     return mv;
   }
 
+  //게시글 목록
   @GetMapping("/board/list")
   public ModelAndView list(@RequestParam(defaultValue = "1") int pageNo, 
       @RequestParam(defaultValue = "8") int pageSize, HttpSession session) throws Exception {
@@ -85,6 +88,7 @@ public class BoardController {
     return mv;
   }
 
+  // 게시글 상세
   @GetMapping("/board/detail")
   public ModelAndView detail(int no, HttpSession session) throws Exception {
 
@@ -104,12 +108,12 @@ public class BoardController {
     mv.addObject("loginUser", member);
     mv.addObject("board", board);
     mv.addObject("pageTitle", "게시글");
-    //mv.addObject("contentUrl", "board/MyBoardDetail.jsp");
     mv.addObject("contentUrl", "board/BoardDetail.jsp");
     mv.setViewName("template2");
     return mv;
   }
 
+  // 게시글 업데이트
   @PostMapping("/board/update")
   public ModelAndView update(BoardDTO board) throws Exception {
 
@@ -126,6 +130,7 @@ public class BoardController {
     return mv;
   }
 
+  // 게시글 삭제
   @GetMapping("/board/delete")
   public ModelAndView delete(int no) throws Exception {
 
@@ -141,11 +146,37 @@ public class BoardController {
     mv.setViewName("redirect:list");
     return mv;
   }
+
+
+  // ---------------------------------------------------------------------------------
+
+  // 게시글 검색
+  @GetMapping("/board/search")
+  public ModelAndView search(String option, String keyword) throws Exception {
+
+
+    if (option.equals("all")) {
+      option = "b.title "+" like(concat('%'," +" '" +keyword+"' " +",'%'))"+" or m.nickname "+" like(concat('%'," +" '" +keyword+"' " +",'%'))";
+
+    } else if (option.equals("title")) {
+      option = "b.title like(concat('%'," +" '" +keyword+"' " +",'%'))";
+
+    } else if (option.equals("writer")) {
+      option = "m.nickname like(concat('%'," +" '" +keyword+"' " +",'%'))";
+    }
+
+    List<BoardDTO> boardList = boardDao.findByKeyword(option, keyword);
+
+    if (boardList.isEmpty()) {
+      throw new Exception("검색한 게시글이 없습니다.");
+    }
+
+    ModelAndView mv = new ModelAndView();
+    mv.addObject("boardList", boardList);
+    mv.addObject("pageTitle", "게시글");
+    mv.addObject("contentUrl", "board/BoardList.jsp");
+    mv.setViewName("template2");
+    return mv;
+  }
+
 }
-
-
-
-
-
-
-
