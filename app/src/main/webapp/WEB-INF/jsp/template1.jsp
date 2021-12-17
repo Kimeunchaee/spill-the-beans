@@ -18,6 +18,7 @@
   <link rel="stylesheet" href="${contextPath}/css/common.css">
   
   <script src="${contextPath}/node_modules/@popperjs/core/dist/umd/popper.js"></script>
+  <script src="${contextPath}/node_modules/@fortawesome/fontawesome-free/js/fontawesome.js"></script>
   <script src="${contextPath}/node_modules/bootstrap/dist/js/bootstrap.js"></script>
   <script src="${contextPath}/node_modules/sweetalert2/dist/sweetalert2.js"></script>
   

@@ -151,7 +151,7 @@ public class BoardController {
   // ---------------------------------------------------------------------------------
 
   // 게시글 검색
-  @GetMapping("/board/search")
+  @GetMapping("/board/search") 
   public ModelAndView search(String option, String keyword) throws Exception {
 
 
@@ -166,10 +166,6 @@ public class BoardController {
     }
 
     List<BoardDTO> boardList = boardDao.findByKeyword(option, keyword);
-
-    if (boardList.isEmpty()) {
-      throw new Exception("검색한 게시글이 없습니다.");
-    }
 
     ModelAndView mv = new ModelAndView();
     mv.addObject("boardList", boardList);

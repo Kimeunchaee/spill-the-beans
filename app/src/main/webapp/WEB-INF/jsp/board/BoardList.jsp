@@ -41,10 +41,26 @@ input[type=text] {
   height: auto;
   line-height: 30px;
 }
+
+.home-wrap {
+    margin-right: 1119px;
+    margin-bottom: 17px;
+    transition: 0.6;
+    font-size: 20px;
+}
+
+select option {
+    color: black;
+    background: #ffffff;
+}
+
 </style>
 
-<h2 class="major">게시글 목록</h2>
+<h2 class="major" style="margin-bottom: 15px;"><a href="${contextPath}/app/board/list">게시글 목록</a></h2>
 
+<div class="home-wrap">
+  <a href='${contextPath}/app/home'><i class="fas fa-home"></i></a>
+</div>
 <table class="table" style="width: 1200px;">
 <thead>
   <tr>
@@ -57,6 +73,12 @@ input[type=text] {
   </tr>
 </thead>
 <tbody>
+
+<c:if test="${empty boardList}">
+  <tr>
+    <td colspan="6" style="height: 100px; vertical-align: middle;">게시글이 없습니다.</td>
+   </tr>
+</c:if>
 
 <c:forEach items="${boardList}" var="board">
 <tr data-no="${board.no}">
@@ -95,9 +117,12 @@ input[type=text] {
     </div>
     
 	<div class="col-2 search">
-	   <c:if test="${!empty loginUser}">
-		<a href='form' class ="button" style="font-size: 14px;">속삭이기</a><br>
+	  <c:if test="${!empty loginUser}">
+		  <a href='form' class ="button" style="font-size: 14px;">속삭이기</a><br>
 		</c:if>
+		<c:if test="${empty loginUser}">
+      <a href='form' class ="button" style="font-size: 14px; visibility:hidden;">속삭이기</a><br>
+    </c:if>
 	</div>
 </div>
 

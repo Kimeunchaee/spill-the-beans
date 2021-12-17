@@ -24,6 +24,7 @@
 	      <li><a href="${contextPath}/app/auth/loginForm#loginForm">로그인</a></li>
 	      <li><a href="${contextPath}/app/member/addForm#signup">회원가입</a></li>
 	      <li><a href="${contextPath}/app/member/findForm#findForm">ID/PW 찾기</a></li>
+	      <li><a href="${contextPath}/app/board/list">속삭이기</a></li>
 	    </ul>
 	  </c:if>
 	  
