@@ -65,7 +65,4 @@ textarea:focus {
 	    </c:if>
 	</div>
 
-<!-- <a href='update' class="btn btn-primary">수정</a>
-<a href='delete' class="btn btn-primary">삭제</a> 
-<a href='list' class="btn btn-primary">목록</a><br> -->
 </form>

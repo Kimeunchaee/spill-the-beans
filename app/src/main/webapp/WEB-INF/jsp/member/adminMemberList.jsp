@@ -11,6 +11,9 @@ tr a {
 tr a:visited {
     color: white;
 }
+tr:hover {
+    cursor: pointer;
+}
 #paging {
   text-align: center;
 }

@@ -104,11 +104,6 @@ public class MemberController {
     session.setAttribute("pageNo", pageNo);
     session.setAttribute("pageSize", pageSize);
 
-    //    mv.addObject("memberList", memberList);
-    //    mv.addObject("totalPage", totalPage);
-    //    mv.addObject("pageNo", pageNo);
-    //    mv.addObject("pageSize", pageSize);
-
     mv.setViewName("redirect:../member/listForm#memberList");
 
     return mv;

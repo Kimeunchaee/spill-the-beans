@@ -1,6 +1,6 @@
 package com.spill.beans.web;
 
-import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 import javax.servlet.http.HttpSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import com.spill.beans.dao.BoardDao;
 import com.spill.beans.dao.CommentDao;
@@ -48,13 +49,39 @@ public class BoardController {
   }
 
   @GetMapping("/board/list")
-  public ModelAndView list() throws Exception {
-    Collection<BoardDTO> boardList = boardDao.findAll();
+  public ModelAndView list(@RequestParam(defaultValue = "1") int pageNo, 
+      @RequestParam(defaultValue = "8") int pageSize, HttpSession session) throws Exception {
+
+    int count = boardDao.count();
+
+    if (pageSize < 5 || pageSize > 8) {
+      pageSize = 8;
+    }
+
+    int totalPage = count / pageSize + ((count % pageSize) > 0 ? 1 : 0);
+
+    if (pageNo < 1 || pageNo > totalPage) {
+      pageNo = 1;
+    }
+
+    HashMap<String,Object> params = new HashMap<>();
+
+    params.put("offset", pageSize * (pageNo - 1));
+    params.put("length", pageSize);
+
+    List<BoardDTO> boardList = boardDao.findAll(params);
+
     ModelAndView mv = new ModelAndView();
+
+    session.setAttribute("totalPage", totalPage);
+    session.setAttribute("pageNo", pageNo);
+    session.setAttribute("pageSize", pageSize);
+
     mv.addObject("boardList", boardList);
     mv.addObject("pageTitle", "게시글목록");
     mv.addObject("contentUrl", "board/BoardList.jsp");
-    mv.setViewName("template1");
+    mv.setViewName("template2");
+
     return mv;
   }
 
@@ -79,7 +106,7 @@ public class BoardController {
     mv.addObject("pageTitle", "게시글");
     //mv.addObject("contentUrl", "board/MyBoardDetail.jsp");
     mv.addObject("contentUrl", "board/BoardDetail.jsp");
-    mv.setViewName("template1");
+    mv.setViewName("template2");
     return mv;
   }
 

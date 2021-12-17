@@ -32,7 +32,7 @@
     values(#{title},#{content},#{viewCount},#{likeCount},#{commentCount},#{category.no},#{writer.no})
   </insert>
   
-   <select id="findAll" resultMap="BoardMap">
+   <select id="findAll" resultMap="BoardMap" parameterType="map">
     select
       b.board_no,
       b.title,
@@ -50,6 +50,9 @@
       board b
       inner join member m on b.member_no=m.member_no
       inner join category c on b.category_no=c.category_no
+    order by
+      b.board_no desc
+      limit #{offset}, #{length}
   </select>
   
   <update id="updateCount" parameterType="int">
@@ -91,6 +94,12 @@
     delete from board 
     where board_no=#{no}
   </delete>
+  
+  <select id="count" resultType="int">
+    select
+      count(*)
+    from board
+  </select> 
   
 </mapper>
 

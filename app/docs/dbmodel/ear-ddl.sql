@@ -39,13 +39,13 @@ ALTER TABLE member
 
 -- 댓글
 CREATE TABLE comment (
-  comment_no INTEGER      NOT NULL COMMENT '댓글번호', -- 댓글번호
-  member_no  INTEGER      NOT NULL COMMENT '회원번호', -- 회원번호
-  board_no   INTEGER      NOT NULL COMMENT '게시글번호', -- 게시글번호
-  content    VARCHAR(255) NOT NULL COMMENT '내용', -- 내용
-  created_dt DATE         NOT NULL DEFAULT curdate() COMMENT '등록일', -- 등록일
-  isPublic   INTEGER      NOT NULL DEFAULT 1 COMMENT '공개여부', -- 공개여부
-  replyCount INTEGER      NOT NULL COMMENT '리댓 수' -- 리댓 수
+  comment_no INTEGER       NOT NULL COMMENT '댓글번호', -- 댓글번호
+  member_no  INTEGER       NOT NULL COMMENT '회원번호', -- 회원번호
+  board_no   INTEGER       NOT NULL COMMENT '게시글번호', -- 게시글번호
+  content    VARCHAR(2200) NOT NULL COMMENT '내용', -- 내용
+  created_dt DATE          NOT NULL DEFAULT curdate() COMMENT '등록일', -- 등록일
+  isPublic   INTEGER       NOT NULL DEFAULT 1 COMMENT '공개여부', -- 공개여부
+  replyCount INTEGER       NOT NULL COMMENT '리댓 수' -- 리댓 수
 )
 COMMENT '댓글';
 
@@ -61,8 +61,8 @@ ALTER TABLE comment
 
 -- 카테고리
 CREATE TABLE category (
-  category_no INTEGER      NOT NULL COMMENT '카테고리 번호', -- 카테고리 번호
-  label       VARCHAR(255) NOT NULL COMMENT '카데고리 이름' -- 카데고리 이름
+  category_no INTEGER     NOT NULL COMMENT '카테고리 번호', -- 카테고리 번호
+  label       VARCHAR(50) NOT NULL COMMENT '카데고리 이름' -- 카데고리 이름
 )
 COMMENT '카테고리';
 
@@ -78,15 +78,15 @@ ALTER TABLE category
 
 -- 게시판
 CREATE TABLE board (
-  board_no     INTEGER      NOT NULL COMMENT '게시글번호', -- 게시글번호
-  member_no    INTEGER      NOT NULL COMMENT '회원번호', -- 회원번호
-  category_no  INTEGER      NOT NULL COMMENT '카테고리 번호', -- 카테고리 번호
-  title        VARCHAR(255) NOT NULL COMMENT '제목', -- 제목
-  content      VARCHAR(255) NOT NULL COMMENT '내용', -- 내용
-  viewCount    INTEGER      NOT NULL COMMENT '조회수', -- 조회수
-  created_dt   DATE         NOT NULL DEFAULT curdate() COMMENT '등록일', -- 등록일
-  likeCount    INTEGER      NOT NULL COMMENT '좋아요 수', -- 좋아요 수
-  commentCount INTEGER      NOT NULL COMMENT '댓글 수' -- 댓글 수
+  board_no     INTEGER       NOT NULL COMMENT '게시글번호', -- 게시글번호
+  member_no    INTEGER       NOT NULL COMMENT '회원번호', -- 회원번호
+  category_no  INTEGER       NOT NULL COMMENT '카테고리 번호', -- 카테고리 번호
+  title        VARCHAR(50)   NOT NULL COMMENT '제목', -- 제목
+  content      VARCHAR(2200) NOT NULL COMMENT '내용', -- 내용
+  viewCount    INTEGER       NOT NULL COMMENT '조회수', -- 조회수
+  created_dt   DATE          NOT NULL DEFAULT curdate() COMMENT '등록일', -- 등록일
+  likeCount    INTEGER       NOT NULL COMMENT '좋아요 수', -- 좋아요 수
+  commentCount INTEGER       NOT NULL COMMENT '댓글 수' -- 댓글 수
 )
 COMMENT '게시판';
 
@@ -102,8 +102,8 @@ ALTER TABLE board
 
 -- 레벨
 CREATE TABLE level (
-  no   INTEGER      NOT NULL COMMENT '레벨 번호', -- 레벨 번호
-  name VARCHAR(255) NOT NULL COMMENT '레벨 이름' -- 레벨 이름
+  no   INTEGER     NOT NULL COMMENT '레벨 번호', -- 레벨 번호
+  name VARCHAR(50) NOT NULL COMMENT '레벨 이름' -- 레벨 이름
 )
 COMMENT '레벨';
 
@@ -117,7 +117,7 @@ ALTER TABLE level
 -- 파일
 CREATE TABLE file (
   no       INTEGER            NOT NULL COMMENT '파일 번호', -- 파일 번호
-  name     VARCHAR(255)       NOT NULL COMMENT '파일 이름', -- 파일 이름
+  name     VARCHAR(50)        NOT NULL COMMENT '파일 이름', -- 파일 이름
   board_no <데이터 타입 없음> NULL     COMMENT '게시글 번호' -- 게시글 번호
 )
 COMMENT '파일';
@@ -168,4 +168,3 @@ ALTER TABLE board
     REFERENCES category ( -- 카테고리
       category_no -- 카테고리 번호
     );
-    

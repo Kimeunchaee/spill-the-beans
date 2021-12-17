@@ -1,6 +1,7 @@
 package com.spill.beans.dao;
 
 import java.util.List;
+import java.util.Map;
 import com.spill.beans.dto.BoardDTO;
 
 // 역할
@@ -8,12 +9,16 @@ import com.spill.beans.dto.BoardDTO;
 public interface BoardDao {
 
   void insert(BoardDTO boardDTO) throws Exception;
-  List<BoardDTO> findAll() throws Exception;
+  List<BoardDTO> findAll(Map<String,Object> params) throws Exception;
   List<BoardDTO> findAllByCategory() throws Exception;
   BoardDTO findByNo(int no) throws Exception;
   BoardDTO findByName(String name) throws Exception;
   void update(BoardDTO boardDTO) throws Exception;
   void updateCount(int no) throws Exception;
   void delete(int no) throws Exception;
+
+  // 게시판 목록 페이징
+  int count() throws Exception;
+
 
 }

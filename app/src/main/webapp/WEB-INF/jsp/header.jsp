@@ -31,7 +31,7 @@
 	    <ul> <!-- 회원 -->
 	      <li><a href="#intro">소개</a></li>
 	      <li><a href="${contextPath}/app/member/detail#detail">마이페이지</a></li>
-	      <li><a href="#write">속삭이기</a></li>
+	      <li><a href="${contextPath}/app/board/list">속삭이기</a></li>
 	      <li><a href="${contextPath}/app/auth/logout">로그아웃</a></li>
 	    </ul>
 	  </c:if>

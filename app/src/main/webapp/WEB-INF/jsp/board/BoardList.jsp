@@ -5,29 +5,52 @@
 <style>
 tr a {
     text-decoration: none;
-    color: black;
+    color: white;
 }
 tr a:visited {
-    color: black;
+    color: white;
 }
 tr:hover {
     cursor: pointer;
 }
+table {
+    color: white;
+}
+table th {
+  text-align: center;
+}
+tbody {
+  text-align: center;
+  color: white;
+}
+.button {
+	font-size: 14px;
+	line-height: 30px;
+	height: auto;
+}
+.search {
+	padding: 1px;
+}
+.search-item {
+  font-size: 14px;
+  height: auto;
+  line-height: 30px;
+}
+input[type=text] {
+  font-size: 14px;
+  height: auto;
+  line-height: 30px;
+}
 </style>
 
-<h1>게시글 목록</h1>
+<h2 class="major">게시글 목록</h2>
 
-<c:if test="${!empty loginUser}">
-<a href='form' class="btn btn-outline-primary btn-sm">새 글</a><br>
-</c:if>
-
-
-<table class="table table-hover">
+<table class="table" style="width: 1200px;">
 <thead>
   <tr>
     <th>번호</th>
     <th>카테고리</th>
-    <th>제목</th>
+    <th style="max-width: 400px; width: 400px;">제목</th>
     <th>작성자</th>
     <th>등록일</th>
     <th>조회수</th>
@@ -48,6 +71,55 @@ tr:hover {
 
 </tbody>
 </table>
+<br>
+
+<form id="search-form" action="${contextRoot}/app/search/all">
+
+<div class="row">
+
+<div class="col-md-8">
+  <div class="col-md-4 search">
+    <select class="search-item" name="demo-category" id="demo-category">
+      <option value="all">전체</option>
+      <option value="title">제목</option>
+      <option value="writer">작성자</option>
+    </select>
+  </div>
+  
+    <div class="col-md-7 search">
+      <input class="search-item" type="text" placeholder="⌨ 키워드를 입력해 주세요!" name="keyword">
+    </div>
+    <div class="col-md-1 search">
+      <button class="search-icon search-item" style="line-height: 32px;">
+         <i class="fas fa-search"></i>
+      </button>
+    </div>
+</div>
+    <div class="col-md-4 search">
+	    <c:if test="${!empty loginUser}">
+			<a href='form' class ="button" style="font-size: 14px;">속삭이기</a><br>
+			</c:if>
+		</div>
+		
+</div>
+
+</form>
+
+<p id="paging">
+    <c:if test="${pageNo > 1}">
+      <a href="list?pageNo=${pageNo-1}&pageSize=${pageSize}">◀</a>
+    </c:if>
+    <c:if test="${pageNo <= 1}">
+     ◀
+    </c:if>
+    ${pageNo} / ${totalPage}
+    <c:if test="${pageNo < totalPage}">
+      <a href="list?pageNo=${pageNo+1}&pageSize=${pageSize}"> ▶</a>
+    </c:if>
+    <c:if test="${pageNo >= totalPage}">
+     ▶
+    </c:if>
+</p>
 
 <script>
 document.querySelectorAll("tbody a").forEach((aTag) => {
@@ -61,7 +133,4 @@ trList.forEach(function(trTag) {
 	};
 });
 </script>
-
-
-
 
