@@ -127,13 +127,13 @@ public class MemberController {
 
     mv.addObject("pageTitle", "회원 목록");
     mv.addObject("contentID", "memberList");
-    mv.addObject("contentUrl", "member/memberList.jsp");
+    mv.addObject("contentUrl", "member/adminMemberList.jsp");
     mv.setViewName("template1");
 
     return mv;
   }
 
-  // 회원 상세
+  // 마이페이지 상세
   @GetMapping("/member/detail")
   public ModelAndView detail(HttpSession session) throws Exception {
 
@@ -155,6 +155,28 @@ public class MemberController {
     return mv;
   }
 
+  // 관리자용 회원 상세
+  @GetMapping("/member/info")
+  public ModelAndView info(int memberNo) throws Exception {
+
+    MemberDTO member = memberDao.findByNo(memberNo);
+
+    if (member == null) {
+
+      throw new Exception("해당 회원을 찾을 수 없습니다.");
+
+    }
+
+    ModelAndView mv = new ModelAndView();
+
+    mv.addObject("pageTitle", "회원 상세");
+    mv.addObject("member", member);
+    mv.addObject("contentID", "info");
+    mv.addObject("contentUrl", "member/adminMemberInfo.jsp");
+    mv.setViewName("template1");
+
+    return mv;
+  }
 
   //----------------------------------------------------------------------------------------------------------
   // 회원 정보 수정 폼
@@ -242,6 +264,21 @@ public class MemberController {
     return mv;
   }
 
+  // 관리자용 회원 탈퇴 폼
+  @GetMapping("/member/deleteMemberPopUp")
+  public ModelAndView deleteMemberPopUp(int memberNo) throws Exception {
+
+    ModelAndView mv = new ModelAndView();
+
+    mv.addObject("pageTitle", "회원 탈퇴");
+    mv.addObject("member", memberDao.findByNo(memberNo));
+    mv.addObject("contentID", "deleteMemberPopUp");
+    mv.addObject("contentUrl", "member/adminDeleteMember.jsp");
+    mv.setViewName("template1");
+
+    return mv;
+  }
+
   // 회원 탈퇴
   @PostMapping("/member/delete")
   public ModelAndView delete(MemberDTO member, HttpSession session) throws Exception {
@@ -264,6 +301,31 @@ public class MemberController {
       // mv.addObject("refresh", "2;url=../auth/logout");
       // 방법 1) 원래 deleteMSG에서 if문을 사용하여 구현해 줘야 하지만
       // 방법 2) jsp에서 refresh 조건문 사용하여 간결하게 구현 가능!
+
+    } 
+
+    mv.setViewName("redirect:../member/deleteMSG#deleteMSG");
+
+    return mv;
+  }
+
+  // 회원 탈퇴
+  @GetMapping("/member/adminDeleteMember")
+  public ModelAndView adminDeleteMember(int memberNo) throws Exception {
+
+    ModelAndView mv = new ModelAndView();
+
+    MemberDTO member = memberDao.findByNo(memberNo);
+
+    if (member != null && member.getActive() != 2) {
+
+      member.setNickname("Deleted Member("+ member.getNickname() +")");
+      member.setEmail("Deleted Email");
+      member.setPassword("Deleted Password");
+      member.setActive(2);
+
+      memberDao.updateActive(member);
+      sqlSessionFactory.openSession().commit();
 
     } 
 

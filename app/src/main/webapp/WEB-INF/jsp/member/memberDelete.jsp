@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-    
+
 <c:choose>
 	<c:when test="${loginUser.active == 2}">
 		<h2 class="major">탈퇴 완료</h2>
@@ -12,6 +12,15 @@
     <meta http-equiv="refresh" content="2; url=${contextPath}/app/auth/logout">
 		<br>
 	</c:when>
+	
+	 <c:when test="${loginUser.active == 3}">
+    <h2 class="major">탈퇴 완료</h2>
+    <p>회원을 탈퇴 시켰습니다.<br>
+       회원 목록으로 이동합니다.</p>
+       
+    <meta http-equiv="refresh" content="2; url=${contextPath}/app/member/list">
+    <br>
+  </c:when>
 	
 	<c:otherwise>
 		<h2 class="major">탈퇴 실패!</h2>

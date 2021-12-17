@@ -33,7 +33,7 @@ tr a:visited {
 	<c:forEach items="${memberList}" var="member">
 	<tr data-no="${member.no}">
 	    <td>${member.no}</td>
-	    <td><a href='detail?no=${member.no}'>${member.nickname}</a></td> 
+	    <td><a href='info?memberNo=${member.no}#info'>${member.nickname}</a></td> 
 	    <td>${member.email}</td> 
 	    <td>${member.registeredDate}</td>
 	</tr>
@@ -41,7 +41,7 @@ tr a:visited {
 	
 	</tbody>
 </table>
-
+<br>
 <p id="paging">
     <c:if test="${pageNo > 1}">
       <a href="list?pageNo=${pageNo-1}&pageSize=${pageSize}">◀</a>
