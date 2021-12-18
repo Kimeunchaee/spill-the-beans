@@ -27,6 +27,11 @@
   
   </resultMap>
   
+  <resultMap id="BoardLikeMap" type="BoardLikeDTO">
+      <id column="board_no" property="boardNo"/>
+      <id column="member_no" property="memberNo"/>
+  </resultMap>
+  
   <insert id="insert" parameterType="BoardDTO">
     insert into board(title,content,viewCount,likeCount,commentCount,category_no,member_no) 
     values(#{title},#{content},#{viewCount},#{likeCount},#{commentCount},#{category.no},#{writer.no})
@@ -58,6 +63,12 @@
   <update id="updateCount" parameterType="int">
     update board set
       viewCount = viewCount + 1
+    where board_no=#{no}
+  </update>
+  
+  <update id="discount" parameterType="int">
+    update board set
+      viewCount = viewCount - 1
     where board_no=#{no}
   </update>
   
@@ -122,6 +133,36 @@
       ${option}
     order by
       b.board_no desc
+  </select>
+  
+  <insert id="insertLike">
+    insert into board_like(board_no,member_no) 
+    values(#{boardNo},#{memberNo})
+  </insert>
+  
+  <delete id="deleteLike">
+    delete from board_like
+    where board_no=#{boardNo} and member_no=#{memberNo}
+  </delete>
+  
+  <update id="updateLikeCount" parameterType="int">
+    update board set
+      likeCount = likeCount + 1
+    where board_no=#{no}
+  </update>
+  
+  <update id="disLikecount" parameterType="int">
+    update board set
+      likeCount = likeCount - 1
+    where board_no=#{no}
+  </update>
+  
+  <select id="findLikeAll" resultMap="BoardLikeMap">
+    select
+      l.board_no,
+      l.member_no
+    from
+      board_like l
   </select>
   
 </mapper>

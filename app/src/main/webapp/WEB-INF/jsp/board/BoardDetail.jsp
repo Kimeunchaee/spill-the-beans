@@ -44,6 +44,14 @@ input[type="checkbox"]:checked + label:before{
     padding-left: 1px;
 }
 
+.box{
+ -ms-overflow-style: none; 
+}
+.box::-webkit-scrollbar{
+ display:none; 
+ }
+
+
 </style>
 
 <h2 class="major">게시글</h2>
@@ -72,7 +80,7 @@ input[type="checkbox"]:checked + label:before{
 
 	<div class="mb-3 row">
 	  <div class="col-sm-10">
-	    <textarea id='f-content' name='content' class="form-control" rows="8" readonly>${board.content}</textarea>
+	    <textarea id='f-content' name='content' class="form-control box" rows="8" readonly>${board.content}</textarea>
 	  </div>
 	</div>
 

@@ -12,19 +12,19 @@
        <div class="card2">
          <div class="card-body" style="padding: 5px 0;">
          
-		        <span style="font-size: 14px; color: white;">${comment.writer.nickname} | ${comment.registeredDate}</span><br>
-				           
 	          <c:choose>
 		           <c:when test="${comment.isPublic == 2}">
 		             <c:if test="${comment.writer.no == loginUser.no}">
-		                <span style="color: white">[비밀]</span> <span>${comment.content} </span><br>
+		             <span style="font-size: 14px; color: white;">${comment.writer.nickname} | ${comment.registeredDate}</span><br>
+		                <span style="color: white"><i class="fas fa-lock"></i></span> <span>${comment.content} </span><br>
 		             </c:if>
 		             
 		             <c:if test="${comment.writer.no != loginUser.no}">
-	                   <span> 🔒 비밀 댓글 입니다.</span><br>
+	                   <span><i class="fas fa-lock"></i> 비밀 댓글입니다.</span><br>
 	               </c:if>
 	             </c:when>
 		           <c:otherwise>
+		           <span style="font-size: 14px; color: white;">${comment.writer.nickname} | ${comment.registeredDate}</span><br>
 				         <span>${comment.content}</span><br>
 		           </c:otherwise>
 	          </c:choose>

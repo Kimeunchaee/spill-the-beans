@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.spill.beans.dao.BoardDao;
 import com.spill.beans.dao.CommentDao;
 import com.spill.beans.dto.BoardDTO;
+import com.spill.beans.dto.BoardLikeDTO;
 import com.spill.beans.dto.CommentDTO;
 import com.spill.beans.dto.MemberDTO;
 
@@ -93,16 +94,26 @@ public class BoardController {
   public ModelAndView detail(int no, HttpSession session) throws Exception {
 
     BoardDTO board = boardDao.findByNo(no);
+    MemberDTO member = (MemberDTO) session.getAttribute("loginUser");
+
+    ModelAndView mv = new ModelAndView();
 
     if (board == null) {
       throw new Exception("해당 번호의 게시글이 없습니다.");
     }
 
     boardDao.updateCount(no);
+    sqlSessionFactory.openSession().commit();
 
     List<CommentDTO> commentList = commentDao.findAll(no);
+    List<BoardLikeDTO> boardLikeList = boardDao.findLikeAll();
 
-    ModelAndView mv = new ModelAndView();
+    for (BoardLikeDTO list : boardLikeList) {
+      if (list.getMemberNo() == member.getNo() && list.getBoardNo() == board.getNo()) {
+        mv.addObject("list", list);
+      } 
+    }
+
     mv.addObject("commentList", commentList);
     mv.addObject("board", board);
     mv.addObject("pageTitle", "게시글");
@@ -184,6 +195,36 @@ public class BoardController {
     mv.addObject("pageTitle", "게시글");
     mv.addObject("contentUrl", "board/BoardList.jsp");
     mv.setViewName("template2");
+    return mv;
+  }
+
+  // ---------------------------------------------------------------------------------
+
+  // 게시글 좋아요
+  @GetMapping("/board/like") 
+  public ModelAndView like(int boardNo, int memberNo) throws Exception {
+
+    boardDao.insertLike(boardNo, memberNo);
+    boardDao.updateLikeCount(boardNo);
+    boardDao.discount(boardNo);
+    sqlSessionFactory.openSession().commit();
+
+    ModelAndView mv = new ModelAndView();
+    mv.setViewName("redirect:detail?no="+boardNo);
+    return mv;
+  }
+
+  // 게시글 좋아요 취소
+  @GetMapping("/board/unlike") 
+  public ModelAndView unlike(int boardNo, int memberNo) throws Exception {
+
+    boardDao.deleteLike(boardNo, memberNo);
+    boardDao.disLikecount(boardNo);
+    boardDao.discount(boardNo);
+    sqlSessionFactory.openSession().commit();
+
+    ModelAndView mv = new ModelAndView();
+    mv.setViewName("redirect:detail?no="+boardNo);
     return mv;
   }
 

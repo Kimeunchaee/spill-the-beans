@@ -16,6 +16,9 @@ DROP TABLE IF EXISTS level RESTRICT;
 -- 파일
 DROP TABLE IF EXISTS file RESTRICT;
 
+-- 좋아요
+DROP TABLE IF EXISTS board_like RESTRICT;
+
 -- 회원
 CREATE TABLE member (
   member_no  INTEGER      NOT NULL COMMENT '회원번호', -- 회원번호
@@ -84,8 +87,8 @@ CREATE TABLE board (
   title        VARCHAR(50)   NOT NULL COMMENT '제목', -- 제목
   content      VARCHAR(2200) NOT NULL COMMENT '내용', -- 내용
   viewCount    INTEGER       NOT NULL COMMENT '조회수', -- 조회수
-  created_dt   DATE          NOT NULL DEFAULT curdate() COMMENT '등록일', -- 등록일
   likeCount    INTEGER       NOT NULL COMMENT '좋아요 수', -- 좋아요 수
+  created_dt   DATE          NOT NULL DEFAULT curdate() COMMENT '등록일', -- 등록일
   commentCount INTEGER       NOT NULL COMMENT '댓글 수' -- 댓글 수
 )
 COMMENT '게시판';
@@ -129,6 +132,21 @@ ALTER TABLE file
       no -- 파일 번호
     );
 
+-- 좋아요
+CREATE TABLE board_like (
+  board_no  INTEGER NOT NULL COMMENT '게시글번호', -- 게시글번호
+  member_no INTEGER NOT NULL COMMENT '회원번호' -- 회원번호
+)
+COMMENT '좋아요';
+
+-- 좋아요
+ALTER TABLE board_like
+  ADD CONSTRAINT PK_board_like -- 좋아요 기본키
+    PRIMARY KEY (
+      board_no,  -- 게시글번호
+      member_no  -- 회원번호
+    );
+
 -- 댓글
 ALTER TABLE comment
   ADD CONSTRAINT FK_board_TO_comment -- 게시판 -> 댓글
@@ -168,3 +186,25 @@ ALTER TABLE board
     REFERENCES category ( -- 카테고리
       category_no -- 카테고리 번호
     );
+
+-- 좋아요
+ALTER TABLE board_like
+  ADD CONSTRAINT FK_board_TO_board_like -- 게시판 -> 좋아요
+    FOREIGN KEY (
+      board_no -- 게시글번호
+    )
+    REFERENCES board ( -- 게시판
+      board_no -- 게시글번호
+    );
+
+-- 좋아요
+ALTER TABLE board_like
+  ADD CONSTRAINT FK_member_TO_board_like -- 회원 -> 좋아요
+    FOREIGN KEY (
+      member_no -- 회원번호
+    )
+    REFERENCES member ( -- 회원
+      member_no -- 회원번호
+    );
+    
+    
