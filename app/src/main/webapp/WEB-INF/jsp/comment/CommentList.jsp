@@ -12,7 +12,7 @@
        <div class="card2">
          <div class="card-body" style="padding: 5px 0;">
          
-		        <span style="font-size: 14px; color: gray;">${comment.writer.nickname} | ${comment.registeredDate}</span><br>
+		        <span style="font-size: 14px; color: white;">${comment.writer.nickname} | ${comment.registeredDate}</span><br>
 				           
 	          <c:choose>
 		           <c:when test="${comment.isPublic == 2}">
@@ -29,11 +29,12 @@
 		           </c:otherwise>
 	          </c:choose>
 	          
-				    <span style="font-size: 14px; color: gray;">답글 ${comment.replyCount}개 ▼ | 답글 쓰기</span>
+				    <span style="font-size: 14px; color: white;">답글 ${comment.replyCount}개 ▼ | 답글 쓰기</span>
 				    
 				    <c:if test="${comment.writer.no == loginUser.no}">
-				      <button class="btn btn-primary">변경</button>
-							<a href='comment/delete?commentNo=${comment.no}' class="btn btn-primary">삭제</a>
+				      <!-- <button><i class="far fa-edit"></i></button> -->
+							<a href='#'><i class="far fa-edit"></i></a>
+							<a href='comment/delete?commentNo=${comment.no}'><i class="fas fa-trash-alt"></i></a>
 				    </c:if>
 				    
          </div>

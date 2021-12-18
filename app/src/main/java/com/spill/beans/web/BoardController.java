@@ -92,7 +92,6 @@ public class BoardController {
   @GetMapping("/board/detail")
   public ModelAndView detail(int no, HttpSession session) throws Exception {
 
-    MemberDTO member = (MemberDTO) session.getAttribute("loginUser");
     BoardDTO board = boardDao.findByNo(no);
 
     if (board == null) {
@@ -105,7 +104,6 @@ public class BoardController {
 
     ModelAndView mv = new ModelAndView();
     mv.addObject("commentList", commentList);
-    mv.addObject("loginUser", member);
     mv.addObject("board", board);
     mv.addObject("pageTitle", "게시글");
     mv.addObject("contentUrl", "board/BoardDetail.jsp");

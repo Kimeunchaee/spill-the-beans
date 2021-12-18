@@ -80,16 +80,31 @@ select option {
    </tr>
 </c:if>
 
-<c:forEach items="${boardList}" var="board">
-<tr data-no="${board.no}">
-    <td>${board.no}</td>
-    <td>${board.category.label}</td>
-    <td><a href='detail?no=${board.no}'>${board.title}</a></td> 
-    <td>${board.writer.nickname}</td> 
-    <td>${board.registeredDate}</td> 
-    <td>${board.viewCount}</td>
-</tr>
-</c:forEach>
+<c:if test="${empty loginUser}">
+	<c:forEach items="${boardList}" var="board">
+	<tr data-no="${board.no}">
+	    <td>${board.no}</td>
+	    <td>${board.category.label}</td>
+	    <td>${board.title}<td> 
+	    <td>${board.writer.nickname}</td> 
+	    <td>${board.registeredDate}</td> 
+	    <td>${board.viewCount}</td>
+	</tr>
+	</c:forEach>
+</c:if>
+
+<c:if test="${not empty loginUser}">
+	<c:forEach items="${boardList}" var="board">
+	<tr data-no="${board.no}">
+	    <td>${board.no}</td>
+	    <td>${board.category.label}</td>
+	    <td><a href='detail?no=${board.no}'>${board.title}</a></td> 
+	    <td>${board.writer.nickname}</td> 
+	    <td>${board.registeredDate}</td> 
+	    <td>${board.viewCount}</td>
+	</tr>
+	</c:forEach>
+</c:if>
 
 </tbody>
 </table>
