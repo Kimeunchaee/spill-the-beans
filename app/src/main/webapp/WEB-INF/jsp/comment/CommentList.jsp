@@ -17,7 +17,7 @@
 	          <c:choose>
 		           <c:when test="${comment.isPublic == 2}">
 		             <c:if test="${comment.writer.no == loginUser.no}">
-		                <span style="color: gray">[비밀]</span> <span>${comment.content} </span><br>
+		                <span style="color: white">[비밀]</span> <span>${comment.content} </span><br>
 		             </c:if>
 		             
 		             <c:if test="${comment.writer.no != loginUser.no}">
