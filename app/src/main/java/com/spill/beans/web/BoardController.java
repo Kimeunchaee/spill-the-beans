@@ -29,7 +29,7 @@ public class BoardController {
     ModelAndView mv = new ModelAndView();
     mv.addObject("pageTitle", "새 글");
     mv.addObject("contentUrl", "board/BoardForm.jsp");
-    mv.setViewName("template1");
+    mv.setViewName("template2");
     return mv;
   }
 
@@ -112,6 +112,20 @@ public class BoardController {
   }
 
   // 게시글 업데이트
+  @GetMapping("/board/updateForm")
+  public ModelAndView updateForm(int no) throws Exception {
+
+    BoardDTO board = boardDao.findByNo(no);
+
+    ModelAndView mv = new ModelAndView();
+    mv.addObject("board", board);
+    mv.addObject("pageTitle", "게시글 수정");
+    mv.addObject("contentUrl", "board/BoardUpdateForm.jsp");
+    mv.setViewName("template2");
+    return mv;
+  }
+
+  // 게시글 업데이트
   @PostMapping("/board/update")
   public ModelAndView update(BoardDTO board) throws Exception {
 
@@ -124,7 +138,7 @@ public class BoardController {
     sqlSessionFactory.openSession().commit();
 
     ModelAndView mv = new ModelAndView();
-    mv.setViewName("redirect:list");
+    mv.setViewName("redirect:detail?no="+board.getNo());
     return mv;
   }
 
@@ -136,7 +150,7 @@ public class BoardController {
     if (board == null) {
       throw new Exception("해당 번호의 게시글이 없습니다.");
     }
-
+    commentDao.deleteByBoardNo(no);
     boardDao.delete(no);
     sqlSessionFactory.openSession().commit();
 

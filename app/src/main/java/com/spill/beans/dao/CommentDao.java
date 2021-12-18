@@ -13,6 +13,7 @@ public interface CommentDao {
   void update(CommentDTO comment) throws Exception;
 
   void delete(int commentNo) throws Exception;            // 관리자가 삭제
+  void deleteByBoardNo(int boardNo) throws Exception;     // 게시글 번호로 삭제
   void deleteByMemberNo(int memberNo) throws Exception;   // 내가 쓴 댓글만 삭제
 
 }

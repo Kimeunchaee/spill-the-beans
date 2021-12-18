@@ -84,8 +84,7 @@
   <update id="update" parameterType="BoardDTO">
     update board set
       title=#{title},
-      content=#{content},
-      category_no=#{category.no}
+      content=#{content}
     where 
       board_no=#{no}
   </update>

@@ -47,7 +47,7 @@ input[type="checkbox"]:checked + label:before{
 </style>
 
 <h2 class="major">게시글</h2>
-<form id="member-form" action='update' method='post' style="width: 1000px;">
+<form style="width: 1000px;">
 
   <input id='f-no' type='hidden' name='no' class="form-control" value='${board.no}' readonly>
 
@@ -66,11 +66,34 @@ input[type="checkbox"]:checked + label:before{
 	</div>
 
 	<div class="btn-wrap" style="margin-left: 684px;">
-		<a href='update' class ="button" style="font-size: 14px;">수정</a>
-		<a href='delete?no=${board.no}' class ="button" style="font-size: 14px;">삭제</a>
+	<c:if test="${loginUser.no == board.writer.no}">
+		<a href='updateForm?no=${board.no}' class ="button" style="font-size: 14px;">수정</a>
+		<a href='#delete' class ="button" style="font-size: 14px;">삭제</a>
 	  <a href='list' class ="button" style="font-size: 14px;">목록</a>
+	</c:if>
+	
+	<c:if test="${loginUser.no != board.writer.no}">
+		<a href='update' class ="button" style="font-size: 14px; visibility: hidden;">수정</a>
+		<a href='delete?no=${board.no}' class ="button" style="font-size: 14px; visibility: hidden;">삭제</a>
+	  <a href='list' class ="button" style="font-size: 14px;">목록</a>
+	</c:if>
+	
 	</div>
 </form>
+
+
+ <!-- Main -->
+  <div id="main">
+      
+	  <article id="delete" style="position: fixed; top: 200px; z-index: 999; box-shadow : rgba(0,0,0,0.5) 0 0 0 9999px; background-color: rgb(31 71 63 / 100%);">
+			  <h2 class="major">게시글 삭제</h2>
+			  <p>정말 삭제 하시겠습니까?</p>
+				<a href='delete?no=${board.no}' class ="button" style="font-size: 16px; width: 49%;">네</a>
+				<a href='detail?no=${board.no}' class ="button" style="font-size: 16px; width: 49%;">아니요</a>
+	  </article>
+  
+  </div>
+ 
 
 <!-- 댓글 -->
 <div style="width: 810px;">
@@ -105,8 +128,7 @@ input[type="checkbox"]:checked + label:before{
 </div>
   
 <!-- 댓글 end -->
-
-
+     
 <script>
 document.querySelector("#member-form").onsubmit = () => {
 	if (document.querySelector("#f-title").value == "" ||

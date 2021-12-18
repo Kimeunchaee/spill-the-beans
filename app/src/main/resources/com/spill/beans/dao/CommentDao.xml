@@ -74,6 +74,12 @@
       comment_no=#{commentNo}
   </delete>
   
+  <delete id="deleteByBoardNo" parameterType="int">
+    delete from comment
+    where
+      board_no=#{boardNo}
+  </delete>
+  
   <delete id="deleteByMemberNo" parameterType="int">
     delete from comment
     where
