@@ -55,7 +55,18 @@ input[type="checkbox"]:checked + label:before{
 	  <div class="col-sm-10">
 	    <h4>${board.category.label}</h4>
 	    <p style="font-size: 22px; margin: 0; font-weight: bold;">${board.title}</p>
-	    <h4 style="margin-top: 6px;">${board.writer.nickname} | ${board.registeredDate} | 조회수:${board.viewCount} | 좋아요:${board.likeCount}</h4>
+	    <h4 style="margin-top: 6px;">${board.writer.nickname} | ${board.registeredDate} | 조회수:${board.viewCount} | 
+	    
+	    <c:choose>
+		    <c:when test="${not empty list}">
+		    <a href="unlike?boardNo=${board.no}&memberNo=${loginUser.no}"><i class="fas fa-thumbs-up"></i></a> ${board.likeCount}
+		    </c:when>
+		    <c:otherwise>
+		    <a href="like?boardNo=${board.no}&memberNo=${loginUser.no}"><i class="far fa-thumbs-up"></i></a> ${board.likeCount}
+		    </c:otherwise>
+		  </c:choose>
+	    </h4>
+	    
 	  </div>
 	</div>
 
