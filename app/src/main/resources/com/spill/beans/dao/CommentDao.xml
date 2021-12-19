@@ -55,17 +55,17 @@
   </insert>
   
   <update id="update" parameterType="CommentDTO">
-    update comment set
+    update comment
      <set>
 	     <if test="content != null">
 	       content=#{content},
 	     </if>
-	     <if test="isPublic !- null">
+	     <if test="isPublic != 0">
 	       isPublic=#{isPublic}
 	     </if>
      </set>
     where
-      comment_no=#{commentNo}
+      comment_no=#{no}
   </update>
   
   <delete id="delete" parameterType="int">

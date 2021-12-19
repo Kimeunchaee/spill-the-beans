@@ -64,7 +64,7 @@ public class CommentController {
     return mv;
   }
 
-  @PostMapping("board/comment/update")
+  @PostMapping("board/commentUpdate")
   public ModelAndView update(CommentDTO comment) throws Exception {
 
     CommentDTO oldComment = commentDao.findByNo(comment.getNo());
@@ -76,7 +76,7 @@ public class CommentController {
     sqlSessionFactory.openSession().commit();
 
     ModelAndView mv = new ModelAndView();
-    mv.setViewName("redirect:../detail?no=" + comment.getBoardNo());
+    mv.setViewName("redirect:../board/detail?no=" + oldComment.getBoardNo());
     return mv;
   }
 

@@ -2,6 +2,23 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+<style>
+.show {
+  display: block; 
+
+}
+
+.label {
+font-size: 16px; 
+padding: 0; 
+padding-left: 21px; 
+line-height: 11px; 
+display: none;
+
+}
+
+
+</style>
 
   <div id="empty-comment">
    <c:if test="${empty commentList}">등록된 댓글이 없습니다.</c:if>
@@ -14,18 +31,39 @@
          
 	          <c:choose>
 		           <c:when test="${comment.isPublic == 2}">
-		             <c:if test="${comment.writer.no == loginUser.no}">
+		           <c:choose>
+		             <c:when test="${comment.writer.no == loginUser.no or board.writer.no == loginUser.no}">
+		             <form action="commentUpdate" method="post">
 		             <span style="font-size: 14px; color: white;">${comment.writer.nickname} | ${comment.registeredDate}</span><br>
-		                <span style="color: white"><i class="fas fa-lock"></i></span> <span>${comment.content} </span><br>
-		             </c:if>
+		                <input type="checkbox" class="label" id="divToggle"; name="isPublic" value="${comment.isPublic}">
+                    <label for="demo-copy">비밀</label>
+                    
+		                <input type="hidden" style="color: white" value="${comment.no}" name="no">
+		                <i class="fas fa-lock"></i><input type="text" value="${comment.content}" name="content" 
+                    style="color: white; width: 719px; margin-left: 6px; display: inline; height: 33px;font-size: 14px;"><br>
+		             <button type="submit" >전송</button>
 		             
-		             <c:if test="${comment.writer.no != loginUser.no}">
+
+		             
+		             </form>
+		             </c:when>
+		             
+		             <c:otherwise>
 	                   <span><i class="fas fa-lock"></i> 비밀 댓글입니다.</span><br>
-	               </c:if>
+	               </c:otherwise>
+	               </c:choose>
 	             </c:when>
+	             
 		           <c:otherwise>
 		           <span style="font-size: 14px; color: white;">${comment.writer.nickname} | ${comment.registeredDate}</span><br>
-				         <span>${comment.content}</span><br>
+				         <form action="commentUpdate" method="post">
+                    <input type="hidden" style="color: white" value="${comment.no}" name="no">
+                    <i class="fas fa-lock"></i><input type="text" value="${comment.content}" name="content" 
+                    style="color: white; width: 719px; margin-left: 6px; display: inline; height: 33px;font-size: 14px;"><br>
+                    <input type="checkbox" class="label" id="divToggle"; name="isPublic" value="${comment.isPublic}">
+                    <label for="demo-copy" >비밀</label>
+                 <button type="submit">전송</button>
+                 </form>
 		           </c:otherwise>
 	          </c:choose>
 	          
@@ -33,7 +71,9 @@
 				    
 				    <c:if test="${comment.writer.no == loginUser.no}">
 				      <!-- <button><i class="far fa-edit"></i></button> -->
-							<a href='#'><i class="far fa-edit"></i></a>
+				      
+							<button id="button"><i class="far fa-edit"></i></button>
+							
 							<a href='comment/delete?commentNo=${comment.no}'><i class="fas fa-trash-alt"></i></a>
 				    </c:if>
 				    
@@ -41,41 +81,13 @@
        </div>
      </c:forEach>
   </div>
+  
+<script>  
+  $(function (){
+  $("#button").click(function (){
+    /* $("#divToggle").toggle(); */
+    document.getElementById('#divToggle').classList.replace('label', 'show');
+  });
+});
 
-<%-- 
-     <div class="btn-group" role="group" aria-label="Basic outlined example">
-       <!-- <c:if test="${comment.writer.no eq loginUser.no}"> -->
-       
-       
-       <button class="btn btn-link" data-bs-toggle="modal" data-bs-target="#exampleModal"
-       data-bs-whatever="@mdo" style="font-size: 12px; padding: 3px 6px;">수정</button>
-       
-       <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-         <div class="modal-dialog">
-           <div class="modal-content">
-               <div class="modal-header">
-                 <h5 class="modal-title" id="exampleModalLabel">댓글 수정</h5>
-                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-               </div>
-               <div class="modal-body">
-                 <!-- form -->
-                 <form action='comment/update' method="post">
-                   <input type='hidden' name='commentNo' value='${comment.no}'/>
-                   <div class="mb-3">
-                     <label for="message-text" class="col-form-label">내용</label>
-                     <textarea type="text" class="form-control" id='f-commentText' name='comment'></textarea>
-                   </div>
-                   <button class="btn btn-dark" data-bs-dismiss="modal">취소</button>
-                   <button class="btn btn-dark">수정</button>
-                 </form>
-               </div>
-           </div>
-         </div>
-       </div>
-         <a href='comment/delete?commentno=${comment.no}' class="btn btn-dark"">삭제</a>
-       <!-- </c:if> -->
-     </div>
-     </div>
-    </div>
-   </c:forEach>
-  </div> --%>
+</script>
