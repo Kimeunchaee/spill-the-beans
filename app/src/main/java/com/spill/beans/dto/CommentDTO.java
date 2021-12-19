@@ -9,7 +9,7 @@ public class CommentDTO {
   private String content;           // 댓글 내용
   private MemberDTO writer;         // 댓글 작성자
   private Date registeredDate;      // 댓글 작성일
-  private int isPublic;         // 댓글 공개 여부 (1 : 공개 댓글 / 2 : 비밀 댓글)
+  private int isPublic;             // 댓글 공개 여부 (1 : 공개 댓글 / 2 : 비밀 댓글)
   private int replyCount;           // 리댓글 수
 
 

@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.spill.beans.dao.BoardDao;
 import com.spill.beans.dao.CommentDao;
 import com.spill.beans.dto.BoardDTO;
@@ -31,21 +33,26 @@ public class CommentController {
 
     mv.addObject("commentList", commentList);
     mv.addObject("contentUrl", "comment/CommentList.jsp");
-    mv.setViewName("template1");
+    mv.setViewName("template2");
     return mv;
   }
 
   @PostMapping("board/comment/add")
   public ModelAndView add(CommentDTO comment, HttpSession session) throws Exception {
+
     BoardDTO board = boardDao.findByNo(comment.getBoardNo());
     if (board == null) {
       throw new Exception("해당 번호의 게시글이 없습니다.");
     }
 
+    //board.setCommentCount(board.getCommentCount()+1);   // 할까 말까
+
     comment.setWriter((MemberDTO) session.getAttribute("loginUser"));
     comment.setReplyCount(0);
 
-    board.setCommentCount(board.getCommentCount()+1);   // 할까 말까
+    if(comment.getIsPublic() == 0) {
+      comment.setIsPublic(1);
+    }
 
     commentDao.insert(comment.getBoardNo(), comment);
     sqlSessionFactory.openSession().commit();
@@ -55,28 +62,48 @@ public class CommentController {
     return mv;
   }
 
-  @PostMapping("board/comment/updateForm")
-  public ModelAndView updateForm(CommentDTO comment, HttpSession session) throws Exception {
+  // 댓글 번호만 PopUp으로 전달
+  @GetMapping("board/comment/updateForm")
+  public ModelAndView updateForm(int commentNo, RedirectAttributes redirectAttributes) throws Exception {
+
+    redirectAttributes.addAttribute("commentNo", commentNo); // 기본자료형만 가능함 (String, int ...)
 
     ModelAndView mv = new ModelAndView();
 
-    mv.setViewName("redirect:../detail?no=" + comment.getBoardNo());
+    mv.setViewName("redirect:../comment/updateForm/PopUp#updateForm");
+
     return mv;
   }
 
-  @PostMapping("board/commentUpdate")
-  public ModelAndView update(CommentDTO comment) throws Exception {
+  // 번호 받아서 코멘트 객체 찾아서 팝업 출력
+  @GetMapping("board/comment/updateForm/PopUp")
+  public ModelAndView updateFormPopUp(@RequestParam("commentNo") int commentNo) throws Exception {
 
-    CommentDTO oldComment = commentDao.findByNo(comment.getNo());
-    if (oldComment == null) {
-      throw new Exception("해당 번호의 댓글이 없습니다.");
+    CommentDTO comment = commentDao.findByNo(commentNo);
+    if (comment == null) {
+      throw new Exception("해당 댓글이 없습니다.");
     }
+
+    System.out.println("-------------------------------------" + comment);
+
+    ModelAndView mv = new ModelAndView();
+    mv.addObject("comment", comment);
+    mv.addObject("pageTitle", "댓글 수정");
+    mv.addObject("contentID", "updateForm");
+    mv.addObject("contentUrl", "comment/CommentUpdateForm.jsp");
+    mv.setViewName("template1");
+
+    return mv;
+  }
+
+  @PostMapping("board/comment/update")
+  public ModelAndView update(CommentDTO comment) throws Exception {
 
     commentDao.update(comment);
     sqlSessionFactory.openSession().commit();
 
     ModelAndView mv = new ModelAndView();
-    mv.setViewName("redirect:../board/detail?no=" + oldComment.getBoardNo());
+    mv.setViewName("redirect:../detail?no=" + comment.getBoardNo());
     return mv;
   }
 
