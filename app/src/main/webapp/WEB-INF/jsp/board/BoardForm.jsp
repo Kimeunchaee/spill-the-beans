@@ -104,7 +104,7 @@ select option {
     <a href="list" class="button" style="font-size: 14px;">목록</a>
   </div>
   
-<!-- Main -->
+<!-- PopUp -->
   <div id="main">
       
     <article id="form" style="position: fixed; top: 200px; z-index: 999; box-shadow : rgba(0,0,0,0.5) 0 0 0 9999px; background-color: rgb(31 71 63 / 100%);">

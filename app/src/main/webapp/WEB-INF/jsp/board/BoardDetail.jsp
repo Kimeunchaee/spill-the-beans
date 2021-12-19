@@ -101,18 +101,18 @@ input[type="checkbox"]:checked + label:before{
 </form>
 
 
- <!-- Main -->
-  <div id="main">
-      
+<!-- PopUp -->
+<div id="main">
+  
+    <!-- 게시글 삭제 -->
 	  <article id="delete" style="position: fixed; top: 200px; z-index: 999; box-shadow : rgba(0,0,0,0.5) 0 0 0 9999px; background-color: rgb(31 71 63 / 100%);">
 			  <h2 class="major">게시글 삭제</h2>
 			  <p>정말 삭제 하시겠습니까?</p>
 				<a href='delete?no=${board.no}' class ="button" style="font-size: 16px; width: 49%;">네</a>
 				<a href='detail?no=${board.no}' class ="button" style="font-size: 16px; width: 49%;">아니요</a>
 	  </article>
-  
-  </div>
- 
+</div>
+
 
 <!-- 댓글 -->
 <div style="width: 810px;">
@@ -145,7 +145,6 @@ input[type="checkbox"]:checked + label:before{
 	  
   </div>
 </div>
-  
 <!-- 댓글 end -->
      
 <script>
