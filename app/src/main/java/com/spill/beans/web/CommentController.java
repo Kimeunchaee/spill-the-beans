@@ -84,8 +84,6 @@ public class CommentController {
       throw new Exception("해당 댓글이 없습니다.");
     }
 
-    System.out.println("-------------------------------------" + comment);
-
     ModelAndView mv = new ModelAndView();
     mv.addObject("comment", comment);
     mv.addObject("pageTitle", "댓글 수정");

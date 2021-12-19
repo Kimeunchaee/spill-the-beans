@@ -4,7 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <style>
-.commet-btoom {
+.comment-bottom {
   display: flex;
   flex-direction: row;
 }
@@ -131,7 +131,7 @@ input[type="checkbox"]:checked + label:before{
 	          <label for="demo-copy" style="font-size: 16px; padding: 0; padding-left: 21px; line-height: 11px;">비밀</label>
 			    </span>
 			    
-			    <div class="commet-btoom">
+			    <div class="comment-bottom">
 				    <textarea id='f-comment-content' name='content' class="form-control col-md-6" rows="2" style="margin-right:5px;"></textarea>
 			      <button class ="button" style="font-size: 14px; height: auto; line-height: 32px;">등록</button>
 		      </div>
