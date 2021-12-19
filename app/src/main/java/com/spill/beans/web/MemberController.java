@@ -181,9 +181,7 @@ public class MemberController {
     ModelAndView mv = new ModelAndView();
 
     if (member == null) {
-
       throw new Exception("해당 회원을 찾을 수 없습니다.");
-
     }
 
     mv.setViewName("redirect:../member/updateForm#updateForm");
