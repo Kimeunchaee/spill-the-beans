@@ -177,5 +177,3 @@ ALTER TABLE board_like
     );
     
     
-    
-    

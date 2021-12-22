@@ -109,6 +109,9 @@ public class BoardController {
     List<CommentDTO> replyList = commentDao.findAllReply(no);
     List<BoardLikeDTO> boardLikeList = boardDao.findLikeAll();
 
+    System.out.println(commentList);
+
+
     for (BoardLikeDTO list : boardLikeList) {
       if (list.getMemberNo() == member.getNo() && list.getBoardNo() == board.getNo()) {
         mv.addObject("list", list);
