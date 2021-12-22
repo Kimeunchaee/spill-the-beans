@@ -259,3 +259,7 @@
         - sql : insertReply문 추가
         - dao : insertReply 메서드 추가
         - 공개여부 체크박스 구현 완료
+        - orderNo, groupNo, classNo 변수 추가
+        - 댓글 하위 등록 구현 완료
+    - 대댓글 목록에서 답글 쓰기
+        - javaScript 사용하여 해당 대댓글만 열고 닫기 구현 완료
