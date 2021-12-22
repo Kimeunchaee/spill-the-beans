@@ -252,3 +252,10 @@
 - 대댓글
     - groupNo끼리 비교하여 조건 출력 구현 완료
     - 대댓글 목록 출력 구현 완료
+        - sql : findAll 수정, replyCount 갯수 가져오기
+            - select count(*) 사용
+    - 대댓글 등록
+        - replyComtroller : add 메서드 추가
+        - sql : insertReply문 추가
+        - dao : insertReply 메서드 추가
+        - 공개여부 체크박스 구현 완료
