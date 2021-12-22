@@ -183,7 +183,7 @@
                                                    </c:if>
                                                    
                                                    <%-- re:대대댓글 보이기 --%>
-                                                   <div class="panel" style="max-height: fit-content;">
+                                                   <div class="panel" style="max-height: 0">
                                                      <div style="width: 810px;">
                                                        <div class="mb-3 row" style="width: 765px;">
                                                          <label for='f-comment-title' class="col-form-label">[답글]</label>
@@ -284,31 +284,30 @@
             
             
             
-            
-            
-            
-            
-            
-            
          </div>
        </div> <%-- 원댓글 end --%>
      </c:forEach> <%-- 원댓글 반복문 end --%>
   </div>
   
 <script>
+var showType = true;
 var acc = document.getElementsByClassName("accordion");
 var i;
 
 for (i = 0; i < acc.length; i++) {
     acc[i].addEventListener("click", function () {
-        this.classList.toggle("active");
-        var panel = this.nextElementSibling;
-        if (panel.style.maxHeight) {
-            panel.style.maxHeight = null;
-        } else {
-            panel.style.maxHeight = panel.scrollHeight + "px";
-        }
+        if(showType === true) {
+           
+           this.classList.toggle("active");
+           var panel = this.nextElementSibling;
+           
+           if (panel.style.maxHeight) {
+             panel.style.maxHeight = null;
+           } else {
+            panel.style.maxHeight = panel.scrollHeight + panel.scrollHeight + "px";
+             showType = true;
+           }
+        } 
     });
 }
-
 </script>

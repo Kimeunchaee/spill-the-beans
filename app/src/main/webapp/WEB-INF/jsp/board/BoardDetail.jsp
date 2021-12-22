@@ -150,13 +150,3 @@ input[type="checkbox"]:checked + label:before{
   </div>
 </div>
 <!-- 댓글 end -->
-     
-<script>
-document.querySelector("#member-form").onsubmit = () => {
-	if (document.querySelector("#f-title").value == "" ||
-			document.querySelector("#f-content").value == "") {
-		Swal.fire("필수 입력 항목이 비어 있습니다.")
-		return false;
-	}
-};
-</script>
