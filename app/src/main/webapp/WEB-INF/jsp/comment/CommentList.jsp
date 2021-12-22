@@ -51,20 +51,24 @@
   </div>
     
   <div class="commentList-wrap">
+  
+     <!-- 원 댓글 반복문-->
      <c:forEach items="${commentList}" var="comment">
        <div class="card2">
          <div class="card-body" style="padding: 5px 0;">
          
 	          <c:choose>
-	             <%-- 비밀 댓글일 때 --%>
+	             <%-- 비밀 댓글일 때 출력--%>
 		           <c:when test="${comment.isPublic == 2}">
 		           <c:choose>
 		           
+		             <%-- 내가 쓴 비밀댓글 & 게시글 작성자가 볼 수 있는 비밀 댓글--%>
 		             <c:when test="${comment.writer.no == loginUser.no or board.writer.no == loginUser.no}">
                     <span style="font-size: 14px; color: white;">${comment.writer.nickname} | ${comment.registeredDate}</span><br>
                     <span style="color: white"><i class="fas fa-lock"></i></span> <span>${comment.content} </span><br>
 		             </c:when>
 		             
+		             <%-- 다른 사람들이 보는 비밀댓글 출력문--%>
 		             <c:otherwise>
 	                   <span><i class="fas fa-lock"></i> 비밀 댓글입니다.</span><br>
 	               </c:otherwise>
@@ -79,29 +83,29 @@
 	          </c:choose>
 				    
 				    <c:if test="${comment.writer.no == loginUser.no}">
-				    
 				      <!-- 수정 버튼 아이콘 -->
 							<a href="comment/updateForm?commentNo=${comment.no}" class="updateBtn"><i class="far fa-edit"></i></a>
 							
 							<!-- 삭제 버튼 아이콘 -->
 							<a href='comment/delete?commentNo=${comment.no}'><i class="fas fa-trash-alt"></i></a>
-							
 							<br>
 				    </c:if>
 				    
+				    
+				    <%-- 대댓글 버튼 --%>
 				    <c:if test="${(comment.isPublic == 2 and (comment.writer.no == loginUser.no or board.writer.no == loginUser.no)) or comment.isPublic == 1}">
-            <button class="accordion" style="font-size: 14px; color: white;">답글 ${comment.replyCount - 1}개 ▼ | 답글 쓰기</button>
+              <button class="accordion" style="font-size: 14px; color: white;">답글 ${comment.replyCount - 1}개 ▼ | 답글 쓰기</button>
             </c:if>
             
+					  <%-- 대댓글 보이기 --%>
             <div class="panel">
-            
-							<!-- 대댓글 입력 폼 -->
 							<div style="width: 810px;">
 							  <div class="mb-3 row">
 							    <label for='f-comment-title' class="col-form-label">[답글]</label>
 							      
 							    <c:if test='${not empty loginUser}'>
 							      <div class="col-sm-11">
+							        <%-- 대댓글 입력 폼 --%>
 							        <form action='comment/reply/add' method="post">
 							          <input type="hidden" name="boardNo" value="${board.no}">
 							          <input type="hidden" name="parentNo" value="${comment.no}">
@@ -110,21 +114,20 @@
 							          <span>
 							            작성자 : ${loginUser.nickname} &nbsp; | &nbsp;
 							            
-							            <input type="checkbox" id="demo-copy2" name="isPublic" value="2">
-							            <label for="demo-copy2" style="font-size: 16px; padding: 0; padding-left: 21px; line-height: 11px;">비밀</label>
+							            <input type="checkbox" id="${comment.no}" name="isPublic" value="2">
+							            <label for="${comment.no}" style="font-size: 16px; padding: 0; padding-left: 21px; line-height: 11px;">비밀</label>
 							          </span>
 							          
 							          <div class="comment-bottom">
 							            <textarea id='f-comment-content' name='content' class="form-control col-md-6" rows="2" style="margin-right:5px;"></textarea>
 							            <button class ="button" style="font-size: 14px; height: auto; line-height: 32px;">등록</button>
 							          </div>
-							        </form>     
+							        </form> <%-- 대댓글 입력 폼 end --%>
 							      </div>
 							    </c:if>
 							    
-							    <!-- 대댓글 내용 출력 -->
+							    <%-- 대댓글 내용 출력 --%>
 							    <div class="col-sm-12">
-
 										<div class="replyList-wrap">
 										     <c:forEach items="${replyList}" var="reply">
 										      <c:if test="${comment.groupNo == reply.groupNo}">
@@ -155,73 +158,28 @@
 										            </c:choose>
 										            
 										            <c:if test="${reply.writer.no == loginUser.no}">
-										            
-										              <!-- 수정 버튼 아이콘 -->
+										              <%-- 수정 버튼 아이콘 --%>
 										              <a href="comment/updateForm?commentNo=${reply.no}" class="updateBtn"><i class="far fa-edit"></i></a>
 										              
-										              <!-- 삭제 버튼 아이콘 -->
+										              <%-- 삭제 버튼 아이콘 --%>
 										              <a href='comment/delete?commentNo=${reply.no}'><i class="fas fa-trash-alt"></i></a>
-										              
 										              <br>
 										            </c:if>
-										            
-										            <button class="accordion" style="font-size: 14px; color: white;">답글 쓰기</button>
-										            
-										            <div class="panel">
-										            
-										              <!-- re:대댓글 -->
-										              <div style="width: 810px;">
-										                <div class="mb-3 row">
-										                  <label for='f-comment-title' class="col-form-label">[답글]</label>
-										                    
-										                  <c:if test='${not empty loginUser}'>
-										                    <div class="col-sm-11">
-										                      <form action='comment/add' method="post">
-										                        <input type="hidden" name="boardNo" value="${board.no}">
-										                        
-										                        <span>
-										                          작성자 : ${loginUser.nickname} &nbsp; | &nbsp;
-										                          
-										                          <input type="checkbox" id="demo-copy3" name="isPublic" value="2">
-										                          <label for="demo-copy3" style="font-size: 16px; padding: 0; padding-left: 21px; line-height: 11px;">비밀</label>
-										                        </span>
-										                        
-										                        <div class="comment-bottom">
-										                          <textarea id='f-comment-content' name='content' class="form-control col-md-6" rows="2" style="margin-right:5px;"></textarea>
-										                          <button class ="button" style="font-size: 14px; height: auto; line-height: 32px;">등록</button>
-										                        </div>
-										                      </form>     
-										                    </div>
-										                  </c:if>
-										                  
-										                  <%-- <div class="col-sm-12">
-										                    <jsp:include page="../comment/ReplyList.jsp"/>
-										                  </div> --%>
-										                  
-										                </div>
-										              </div>
-										              <!-- re:대댓글 end -->
-										
 										            </div>
 										            
 										         </div>
-										       </div>
 										       </c:if>
-										     </c:forEach>
+										     </c:forEach> <%-- 대댓글 반복문 end --%>
 										  </div>
-
-							    </div>
-							    <!-- 대댓글 내용 출력 end -->
+							    </div> <%-- 대댓글 내용 출력 end --%>
 							    
 							  </div>
 							</div>
-							<!-- 대댓글 입력 폼 end -->
-
-            </div>
+            </div> <%-- 대댓글 보이기 end --%>
             
          </div>
-       </div>
-     </c:forEach>
+       </div> <%-- 원댓글 end --%>
+     </c:forEach> <%-- 원댓글 반복분 end --%>
   </div>
   
 <script>
