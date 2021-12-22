@@ -1,7 +1,6 @@
 package com.spill.beans.dao;
 
 import java.util.List;
-import org.apache.ibatis.annotations.Param;
 import com.spill.beans.dto.CommentDTO;
 
 public interface CommentDao {
@@ -9,7 +8,8 @@ public interface CommentDao {
   List<CommentDTO> findAll(int boardNo) throws Exception;
   CommentDTO findByNo(int commentNo) throws Exception;
 
-  void insertComment(@Param("boardNo")int boardNo, @Param("comment")CommentDTO comment) throws Exception;
+  void insertComment(CommentDTO comment) throws Exception;
+  void updateGroupNo(int commentNo) throws Exception;
 
   void update(CommentDTO comment) throws Exception;
 

@@ -47,7 +47,7 @@
   <select id="findAll" resultMap="CommentMap" parameterType="int">
    <include refid="select1"/>
    where
-      c.board_no=#{boardNo} and class_no=0
+      c.board_no=#{boardNo} and class_no = 0
    order by comment_no desc, group_no asc, order_no asc;
   </select>
   
@@ -57,10 +57,18 @@
        comment_no=#{commentNo}
   </select>
   
-  <insert id="insertComment">
-     insert into comment(board_no, member_no, content, isPublic, replyCount, parent_comment_no, group_no, class_no)
-     values(#{boardNo}, #{comment.writer.no}, #{comment.content}, #{comment.isPublic}, #{comment.replyCount}, 0, 0, 0)
+  <insert id="insertComment" parameterType="CommentDTO"
+         useGeneratedKeys="true" keyColumn="comment_no" keyProperty="no">
+     insert into comment(board_no, member_no, content, isPublic, replyCount, parent_comment_no, group_no, class_no, order_no)
+     values(#{boardNo}, #{writer.no}, #{content}, #{isPublic}, 0, 0, 0, 0, #{orderNo})
   </insert>
+  
+ <update id="updateGroupNo" parameterType="int">
+    update comment
+    set
+      group_no=${commentNo}
+    where comment_no=${commentNo}
+  </update>
   
   <update id="update" parameterType="CommentDTO">
     update comment
@@ -119,14 +127,14 @@
   <select id="findAllReply" resultMap="CommentMap" parameterType="int">
    <include refid="select2"/>
    where
-      c.board_no=#{boardNo} and class_no!=0
+      c.board_no=#{boardNo} and class_no != 0
    order by comment_no desc, group_no asc, order_no asc;
   </select>
 
   <insert id="insertReply" parameterType="CommentDTO">
-     insert into comment(board_no, member_no, content, isPublic, replyCount, parent_comment_no, group_no, class_no)
+     insert into comment(board_no, member_no, content, isPublic, replyCount, parent_comment_no, group_no, class_no, order_no)
      values(#{boardNo}, #{writer.no}, #{content}, #{isPublic}, #{replyCount},
-     #{parentNo}, #{groupNo}, #{classNo})
+     #{parentNo}, #{groupNo}, #{classNo}, #{orderNo})
   </insert>
   
 </mapper>
