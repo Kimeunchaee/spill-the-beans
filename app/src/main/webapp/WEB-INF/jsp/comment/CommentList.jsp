@@ -89,7 +89,10 @@
 							<br>
 				    </c:if>
 				    
-            <button class="accordion" style="font-size: 14px; color: white;">답글 ${comment.replyCount}개 ▼ | 답글 쓰기</button>
+				    <c:if test="${(comment.isPublic == 2 and (comment.writer.no == loginUser.no or board.writer.no == loginUser.no)) or comment.isPublic == 1}">
+            <button class="accordion" style="font-size: 14px; color: white;">답글 ${comment.replyCount - 1}개 ▼ | 답글 쓰기</button>
+            </c:if>
+            
             <div class="panel">
             
 							<!-- 대댓글 입력 폼 -->
@@ -99,14 +102,16 @@
 							      
 							    <c:if test='${not empty loginUser}'>
 							      <div class="col-sm-11">
-							        <form action='comment/add' method="post">
+							        <form action='comment/reply/add' method="post">
 							          <input type="hidden" name="boardNo" value="${board.no}">
-							          
+							          <input type="hidden" name="parentNo" value="${comment.no}">
+							          <input type="hidden" name="groupNo" value="${comment.no}">
+							          <input type="hidden" name="classNo" value="${comment.classNo}">
 							          <span>
 							            작성자 : ${loginUser.nickname} &nbsp; | &nbsp;
 							            
-							            <input type="checkbox" id="demo-copy" name="isPublic" value="2">
-							            <label for="demo-copy" style="font-size: 16px; padding: 0; padding-left: 21px; line-height: 11px;">비밀</label>
+							            <input type="checkbox" id="demo-copy2" name="isPublic" value="2">
+							            <label for="demo-copy2" style="font-size: 16px; padding: 0; padding-left: 21px; line-height: 11px;">비밀</label>
 							          </span>
 							          
 							          <div class="comment-bottom">
@@ -161,6 +166,7 @@
 										            </c:if>
 										            
 										            <button class="accordion" style="font-size: 14px; color: white;">답글 쓰기</button>
+										            
 										            <div class="panel">
 										            
 										              <!-- re:대댓글 -->
@@ -176,8 +182,8 @@
 										                        <span>
 										                          작성자 : ${loginUser.nickname} &nbsp; | &nbsp;
 										                          
-										                          <input type="checkbox" id="demo-copy" name="isPublic" value="2">
-										                          <label for="demo-copy" style="font-size: 16px; padding: 0; padding-left: 21px; line-height: 11px;">비밀</label>
+										                          <input type="checkbox" id="demo-copy3" name="isPublic" value="2">
+										                          <label for="demo-copy3" style="font-size: 16px; padding: 0; padding-left: 21px; line-height: 11px;">비밀</label>
 										                        </span>
 										                        
 										                        <div class="comment-bottom">
@@ -233,4 +239,5 @@ for (i = 0; i < acc.length; i++) {
         }
     });
 }
+
 </script>

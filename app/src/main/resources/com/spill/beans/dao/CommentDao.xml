@@ -31,7 +31,7 @@
         c.content,
         c.created_dt,
         c.isPublic,
-        c.replyCount,
+        (select count(*) from comment cmt where cmt.group_no=c.group_no) replyCount,
         c.parent_comment_no,
         c.group_no,
         c.order_no,
@@ -123,10 +123,10 @@
    order by comment_no desc, group_no asc, order_no asc;
   </select>
 
-  <insert id="insertReply">
+  <insert id="insertReply" parameterType="CommentDTO">
      insert into comment(board_no, member_no, content, isPublic, replyCount, parent_comment_no, group_no, class_no)
-     values(#{boardNo}, #{comment.writer.no}, #{comment.content}, #{comment.isPublic}, #{comment.replyCount},
-     #{comment.parentNo}, #{comment.groupNo}, #{comment.classNo})
+     values(#{boardNo}, #{writer.no}, #{content}, #{isPublic}, #{replyCount},
+     #{parentNo}, #{groupNo}, #{classNo})
   </insert>
   
 </mapper>

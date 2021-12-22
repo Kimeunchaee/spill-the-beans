@@ -19,5 +19,5 @@ public interface CommentDao {
 
   // 답글
   List<CommentDTO> findAllReply(int boardNo) throws Exception;
-  void insertReply(@Param("boardNo")int boardNo, @Param("comment")CommentDTO comment) throws Exception;
+  void insertReply(CommentDTO reply) throws Exception;
 }

@@ -85,7 +85,7 @@ select option {
 	<tr data-no="${board.no}">
 	    <td>${board.no}</td>
 	    <td>${board.category.label}</td>
-	    <td>${board.title}<td> 
+	    <td>${board.title}</td> 
 	    <td>${board.writer.nickname}</td> 
 	    <td>${board.registeredDate}</td> 
 	    <td>${board.viewCount}</td>

@@ -10,19 +10,8 @@ DROP TABLE IF EXISTS category RESTRICT;
 -- 게시판
 DROP TABLE IF EXISTS board RESTRICT;
 
--- 레벨
-DROP TABLE IF EXISTS level RESTRICT;
-
--- 파일
-DROP TABLE IF EXISTS file RESTRICT;
-
 -- 좋아요
 DROP TABLE IF EXISTS board_like RESTRICT;
-
--- 대댓글
-DROP TABLE IF EXISTS reply RESTRICT;
-
-
 
 -- 회원
 CREATE TABLE member (
@@ -69,7 +58,7 @@ ALTER TABLE comment
     );
 
 ALTER TABLE comment
-  MODIFY COLUMN order_no INTEGER NOT NULL AUTO_INCREMENT DEFAULT 1 COMMENT '정렬순서';
+  MODIFY COLUMN comment_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '댓글번호';
 
 -- 카테고리
 CREATE TABLE category (
@@ -112,35 +101,6 @@ ALTER TABLE board
 ALTER TABLE board
   MODIFY COLUMN board_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '게시글번호';
 
--- 레벨
-CREATE TABLE level (
-  no   INTEGER     NOT NULL COMMENT '레벨 번호', -- 레벨 번호
-  name VARCHAR(50) NOT NULL COMMENT '레벨 이름' -- 레벨 이름
-)
-COMMENT '레벨';
-
--- 레벨
-ALTER TABLE level
-  ADD CONSTRAINT PK_level -- 레벨 기본키
-    PRIMARY KEY (
-      no -- 레벨 번호
-    );
-
--- 파일
-CREATE TABLE file (
-  no       INTEGER            NOT NULL COMMENT '파일 번호', -- 파일 번호
-  name     VARCHAR(50)        NOT NULL COMMENT '파일 이름', -- 파일 이름
-  board_no <데이터 타입 없음> NULL     COMMENT '게시글 번호' -- 게시글 번호
-)
-COMMENT '파일';
-
--- 파일
-ALTER TABLE file
-  ADD CONSTRAINT PK_file -- 파일 기본키
-    PRIMARY KEY (
-      no -- 파일 번호
-    );
-
 -- 좋아요
 CREATE TABLE board_like (
   board_no  INTEGER NOT NULL COMMENT '게시글번호', -- 게시글번호
@@ -155,28 +115,6 @@ ALTER TABLE board_like
       board_no,  -- 게시글번호
       member_no  -- 회원번호
     );
-
--- 대댓글
-CREATE TABLE reply (
-  reply_no   INTEGER       NOT NULL COMMENT '대댓글번호', -- 대댓글번호
-  content    VARCHAR(2200) NOT NULL COMMENT '내용', -- 내용
-  created_dt DATE          NOT NULL DEFAULT curdate() COMMENT '등록일', -- 등록일
-  isPublic   INTEGER       NOT NULL DEFAULT 1 COMMENT '공개여부', -- 공개여부
-  group_no   INTEGER       NOT NULL COMMENT '그룹번호', -- 그룹번호
-  order_no   INTEGER       NOT NULL DEFAULT 1 COMMENT '정렬순서', -- 정렬순서
-  class_no   INTEGER       NOT NULL COMMENT '계층' -- 계층
-)
-COMMENT '대댓글';
-
--- 대댓글
-ALTER TABLE reply
-  ADD CONSTRAINT PK_reply -- 대댓글 기본키
-    PRIMARY KEY (
-      reply_no -- 대댓글번호
-    );
-
-ALTER TABLE reply
-  MODIFY COLUMN order_no INTEGER NOT NULL AUTO_INCREMENT DEFAULT 1 COMMENT '정렬순서';
 
 -- 댓글
 ALTER TABLE comment
@@ -237,6 +175,7 @@ ALTER TABLE board_like
     REFERENCES member ( -- 회원
       member_no -- 회원번호
     );
+    
     
     
     

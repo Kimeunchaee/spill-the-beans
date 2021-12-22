@@ -44,5 +44,3 @@ values(14, '테스트 추가하면 됩니다','테스트 추가하면 됩니다'
 
 insert into board(board_no, title,content,viewCount,likeCount,commentCount,category_no,member_no) 
 values(15, '테스트 추가하면 됩니다','테스트 추가하면 됩니다',0,0,0,3,16);
-
-
