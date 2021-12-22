@@ -106,6 +106,7 @@ public class BoardController {
     sqlSessionFactory.openSession().commit();
 
     List<CommentDTO> commentList = commentDao.findAll(no);
+    List<CommentDTO> replyList = commentDao.findAllReply(no);
     List<BoardLikeDTO> boardLikeList = boardDao.findLikeAll();
 
     for (BoardLikeDTO list : boardLikeList) {
@@ -114,7 +115,11 @@ public class BoardController {
       } 
     }
 
+    System.out.println("**********************" + commentList);
+    System.out.println("**********************" + replyList);
+
     mv.addObject("commentList", commentList);
+    mv.addObject("replyList", replyList);
     mv.addObject("board", board);
     mv.addObject("pageTitle", "게시글");
     mv.addObject("contentUrl", "board/BoardDetail.jsp");

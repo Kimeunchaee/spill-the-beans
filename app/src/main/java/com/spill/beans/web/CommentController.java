@@ -1,6 +1,5 @@
 package com.spill.beans.web;
 
-import java.util.List;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -25,17 +24,17 @@ public class CommentController {
   @Autowired BoardDao boardDao;  
   @Autowired ServletContext sc;
 
-  @GetMapping("board/comment/list")
-  public ModelAndView list(int boardNo) throws Exception {
-    ModelAndView mv = new ModelAndView();
-
-    List<CommentDTO> commentList = commentDao.findAll(boardNo);
-
-    mv.addObject("commentList", commentList);
-    mv.addObject("contentUrl", "comment/CommentList.jsp");
-    mv.setViewName("template2");
-    return mv;
-  }
+  //  @GetMapping("board/comment/list")
+  //  public ModelAndView list(int boardNo) throws Exception {
+  //    ModelAndView mv = new ModelAndView();
+  //
+  //    List<CommentDTO> commentList = commentDao.findAll(boardNo);
+  //
+  //    mv.addObject("commentList", commentList);
+  //    mv.addObject("contentUrl", "comment/CommentList.jsp");
+  //    mv.setViewName("template2");
+  //    return mv;
+  //  }
 
   @PostMapping("board/comment/add")
   public ModelAndView add(CommentDTO comment, HttpSession session) throws Exception {
@@ -54,7 +53,7 @@ public class CommentController {
       comment.setIsPublic(1);
     }
 
-    commentDao.insert(comment.getBoardNo(), comment);
+    commentDao.insertComment(comment.getBoardNo(), comment);
     sqlSessionFactory.openSession().commit();
 
     ModelAndView mv = new ModelAndView();

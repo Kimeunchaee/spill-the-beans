@@ -12,6 +12,10 @@
     <result column="created_dt" property="registeredDate"/>
     <result column="isPublic" property="isPublic"/>
     <result column="replyCount" property="replyCount"/>
+    <result column="parent_comment_no" property="parentNo"/>
+    <result column="group_no" property="groupNo"/>
+    <result column="order_no" property="orderNo"/>
+    <result column="class_no" property="classNo"/>
   
 	  <association property="writer" javaType="MemberDTO">
 	      <id column="member_no" property="no"/> 
@@ -28,6 +32,10 @@
         c.created_dt,
         c.isPublic,
         c.replyCount,
+        c.parent_comment_no,
+        c.group_no,
+        c.order_no,
+        c.class_no,
         m.member_no member_no,
         m.nickname nickname,
         m.active active
@@ -39,8 +47,8 @@
   <select id="findAll" resultMap="CommentMap" parameterType="int">
    <include refid="select1"/>
    where
-      c.board_no=#{boardNo}
-   order by comment_no desc;
+      c.board_no=#{boardNo} and class_no=0
+   order by comment_no desc, group_no asc, order_no asc;
   </select>
   
   <select id="findByNo" resultMap="CommentMap" parameterType="int">
@@ -49,9 +57,9 @@
        comment_no=#{commentNo}
   </select>
   
-  <insert id="insert">
-     insert into comment(board_no, member_no, content, isPublic, replyCount)
-     values(#{boardNo}, #{comment.writer.no}, #{comment.content}, #{comment.isPublic}, #{comment.replyCount})
+  <insert id="insertComment">
+     insert into comment(board_no, member_no, content, isPublic, replyCount, parent_comment_no, group_no, class_no)
+     values(#{boardNo}, #{comment.writer.no}, #{comment.content}, #{comment.isPublic}, #{comment.replyCount}, 0, 0, 0)
   </insert>
   
   <update id="update" parameterType="CommentDTO">
@@ -85,5 +93,41 @@
     where
       member_no=#{memberNo}
   </delete>
+  
+<!-- ************************** 답변 ************************** -->
+
+  <sql id="select2">
+      select
+        b.board_no board_no,
+        c.comment_no,
+        c.content,
+        c.created_dt,
+        c.isPublic,
+        c.replyCount,
+        c.parent_comment_no,
+        c.group_no,
+        c.order_no,
+        c.class_no,
+        m.member_no member_no,
+        m.nickname nickname,
+        m.active active
+     from comment c
+       left outer join member m on m.member_no=c.member_no
+       left outer join board b on b.board_no=c.board_no
+  </sql>
+  
+  <select id="findAllReply" resultMap="CommentMap" parameterType="int">
+   <include refid="select2"/>
+   where
+      c.board_no=#{boardNo} and class_no!=0
+   order by comment_no desc, group_no asc, order_no asc;
+  </select>
+
+  <insert id="insertReply">
+     insert into comment(board_no, member_no, content, isPublic, replyCount, parent_comment_no, group_no, class_no)
+     values(#{boardNo}, #{comment.writer.no}, #{comment.content}, #{comment.isPublic}, #{comment.replyCount},
+     #{comment.parentNo}, #{comment.groupNo}, #{comment.classNo})
+  </insert>
+  
 </mapper>
 
