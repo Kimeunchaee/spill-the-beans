@@ -19,6 +19,11 @@ DROP TABLE IF EXISTS file RESTRICT;
 -- 좋아요
 DROP TABLE IF EXISTS board_like RESTRICT;
 
+-- 대댓글
+DROP TABLE IF EXISTS reply RESTRICT;
+
+
+
 -- 회원
 CREATE TABLE member (
   member_no  INTEGER      NOT NULL COMMENT '회원번호', -- 회원번호
@@ -42,13 +47,17 @@ ALTER TABLE member
 
 -- 댓글
 CREATE TABLE comment (
-  comment_no INTEGER       NOT NULL COMMENT '댓글번호', -- 댓글번호
-  member_no  INTEGER       NOT NULL COMMENT '회원번호', -- 회원번호
-  board_no   INTEGER       NOT NULL COMMENT '게시글번호', -- 게시글번호
-  content    VARCHAR(2200) NOT NULL COMMENT '내용', -- 내용
-  created_dt DATE          NOT NULL DEFAULT curdate() COMMENT '등록일', -- 등록일
-  isPublic   INTEGER       NOT NULL DEFAULT 1 COMMENT '공개여부', -- 공개여부
-  replyCount INTEGER       NOT NULL COMMENT '리댓 수' -- 리댓 수
+  comment_no        INTEGER       NOT NULL COMMENT '댓글번호', -- 댓글번호
+  member_no         INTEGER       NOT NULL COMMENT '회원번호', -- 회원번호
+  board_no          INTEGER       NOT NULL COMMENT '게시글번호', -- 게시글번호
+  parent_comment_no INTEGER       NOT NULL COMMENT '부모댓글번호', -- 부모댓글번호
+  content           VARCHAR(2200) NOT NULL COMMENT '내용', -- 내용
+  created_dt        DATE          NOT NULL DEFAULT curdate() COMMENT '등록일', -- 등록일
+  isPublic          INTEGER       NOT NULL DEFAULT 1 COMMENT '공개여부', -- 공개여부
+  replyCount        INTEGER       NOT NULL COMMENT '리댓 수', -- 리댓 수
+  group_no          INTEGER       NOT NULL COMMENT '그룹번호', -- 그룹번호
+  order_no          INTEGER       NOT NULL DEFAULT 1 COMMENT '정렬순서', -- 정렬순서
+  class_no          INTEGER       NOT NULL DEFAULT 0 COMMENT '계층' -- 계층
 )
 COMMENT '댓글';
 
@@ -60,7 +69,7 @@ ALTER TABLE comment
     );
 
 ALTER TABLE comment
-  MODIFY COLUMN comment_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '댓글번호';
+  MODIFY COLUMN order_no INTEGER NOT NULL AUTO_INCREMENT DEFAULT 1 COMMENT '정렬순서';
 
 -- 카테고리
 CREATE TABLE category (
@@ -147,6 +156,28 @@ ALTER TABLE board_like
       member_no  -- 회원번호
     );
 
+-- 대댓글
+CREATE TABLE reply (
+  reply_no   INTEGER       NOT NULL COMMENT '대댓글번호', -- 대댓글번호
+  content    VARCHAR(2200) NOT NULL COMMENT '내용', -- 내용
+  created_dt DATE          NOT NULL DEFAULT curdate() COMMENT '등록일', -- 등록일
+  isPublic   INTEGER       NOT NULL DEFAULT 1 COMMENT '공개여부', -- 공개여부
+  group_no   INTEGER       NOT NULL COMMENT '그룹번호', -- 그룹번호
+  order_no   INTEGER       NOT NULL DEFAULT 1 COMMENT '정렬순서', -- 정렬순서
+  class_no   INTEGER       NOT NULL COMMENT '계층' -- 계층
+)
+COMMENT '대댓글';
+
+-- 대댓글
+ALTER TABLE reply
+  ADD CONSTRAINT PK_reply -- 대댓글 기본키
+    PRIMARY KEY (
+      reply_no -- 대댓글번호
+    );
+
+ALTER TABLE reply
+  MODIFY COLUMN order_no INTEGER NOT NULL AUTO_INCREMENT DEFAULT 1 COMMENT '정렬순서';
+
 -- 댓글
 ALTER TABLE comment
   ADD CONSTRAINT FK_board_TO_comment -- 게시판 -> 댓글
@@ -206,5 +237,6 @@ ALTER TABLE board_like
     REFERENCES member ( -- 회원
       member_no -- 회원번호
     );
+    
     
     

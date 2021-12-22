@@ -10,8 +10,39 @@
 	font-size: 17px;
 }
 
+.accordion {
+  box-shadow: none;
+  background: none;
+  cursor: pointer;
+  outline: none;
+  border: none;
+  transition: 0.4s;
+}
 
+.active, .accordion:hover {
+  background: none;
+  font-weight: bold;
+}
 
+.accordion:after {
+    content: '\002B';
+    font-weight: bold;
+    float: right;
+    margin-left: 5px;
+}
+
+.active:after {
+    content: "\2212";
+}
+
+.panel {
+    padding: 0 16px;
+    background-color: #blue;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+    border-bottom: 1px solid #eeeeee;
+}
 
 </style>
 
@@ -46,8 +77,6 @@
                   <span style="color: white"> ${comment.content} </span><br>
 		           </c:otherwise>
 	          </c:choose>
-               
-				    <span style="font-size: 14px; color: white;">답글 ${comment.replyCount}개 ▼ | 답글 쓰기</span>
 				    
 				    <c:if test="${comment.writer.no == loginUser.no}">
 				    
@@ -57,9 +86,65 @@
 							<!-- 삭제 버튼 아이콘 -->
 							<a href='comment/delete?commentNo=${comment.no}'><i class="fas fa-trash-alt"></i></a>
 							
+							<br>
 				    </c:if>
 				    
+            <button class="accordion" style="font-size: 14px; color: white;">답글 ${comment.replyCount}개 ▼ | 답글 쓰기</button>
+            <div class="panel">
+            
+							<!-- 대댓글 -->
+							<div style="width: 810px;">
+							  <div class="mb-3 row">
+							    <label for='f-comment-title' class="col-form-label">[답글]</label>
+							      
+							    <c:if test='${not empty loginUser}'>
+							      <div class="col-sm-11">
+							        <form action='comment/add' method="post">
+							          <input type="hidden" name="boardNo" value="${board.no}">
+							          
+							          <span>
+							            작성자 : ${loginUser.nickname} &nbsp; | &nbsp;
+							            
+							            <input type="checkbox" id="demo-copy" name="isPublic" value="2">
+							            <label for="demo-copy" style="font-size: 16px; padding: 0; padding-left: 21px; line-height: 11px;">비밀</label>
+							          </span>
+							          
+							          <div class="comment-bottom">
+							            <textarea id='f-comment-content' name='content' class="form-control col-md-6" rows="2" style="margin-right:5px;"></textarea>
+							            <button class ="button" style="font-size: 14px; height: auto; line-height: 32px;">등록</button>
+							          </div>
+							        </form>     
+							      </div>
+							    </c:if>
+							    
+							    <%-- <div class="col-sm-12">
+							      <jsp:include page="../comment/CommentList.jsp"/>
+							    </div> --%>
+							    
+							  </div>
+							</div>
+							<!-- 대댓글 end -->
+
+            </div>
+            
          </div>
        </div>
      </c:forEach>
   </div>
+  
+<script>
+var acc = document.getElementsByClassName("accordion");
+var i;
+
+for (i = 0; i < acc.length; i++) {
+    acc[i].addEventListener("click", function () {
+        this.classList.toggle("active");
+        var panel = this.nextElementSibling;
+        if (panel.style.maxHeight) {
+            panel.style.maxHeight = null;
+        } else {
+            panel.style.maxHeight = panel.scrollHeight + "px";
+        }
+    });
+}
+</script>
