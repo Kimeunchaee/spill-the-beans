@@ -123,6 +123,10 @@ input[type="checkbox"]:checked + label:before{
 		  <div class="col-sm-11">
 		    <form action='comment/add' method="post">
 		      <input type="hidden" name="boardNo" value="${board.no}">
+			    <input type="hidden" name="parentNo" value="0">
+          <input type="hidden" name="classNo" value="0">
+          <input type="hidden" name="groupNo" value="0">
+          <input type="hidden" name="orderNo" value="1">
 			    
 			    <span>
 				    작성자 : ${loginUser.nickname} &nbsp; | &nbsp;

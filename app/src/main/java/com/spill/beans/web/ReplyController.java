@@ -33,7 +33,13 @@ public class ReplyController {
 
     reply.setWriter((MemberDTO) session.getAttribute("loginUser"));
     reply.setReplyCount(0);
-    reply.setClassNo(reply.getClassNo() + 1);
+
+    //    reply.setClassNo(reply.getClassNo() + 1);
+    //    reply.setGroupNo(reply.getParentNo());
+    //    reply.setOrderNo(reply.getOrderNo() + 1);
+
+    System.out.println("*******************대댓글 오더번호 : " + reply.getOrderNo());
+
 
     if(reply.getIsPublic() == 0) {
       reply.setIsPublic(1);

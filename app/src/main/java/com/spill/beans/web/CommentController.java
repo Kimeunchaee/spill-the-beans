@@ -49,11 +49,18 @@ public class CommentController {
     comment.setWriter((MemberDTO) session.getAttribute("loginUser"));
     comment.setReplyCount(0);
 
+    System.out.println("*******************코멘트 오더번호(원댓) : "+comment.getOrderNo());
+
     if(comment.getIsPublic() == 0) {
       comment.setIsPublic(1);
     }
 
-    commentDao.insertComment(comment.getBoardNo(), comment);
+
+    commentDao.insertComment(comment);
+
+    comment.setGroupNo(comment.getNo());
+    commentDao.updateGroupNo(comment.getNo());
+
     sqlSessionFactory.openSession().commit();
 
     ModelAndView mv = new ModelAndView();
