@@ -115,9 +115,6 @@ public class BoardController {
       } 
     }
 
-    System.out.println("**********************" + commentList);
-    System.out.println("**********************" + replyList);
-
     mv.addObject("commentList", commentList);
     mv.addObject("replyList", replyList);
     mv.addObject("board", board);

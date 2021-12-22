@@ -100,7 +100,7 @@
 					  <%-- 대댓글 보이기 --%>
             <div class="panel">
 							<div style="width: 810px;">
-							  <div class="mb-3 row">
+							  <div class="mb-3 row" style="width: 800px;">
 							    <label for='f-comment-title' class="col-form-label">[답글]</label>
 							      
 							    <c:if test='${not empty loginUser}'>
