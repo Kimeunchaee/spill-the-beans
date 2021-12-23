@@ -24,27 +24,20 @@ public class CommentController {
   @Autowired BoardDao boardDao;  
   @Autowired ServletContext sc;
 
-  //  @GetMapping("board/comment/list")
-  //  public ModelAndView list(int boardNo) throws Exception {
-  //    ModelAndView mv = new ModelAndView();
-  //
-  //    List<CommentDTO> commentList = commentDao.findAll(boardNo);
-  //
-  //    mv.addObject("commentList", commentList);
-  //    mv.addObject("contentUrl", "comment/CommentList.jsp");
-  //    mv.setViewName("template2");
-  //    return mv;
-  //  }
-
   @PostMapping("board/comment/add")
   public ModelAndView add(CommentDTO comment, HttpSession session) throws Exception {
+
+    ModelAndView mv = new ModelAndView();
+
+    if (session.getAttribute("loginUser") == null) {
+      mv.setViewName("redirect:../../auth/loginForm#loginForm");
+      return mv;
+    }
 
     BoardDTO board = boardDao.findByNo(comment.getBoardNo());
     if (board == null) {
       throw new Exception("해당 번호의 게시글이 없습니다.");
     }
-
-    //board.setCommentCount(board.getCommentCount()+1);   // 할까 말까
 
     comment.setWriter((MemberDTO) session.getAttribute("loginUser"));
     comment.setReplyCount(0);
@@ -63,7 +56,7 @@ public class CommentController {
 
     sqlSessionFactory.openSession().commit();
 
-    ModelAndView mv = new ModelAndView();
+
     mv.setViewName("redirect:../detail?no=" + comment.getBoardNo());
     return mv;
   }

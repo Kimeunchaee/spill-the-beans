@@ -38,6 +38,13 @@ public class BoardController {
   @PostMapping("/board/add")
   public ModelAndView add(BoardDTO board, HttpSession session) throws Exception {
 
+    ModelAndView mv = new ModelAndView();
+
+    if (session.getAttribute("loginUser") == null) {
+      mv.setViewName("redirect:../auth/loginForm#loginForm");
+      return mv;
+    }
+
     board.setViewCount(0);
     board.setLikeCount(0);
     board.setCommentCount(0);
@@ -46,7 +53,6 @@ public class BoardController {
     boardDao.insert(board);
     sqlSessionFactory.openSession().commit();
 
-    ModelAndView mv = new ModelAndView();
     mv.setViewName("redirect:list");
     return mv;
   }
