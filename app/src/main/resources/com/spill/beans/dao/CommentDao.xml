@@ -87,15 +87,17 @@
   <delete id="delete" parameterType="int">
     delete from comment
     where
-      comment_no=#{commentNo}
+      comment_no=#{commentNo} or group_no=#{commentNo} or parent_comment_no=#{commentNo}
   </delete>
   
+  <!-- 게시글 삭제할때  -->
   <delete id="deleteByBoardNo" parameterType="int">
     delete from comment
     where
       board_no=#{boardNo}
   </delete>
   
+  <!-- 회원 삭제할때  -->
   <delete id="deleteByMemberNo" parameterType="int">
     delete from comment
     where
