@@ -19,27 +19,37 @@
 ----------------------------------------------------------------------------------------------------
 
 ## 1일차(2021-12-06,월)
-- 프로젝트 주제 선정 및 세팅
+
+- 프로젝트 기획
+    - 주제 선정 회의
 	- 공용 깃허브 생성
     - .gitignore 설정
     - gradle eclipse 설정
+
+- 요구사항 명세
+    - 기능 요구 사항 : 로그인, 회원가입, 게시판, 댓글
+    - 비기능 요구 사항 : 닉네임 중복 검사, 이메일 중복 검사, 게시판 유효성 검사, 로그인 유효성 검사, 회원가입 유효성 검사, <br>
+    &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; 로그인 여부에 따른 접근 제어, 유저 상태에 따른 접근 제어, 동작 흐름에 따른 응답 
+    - 데이터베이스 요구 사항 : 여러 기능에서 사용될 데이터의 타입(INTEGER, DATE, VARCHAR), 엔티티(회원, 카테고리, 게시판, 댓글, 좋아요), 관계 설정, 무결성 제약조건
+    - 인터페이스 요구 사항 : 시스템 인터페이스, 사용자 인터페이스
+
+- 데이터베이스 설계
     - 테이블 설정
-    - DB 설정
-        - 로컬 MySQL 서버에 접속
-            > mysql -u root -p
-        - MySQL 사용자 추가
-            > CREATE USER 'ear'@'localhost' IDENTIFIED BY '1111';
-        - MySQL 데이터베이스 생성
-            > CREATE DATABASE eardb
-              DEFAULT CHARACTER SET utf8
-              DEFAULT COLLATE utf8_general_ci;
-        - MySQL 사용자에게 데이터베이스 사용 권한 부여
-            > GRANT ALL ON eardb.* TO 'ear'@'localhost';
-        - MySQL 사용자 목록 조회
-            > select user from mysql.user;
+    - 로컬 MySQL 서버에 접속
+        > mysql -u root -p
+    - MySQL 사용자 추가
+        > CREATE USER 'ear'@'localhost' IDENTIFIED BY '1111';
+    - MySQL 데이터베이스 생성
+        > CREATE DATABASE eardb
+            DEFAULT CHARACTER SET utf8
+            DEFAULT COLLATE utf8_general_ci;
+    - MySQL 사용자에게 데이터베이스 사용 권한 부여
+        > GRANT ALL ON eardb.* TO 'ear'@'localhost';
+    - MySQL 사용자 목록 조회
+        > select user from mysql.user;
 
 - 프로젝트 시작
-    - DB 모델링
+    - 데이터베이스 모델링
         - 테이블 생성
     - npm install
     - Tomcat 서버 생성
