@@ -85,7 +85,7 @@ select option {
 	<tr data-no="${board.no}">
 	    <td>${board.no}</td>
 	    <td>${board.category.label}</td>
-	    <td>${board.title}</td> 
+	    <td>${board.title} (${board.commentCount})</td> 
 	    <td>${board.writer.nickname}</td> 
 	    <td>${board.registeredDate}</td> 
 	    <td>${board.viewCount}</td>
@@ -98,7 +98,7 @@ select option {
 	<tr data-no="${board.no}">
 	    <td>${board.no}</td>
 	    <td>${board.category.label}</td>
-	    <td><a href='detail?no=${board.no}'>${board.title}</a></td> 
+	    <td><a href='detail?no=${board.no}'>${board.title} (${board.commentCount})</a></td> 
 	    <td>${board.writer.nickname}</td> 
 	    <td>${board.registeredDate}</td> 
 	    <td>${board.viewCount}</td>
