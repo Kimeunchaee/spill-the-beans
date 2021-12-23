@@ -1,10 +1,16 @@
 # spill-the-beans 임금님 귀는 당나귀 귀👂
+<br>
+
+## 메인 소개
+<img src=app/docs/img/main.jpg>
+<br><br>
 
 ## 프로젝트 명
 1. 타이틀 : 임금님 귀는 당나귀 귀👂</br>
 2. 소개 : 주위 사람들에게 털어 놓을 수 없는, 털어 놓지 못해 답답한 사람들을 위해</br>
           자신만의 비밀이나 속마음을 어딘가에 쏟을 수 있도록 도와주는</br>
           사소하면서 웃기고 슬픈 TMI를 익명으로 공유할 수 있는 프로젝트</br>
+<br>
 
 ## 프로젝트 제작
 1. 주제 : 사소한 TMI를 익명으로 공유할 수 있는 게시판 서비스 제공
@@ -15,10 +21,7 @@
           [조솔](https://github.com/jo-sol) 
           [김은채](https://github.com/Kimeunchaee)
 5. 기간 : 2021.12.06 ~ 2021.12.23 (약 2주)
-
-## 메인 소개
-<img src=app/docs/img/main.jpg>
-<br>
+<br><br>
 
 ## 프로젝트 일정
 <img src=app/docs/img/flow_chart_white.png>
@@ -30,9 +33,25 @@
 
 ## 사이트맵
 <img src=app/docs/img/sitemap_white.png>
+<br><br>
+
+## 사용 기술
+
+|기술|목록| 
+| :---- | ------ | 
+| **Languages** | <a href="#"><img src="https://img.shields.io/badge/java-007396.svg?style=for-the-badge&logo=java&logoColor=white"/></a><a href="#"><img src="https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white"/></a><a href="#"><img src="https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white"/></a><a href="#"><img src="https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E"/></a> | 
+| **Frameworks, Platforms and Libraries** | <a href="#"><img src="https://img.shields.io/badge/spring-%236DB33F.svg?style=for-the-badge&logo=spring&logoColor=white"/></a><a href="#"><img src="https://img.shields.io/badge/bootstrap-%23563D7C.svg?style=for-the-badge&logo=bootstrap&logoColor=white"/></a><a href="#"><img src="https://img.shields.io/badge/NPM-%23000000.svg?style=for-the-badge&logo=npm&logoColor=white"/></a><a href="#"><img src="https://img.shields.io/badge/jquery-0769AD.svg?style=for-the-badge&logo=jquery&logoColor=white"/></a> | 
+| **IDEs/Editors** | <a href="#"><img src="https://img.shields.io/badge/Eclipse-2C2255.svg?style=for-the-badge&logo=Eclipse&logoColor=white"/></a><a href="#"><img src="https://img.shields.io/badge/Visual%20Studio%20Code-0078d7.svg?style=for-the-badge&logo=visual-studio-code&logoColor=white"/></a> | 
+| **Version Control** | <a href="#"><img src="https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white"/></a> | 
+| **Servers** | <a href="#"><img src="https://img.shields.io/badge/Apache%20Tomcat-F8DC75.svg?style=for-the-badge&logo=Apache%20Tomcat&logoColor=black"/></a> |
+| **Databases** |<a href="#"><img src="https://img.shields.io/badge/mariadb-003545.svg?style=for-the-badge&logo=mariadb&logoColor=white"/></a><a href="#"><img src="https://img.shields.io/badge/exerd-8F0000.svg?style=for-the-badge&logo=exerd&logoColor=white"/></a> |
+| **Other** | <a href="#"><img src="https://img.shields.io/badge/Gradle-02303A.svg?style=for-the-badge&logo=Gradle&logoColor=white"/></a>
+<br>
 <br>
 
 ----------------------------------------------------------------------------------------------------
+
+<br>
 
 ## 1일차(2021-12-06,월)
 
@@ -44,8 +63,7 @@
 
 - 요구사항 명세
     - 기능 요구 사항 : 로그인, 회원가입, 게시판, 댓글
-    - 비기능 요구 사항 : 닉네임 중복 검사, 이메일 중복 검사, 게시판 유효성 검사, 로그인 유효성 검사, 회원가입 유효성 검사, <br>
-    &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; 로그인 여부에 따른 접근 제어, 유저 상태에 따른 접근 제어, 동작 흐름에 따른 응답 
+    - 비기능 요구 사항 : 닉네임 중복 검사, 이메일 중복 검사, 게시판 유효성 검사, 로그인 유효성 검사, 회원가입 유효성 검사, 로그인 여부에 따른 접근 제어, 유저 상태에 따른 접근 제어, 동작 흐름에 따른 응답 
     - 데이터베이스 요구 사항 : 여러 기능에서 사용될 데이터의 타입(INTEGER, DATE, VARCHAR), 엔티티(회원, 카테고리, 게시판, 댓글, 좋아요), 관계 설정, 무결성 제약조건
     - 인터페이스 요구 사항 : 시스템 인터페이스, 사용자 인터페이스
 
