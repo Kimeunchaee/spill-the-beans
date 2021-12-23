@@ -67,10 +67,10 @@ input[type="checkbox"]:checked + label:before{
 	    
 	    <c:choose>
 		    <c:when test="${not empty list}">
-		    <a href="unlike?boardNo=${board.no}&memberNo=${loginUser.no}"><i class="fas fa-thumbs-up"></i></a> ${board.likeCount}
+		    <a href="unlike?boardNo=${board.no}&memberNo=${loginUser.no}"><i style="font-size:16px; color:#ffd745;" class="fas fa-heart"></i></a> ${board.likeCount}
 		    </c:when>
 		    <c:otherwise>
-		    <a href="like?boardNo=${board.no}&memberNo=${loginUser.no}"><i class="far fa-thumbs-up"></i></a> ${board.likeCount}
+		    <a href="like?boardNo=${board.no}&memberNo=${loginUser.no}"><i style="font-size:16px; color:#ffd745;" class="far fa-heart"></i></a> ${board.likeCount}
 		    </c:otherwise>
 		  </c:choose>
 	    </h4>
@@ -85,13 +85,18 @@ input[type="checkbox"]:checked + label:before{
 	</div>
 
 	<div class="btn-wrap" style="margin-left: 684px;">
-	<c:if test="${loginUser.no == board.writer.no}">
+	<c:if test="${loginUser.no == board.writer.no or loginUser.active == 3}">
+	  <c:if test="${loginUser.active == 1}">
 		<a href='updateForm?no=${board.no}' class ="button" style="font-size: 14px;">수정</a>
+		</c:if>
+		<c:if test="${loginUser.active == 3}">
+		<a href='updateForm?no=${board.no}' class ="button" style="font-size: 14px; visibility: hidden;">수정</a>
+		</c:if>
 		<a href='#delete' class ="button" style="font-size: 14px;">삭제</a>
 	  <a href='list' class ="button" style="font-size: 14px;">목록</a>
 	</c:if>
 	
-	<c:if test="${loginUser.no != board.writer.no}">
+	<c:if test="${loginUser.no != board.writer.no and loginUser.active == 1}">
 		<a href='update' class ="button" style="font-size: 14px; visibility: hidden;">수정</a>
 		<a href='delete?no=${board.no}' class ="button" style="font-size: 14px; visibility: hidden;">삭제</a>
 	  <a href='list' class ="button" style="font-size: 14px;">목록</a>
@@ -113,12 +118,11 @@ input[type="checkbox"]:checked + label:before{
 	  </article>
 </div>
 
-
 <!-- 댓글 -->
 <div style="width: 810px;">
 	<div class="mb-3 row">
 	  <label for='f-comment-title' class="col-form-label">[댓글]</label>
-		  
+  <c:if test="${board.writer.active != 2}">
 	  <c:if test='${not empty loginUser}'>
 		  <div class="col-sm-11">
 		    <form action='comment/add' method="post">
@@ -142,7 +146,8 @@ input[type="checkbox"]:checked + label:before{
 		    </form>	    
 		  </div>
 	  </c:if>
-	  
+  </c:if>
+
 	  <div class="col-sm-12">
       <jsp:include page="../comment/CommentList.jsp"/>
 	  </div>

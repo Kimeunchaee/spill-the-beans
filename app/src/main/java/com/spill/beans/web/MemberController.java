@@ -361,10 +361,15 @@ public class MemberController {
   @GetMapping("/member/checkNickname")
   @ResponseBody
   public String checkNickname(String nickname) throws Exception {
+
     MemberDTO member = memberDao.findByNickName(nickname);
-    if (member == null) {
+    if (nickname.equalsIgnoreCase("null")) {
+      return "true";
+    } 
+    else if (member == null) {
       return "false";
-    } else {
+    }
+    else {
       return "true";
     }
   }

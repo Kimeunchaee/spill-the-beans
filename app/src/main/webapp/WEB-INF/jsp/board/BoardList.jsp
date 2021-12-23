@@ -164,10 +164,16 @@ document.querySelectorAll("tbody a").forEach((aTag) => {
 	aTag.onclick = () => false;
 });
 
+var loginUserNickname = '<%=(String)session.getAttribute("loginUserNickname")%>';
 var trList = document.querySelectorAll("tbody tr"); // 리턴 객체는 HTMLCollection 타입 객체이다.
 trList.forEach(function(trTag) {
 	trTag.onclick = (e) => {
+		if (loginUserNickname == "null") {
+			alert("로그인을 해 주세요.");
+			return false;
+		} else {
 		window.location.href = e.currentTarget.querySelector("a").href;
+		}
 	};
 });
 </script>

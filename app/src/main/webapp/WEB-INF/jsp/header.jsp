@@ -42,7 +42,7 @@
 	      <li><a href="#intro">소개</a></li>
 	      <li><a href="${contextPath}/app/member/detail#detail">마이페이지</a></li>
 	      <li><a href="${contextPath}/app/member/list">회원 관리</a></li>
-	      <li><a href="#board">게시글 관리</a></li>
+	      <li><a href="${contextPath}/app/board/list">게시글 관리</a></li>
 	      <li><a href="${contextPath}/app/auth/logout">로그아웃</a></li>
 	    </ul>
 	  </c:if>
