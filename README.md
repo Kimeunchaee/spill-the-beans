@@ -1,18 +1,18 @@
 # spill-the-beans 임금님 귀는 당나귀 귀👂
 <br>
 
-## 메인 소개
+## 🐴 메인 소개
 <img src=app/docs/img/main.jpg>
 <br><br>
 
-## 프로젝트 명
+## :heavy_check_mark: 프로젝트 명
 1. 타이틀 : 임금님 귀는 당나귀 귀👂</br>
 2. 소개 : 주위 사람들에게 털어 놓을 수 없는, 털어 놓지 못해 답답한 사람들을 위해</br>
           자신만의 비밀이나 속마음을 어딘가에 쏟을 수 있도록 도와주는</br>
           사소하면서 웃기고 슬픈 TMI를 익명으로 공유할 수 있는 프로젝트</br>
 <br>
 
-## 프로젝트 제작
+## :heavy_check_mark: 프로젝트 제작
 1. 주제 : 사소한 TMI를 익명으로 공유할 수 있는 게시판 서비스 제공
 2. 목표 : 반복된 연습으로 빠르고 최적화된 게시판 생성을 목표로
          배웠던 내용을 실제 프로젝트에 적용하면서 걍험을 쌓기 위한 프로젝트
@@ -23,25 +23,26 @@
 5. 기간 : 2021.12.06 ~ 2021.12.23 (약 2주)
 <br><br>
 
-## 팀원 소개
-| 🐳 이혜연 | 🐣 조솔 | 👻 김은채 | 
+## :heavy_check_mark: 팀원 소개
+| ☃️: 이혜연 | 🐣 조솔 | 👻 김은채 | 
 | :-----------: | :------------: | :------------: | 
 | Front-End & Back-End |  Front-End & Back-End |  Front-End & Back-End | 
 | [lee-hyeyeon](https://github.com/lee-hyeyeon) | [jo-sol](https://github.com/jo-sol) | [Kimeunchaee](https://github.com/Kimeunchaee) |
+<br>
 
-## 프로젝트 일정
+## :heavy_check_mark: 프로젝트 일정
 <img src=app/docs/img/flow_chart_white.png>
 <br>
 
-## 데이터베이스 모델링
+## :heavy_check_mark: 데이터베이스 모델링
 <img src=app/docs/img/exerd.PNG>
 <br>
 
-## 사이트맵
+## :heavy_check_mark: 사이트맵
 <img src=app/docs/img/sitemap_white.png>
 <br><br>
 
-## 사용 기술
+## :heavy_check_mark: 사용 기술
 
 |기술|목록| 
 | :---- | ------ | 
@@ -55,9 +56,7 @@
 <br>
 <br>
 
-----------------------------------------------------------------------------------------------------
-
-<br>
+## :heavy_check_mark: 프로젝트 기록
 
 ## 1일차(2021-12-06,월)
 
