@@ -15,5 +15,3 @@ values(3, 3, 14, '예민하면 산에서 살것이지ㅡㅡ 힘내세여', 1, 0,
 insert into comment(comment_no, board_no, member_no, content, isPublic, replyCount, group_no, order_no, class_no, parent_comment_no)
 values(4, 3, 8, '똑같이 겪어봐야 안그럴거에요, 그대로 해보세요', 1, 0, 4, 1, 0, 0);
  
-
-

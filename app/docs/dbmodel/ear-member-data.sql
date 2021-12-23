@@ -48,4 +48,3 @@ values(15, '강같은평화', 'peace@naver.com', password('1111'), '2021-12-16',
 insert into member(member_no, nickname, email, password, created_dt, active)
 values(16, '염전', 'salt@gmail.com', password('1111'), '2021-12-16', 1);
 
-
