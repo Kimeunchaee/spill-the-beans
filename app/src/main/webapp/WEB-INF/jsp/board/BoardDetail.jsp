@@ -25,6 +25,7 @@ form div {
     border-top: 1px solid #ced4da;
     border-bottom: 1px solid #ced4da;
 }
+
 .form-control[readonly]:hover{
   cursor: default;
 }
@@ -45,16 +46,27 @@ input[type="checkbox"]:checked + label:before{
 }
 
 .box{
- -ms-overflow-style: none; 
+    -ms-overflow-style: none; 
 }
-.box::-webkit-scrollbar{
- display:none; 
- }
 
+.box::-webkit-scrollbar{
+    display:none; 
+ }
+ 
+ .home-wrap {
+    width: 827px;
+    transition: 0.6;
+    font-size: 20px;
+}
 
 </style>
 
-<h2 class="major">게시글</h2>
+
+<div class="home-wrap">
+  <a href='${contextPath}/app/home'><i class="fas fa-home"></i></a>
+  <h2 class="major" style="display: inline-block; margin-left: 368px;">게시글</h2>
+</div>
+
 <form style="width: 1000px;">
 
   <input id='f-no' type='hidden' name='no' class="form-control" value='${board.no}' readonly>

@@ -47,7 +47,19 @@
 .commentContent {
 	color: white;
 	display: inline-block;
-	width: 765px;
+	width: 764px;
+}
+
+.re_commentContent {
+  color: white;
+  display: inline-block;
+  width: 728px;
+}
+
+.re_re_commentContent {
+  color: white;
+  display: inline-block;
+  width: 697px;
 }
 
 .editdelete {
@@ -75,7 +87,12 @@
 	                   <%-- 내가 쓴 비밀 댓글 & 게시글 작성자 & 관리자가 볼 수 있는 비밀 댓글--%>
 	                   <c:when test="${comment.writer.no == loginUser.no or board.writer.no == loginUser.no or loginUser.active == 3}">
 	                    <span style="font-size: 14px; color: white;">${comment.writer.nickname} | ${comment.registeredDate}</span><br>
-	                    <span style="color: white"><i class="fas fa-lock"></i></span> <span>${comment.content} </span><br>
+	                    
+	                    <span class="commentContent" style="margin-bottom: 10px;">
+		                    <i class="fas fa-lock" style="color: white"></i> <%-- 자물쇠 아이콘  --%>
+		                    ${comment.content}
+		                  </span>
+		                  
 	                   </c:when>
 	                   
 	                   <%-- 다른 사람들이 보는 비밀 댓글 출력문--%>
@@ -167,7 +184,12 @@
                                              
                                                <c:when test="${reply.writer.no == loginUser.no or board.writer.no == loginUser.no or loginUser.active == 3}">
                                                   <span style="font-size: 14px; color: white;">${reply.writer.nickname} | ${reply.registeredDate}</span><br>
-                                                  <span style="color: white"><i class="fas fa-lock"></i></span> <span>${reply.content} </span><br>
+                                                  
+                                                  <span class="re_commentContent" style="margin-bottom: 10px;">
+														                        <i class="fas fa-lock" style="color: white"></i> <%-- 자물쇠 아이콘  --%>
+														                        ${reply.content}
+														                      </span>
+                                                  
                                                </c:when>
                                                
                                                <c:otherwise>
@@ -181,19 +203,21 @@
                                              <%-- 공개 댓글일 때 --%>
                                              <c:otherwise>
                                                 <span style="font-size: 14px; color: white;">${reply.writer.nickname} | ${reply.registeredDate}</span><br>
-                                                <span style="color: white"> ${reply.content} </span><br>
+                                                <span class="re_commentContent"> ${reply.content} </span>
                                              </c:otherwise>
                                           </c:choose>
                                           
                                           <c:if test="${reply.writer.no == loginUser.no or loginUser.active == 3}">
-                                            <%-- 수정 버튼 아이콘 --%>
-                                            <c:if test="${board.writer.active != 2 and comment.writer.no == loginUser.no}">
-                                            <a href="comment/updateForm?commentNo=${reply.no}" class="updateBtn"><i class="far fa-edit"></i></a>
-                                            </c:if>
-                                            
-                                            <%-- 삭제 버튼 아이콘 --%>
-                                            <a href='comment/delete?commentNo=${reply.no}'><i class="fas fa-trash-alt"></i></a>
-                                            <br>
+	                                          <div class="editdelete">
+		                                            <%-- 수정 버튼 아이콘 --%>
+		                                            <c:if test="${board.writer.active != 2 and comment.writer.no == loginUser.no}">
+		                                            <a href="comment/updateForm?commentNo=${reply.no}" class="updateBtn"><i class="far fa-edit"></i></a>
+		                                            </c:if>
+		                                            
+		                                            <%-- 삭제 버튼 아이콘 --%>
+		                                            <a href='comment/delete?commentNo=${reply.no}'><i class="fas fa-trash-alt"></i></a>
+		                                            <br>
+	                                           </div>
                                           </c:if>
                                           
                                           
@@ -224,7 +248,11 @@
                                                                         
                                                                           <c:when test="${re_reply.writer.no == loginUser.no or board.writer.no == loginUser.no or loginUser.active == 3}">
                                                                              <span style="font-size: 14px; color: white;">${re_reply.writer.nickname} | ${re_reply.registeredDate}</span><br>
-                                                                             <span style="color: white"><i class="fas fa-lock"></i></span> <span>${re_reply.content} </span><br>
+                                                                             
+                                                                             <span class="re_re_commentContent" style="margin-bottom: 10px;">
+														                                                    <i class="fas fa-lock" style="color: white"></i> <%-- 자물쇠 아이콘  --%>
+														                                                    ${re_reply.content}
+														                                                 </span>
                                                                           </c:when>
                                                                           
                                                                           <c:otherwise>
@@ -238,19 +266,21 @@
                                                                         <%-- 공개 댓글일 때 --%>
                                                                         <c:otherwise>
                                                                            <span style="font-size: 14px; color: white;">${re_reply.writer.nickname} | ${re_reply.registeredDate}</span><br>
-                                                                           <span style="color: white"> ${re_reply.content} </span><br>
+                                                                           <span class="re_re_commentContent"> ${re_reply.content} </span>
                                                                         </c:otherwise>
                                                                      </c:choose>
                                                                      
                                                                      <c:if test="${re_reply.writer.no == loginUser.no or loginUser.active == 3}">
-                                                                       <%-- 수정 버튼 아이콘 --%>
-                                                                       <c:if test="${board.writer.active != 2 and comment.writer.no == loginUser.no}">
-                                                                       <a href="comment/updateForm?commentNo=${re_reply.no}" class="updateBtn"><i class="far fa-edit"></i></a>
-                                                                       </c:if>
-                                                                       
-                                                                       <%-- 삭제 버튼 아이콘 --%>
-                                                                       <a href='comment/delete?commentNo=${re_reply.no}'><i class="fas fa-trash-alt"></i></a>
-                                                                       <br>
+                                                                        <div class="editdelete">
+		                                                                       <%-- 수정 버튼 아이콘 --%>
+		                                                                       <c:if test="${board.writer.active != 2 and comment.writer.no == loginUser.no}">
+		                                                                       <a href="comment/updateForm?commentNo=${re_reply.no}" class="updateBtn"><i class="far fa-edit"></i></a>
+		                                                                       </c:if>
+		                                                                       
+		                                                                       <%-- 삭제 버튼 아이콘 --%>
+		                                                                       <a href='comment/delete?commentNo=${re_reply.no}'><i class="fas fa-trash-alt"></i></a>
+		                                                                       <br>
+                                                                        </div>
                                                                      </c:if>
                                                                      </div>
                                                                      
