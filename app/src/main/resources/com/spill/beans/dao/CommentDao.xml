@@ -48,7 +48,7 @@
    <include refid="select1"/>
    where
       c.board_no=#{boardNo} and class_no = 0
-   order by comment_no desc, group_no asc, order_no asc;
+   order by comment_no asc, group_no asc, order_no asc;
   </select>
   
   <select id="findByNo" resultMap="CommentMap" parameterType="int">
@@ -130,7 +130,7 @@
    <include refid="select2"/>
    where
       c.board_no=#{boardNo} and class_no != 0
-   order by comment_no desc, group_no asc, order_no asc;
+   order by comment_no asc, group_no asc, order_no asc;
   </select>
 
   <insert id="insertReply" parameterType="CommentDTO">
