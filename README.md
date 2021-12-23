@@ -24,6 +24,10 @@
 | [lee-hyeyeon](https://github.com/lee-hyeyeon) | [jo-sol](https://github.com/jo-sol) | [Kimeunchaee](https://github.com/Kimeunchaee) |
 <br>
 
+## :heavy_check_mark: Wiki 보러 가기
+[<h4>#임금님 귀는 당나귀 귀 Wiki</h4>](https://github.com/lee-hyeyeon/spill-the-beans/wiki)
+<br>
+
 ## :heavy_check_mark: 프로젝트 일정
 <img src=app/docs/img/flow_chart_white.png>
 <br>
