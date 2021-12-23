@@ -16,6 +16,22 @@
           [김은채](https://github.com/Kimeunchaee)
 5. 기간 : 2021.12.06 ~ 2021.12.23 (약 2주)
 
+## 메인 소개
+<img src=app/docs/img/main.jpg>
+<br>
+
+## 프로젝트 일정
+<img src=app/docs/img/flow_chart_white.png>
+<br>
+
+## 데이터베이스 모델링
+<img src=app/docs/img/exerd.PNG>
+<br>
+
+## 사이트맵
+<img src=app/docs/img/sitemap_white.png>
+<br>
+
 ----------------------------------------------------------------------------------------------------
 
 ## 1일차(2021-12-06,월)
