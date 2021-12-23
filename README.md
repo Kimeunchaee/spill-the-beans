@@ -39,7 +39,7 @@
 ## :heavy_check_mark: 사용 기술
 
 |기술|목록| 
-| :---- | ------ | 
+| ------ | ------ | 
 | **Languages** | <a href="#"><img src="https://img.shields.io/badge/java-007396.svg?style=for-the-badge&logo=java&logoColor=white"/></a><a href="#"><img src="https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white"/></a><a href="#"><img src="https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white"/></a><a href="#"><img src="https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E"/></a> | 
 | **Frameworks, Platforms and Libraries** | <a href="#"><img src="https://img.shields.io/badge/spring-%236DB33F.svg?style=for-the-badge&logo=spring&logoColor=white"/></a><a href="#"><img src="https://img.shields.io/badge/bootstrap-%23563D7C.svg?style=for-the-badge&logo=bootstrap&logoColor=white"/></a><a href="#"><img src="https://img.shields.io/badge/NPM-%23000000.svg?style=for-the-badge&logo=npm&logoColor=white"/></a><a href="#"><img src="https://img.shields.io/badge/jquery-0769AD.svg?style=for-the-badge&logo=jquery&logoColor=white"/></a> | 
 | **IDEs/Editors** | <a href="#"><img src="https://img.shields.io/badge/Eclipse-2C2255.svg?style=for-the-badge&logo=Eclipse&logoColor=white"/></a><a href="#"><img src="https://img.shields.io/badge/Visual%20Studio%20Code-0078d7.svg?style=for-the-badge&logo=visual-studio-code&logoColor=white"/></a> | 
@@ -381,6 +381,7 @@
         - 탈퇴된 회원의 게시글일 경우 댓글 작성 금지
         - 탈퇴된 회원의 게시글일 경우 답글 작성 금지
         - 목록 : 홈버튼 아이콘 위치 수정 완료
+        - 목록 : 댓글 수 출력 추가 완료
         - 상세 : 홈버튼 아이콘 추가 완료
     - 댓글
         - 수정 버튼 위치 수정 완료
@@ -393,4 +394,13 @@
         - 대댓글 출력 조건문 수정 완료
     - 회원
         - 탈퇴 시 메세지 추가 완료
+    - 데이터(테스트 값) 정리
+        - Board-Data 수정 완료
+        - Member-Data 수정 완료
+        - Comment-Data 수정 완료
+    - 정리
+        - 파일 정리
+        - 코드 정리
+        - 주석 정리
+        - README.md 정리
 </details>
