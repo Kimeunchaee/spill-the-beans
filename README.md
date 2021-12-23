@@ -24,7 +24,7 @@
 <br><br>
 
 ## :heavy_check_mark: 팀원 소개
-| ☃️: 이혜연 | 🐣 조솔 | 👻 김은채 | 
+| ☃️ 이혜연 | 🐣 조솔 | 👻 김은채 | 
 | :-----------: | :------------: | :------------: | 
 | Front-End & Back-End |  Front-End & Back-End |  Front-End & Back-End | 
 | [lee-hyeyeon](https://github.com/lee-hyeyeon) | [jo-sol](https://github.com/jo-sol) | [Kimeunchaee](https://github.com/Kimeunchaee) |
