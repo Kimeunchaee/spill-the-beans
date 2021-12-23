@@ -192,34 +192,6 @@
                                                        <div class="mb-3 row" style="width: 765px;">
                                                          <label for='f-comment-title' class="col-form-label">[답글]</label>
                                                            
-                                                         <c:if test='${not empty loginUser}'>
-                                                           <div class="col-sm-11">
-                                                             <%-- re:대대댓글 입력 폼 --%>
-                                                             <form action='comment/reply/add' method="post">
-                                                               <input type="hidden" name="boardNo" value="${board.no}">
-                                                               <input type="hidden" name="parentNo" value="${reply.no}">
-                                                               <input type="hidden" name="groupNo" value="${reply.parentNo}">
-                                                               <input type="hidden" name="classNo" value="${reply.classNo + 1}">
-                                                               
-                                                               <c:if test="${comment.replyCount > 2}">
-                                                                   <input type="hidden" name="orderNo" value="${comment.replyCount + 1}">
-                                                               </c:if>
-                                                                  
-                                                               <span>
-                                                                 작성자 : ${loginUser.nickname} &nbsp; | &nbsp;
-                                                                 
-                                                                 <input type="checkbox" id="${reply.no}" name="isPublic" value="2">
-                                                                 <label for="${reply.no}" style="font-size: 16px; padding: 0; padding-left: 21px; line-height: 11px;">비밀</label>
-                                                               </span>
-                                                               
-                                                               <div class="comment-bottom">
-                                                                 <textarea id='f-comment-content' name='content' class="form-control col-md-6" rows="2" style="margin-right:5px;"></textarea>
-                                                                 <button type="submit" class ="button" style="font-size: 14px; height: auto; line-height: 32px;">등록</button>
-                                                               </div>
-                                                             </form> <%-- re:대대댓글 입력 폼 end --%>
-                                                           </div>
-                                                         </c:if>
-                                                         
                                                          <%-- re:대대댓글 내용 출력 --%>
                                                          <div class="col-sm-12">
                                                            <div class="replyList-wrap">
@@ -269,6 +241,34 @@
                                                              </div>
                                                          </div> <%-- re:대대댓글 내용 출력 end --%>
                                                          
+                                                         <c:if test='${not empty loginUser}'>
+                                                           <div class="col-sm-11">
+                                                             <%-- re:대대댓글 입력 폼 --%>
+                                                             <form action='comment/reply/add' method="post">
+                                                               <input type="hidden" name="boardNo" value="${board.no}">
+                                                               <input type="hidden" name="parentNo" value="${reply.no}">
+                                                               <input type="hidden" name="groupNo" value="${reply.parentNo}">
+                                                               <input type="hidden" name="classNo" value="${reply.classNo + 1}">
+                                                               
+                                                               <c:if test="${comment.replyCount > 2}">
+                                                                   <input type="hidden" name="orderNo" value="${comment.replyCount + 1}">
+                                                               </c:if>
+                                                                  
+                                                               <span>
+                                                                 작성자 : ${loginUser.nickname} &nbsp; | &nbsp;
+                                                                 
+                                                                 <input type="checkbox" id="${reply.no}" name="isPublic" value="2">
+                                                                 <label for="${reply.no}" style="font-size: 16px; padding: 0; padding-left: 21px; line-height: 11px;">비밀</label>
+                                                               </span>
+                                                               
+                                                               <div class="comment-bottom">
+                                                                 <textarea id='f-comment-content' name='content' class="form-control col-md-6" rows="2" style="margin-right:5px;"></textarea>
+                                                                 <button type="submit" class ="button" style="font-size: 14px; height: auto; line-height: 32px;">등록</button>
+                                                               </div>
+                                                             </form> <%-- re:대대댓글 입력 폼 end --%>
+                                                           </div>
+                                                         </c:if>
+                                                         
                                                        </div>
                                                      </div>
                                                    </div> <%-- re:대대댓글 보이기 end --%>
@@ -310,7 +310,7 @@ for (i = 0; i < acc.length; i++) {
            if (panel.style.maxHeight) {
              panel.style.maxHeight = null;
            } else {
-            panel.style.maxHeight = panel.scrollHeight + panel.scrollHeight + "px";
+            panel.style.maxHeight = panel.scrollHeight * i + "px";
              showType = true;
            }
         } 
