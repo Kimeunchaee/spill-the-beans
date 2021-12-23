@@ -165,7 +165,7 @@ document.querySelectorAll("tbody a").forEach((aTag) => {
 });
 
 var loginUserNickname = '<%=(String)session.getAttribute("loginUserNickname")%>';
-var trList = document.querySelectorAll("tbody tr"); // 리턴 객체는 HTMLCollection 타입 객체이다.
+var trList = document.querySelectorAll("tbody tr");
 trList.forEach(function(trTag) {
 	trTag.onclick = (e) => {
 		if (loginUserNickname == "null") {

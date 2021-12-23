@@ -59,6 +59,16 @@ input[type="checkbox"]:checked + label:before{
     font-size: 20px;
 }
 
+.swal2-title {
+    font-size: 18px;
+}
+.swal2-styled.swal2-confirm {
+    line-height: 14px;
+    font-weight: bold;
+    background-color: rgb(31 71 63 / 100%);
+}
+
+
 </style>
 
 
@@ -137,7 +147,7 @@ input[type="checkbox"]:checked + label:before{
   <c:if test="${board.writer.active != 2}">
 	  <c:if test='${not empty loginUser}'>
 		  <div class="col-sm-11">
-		    <form action='comment/add' method="post">
+		    <form action='comment/add' method="post" id="comment-form">
 		      <input type="hidden" name="boardNo" value="${board.no}">
 			    <input type="hidden" name="parentNo" value="0">
           <input type="hidden" name="classNo" value="0">
@@ -167,3 +177,12 @@ input[type="checkbox"]:checked + label:before{
   </div>
 </div>
 <!-- 댓글 end -->
+
+<script>
+document.querySelector("#comment-form").onsubmit = () => {
+  if (document.querySelector("#f-comment-content").value == "") {
+    Swal.fire("댓글 내용을 입력해 주세요.")
+    return false;
+  }
+};
+</script>

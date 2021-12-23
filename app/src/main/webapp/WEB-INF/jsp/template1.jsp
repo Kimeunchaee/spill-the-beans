@@ -37,7 +37,7 @@
         <!-- Main -->
           <div id="main">
 
-            <!-- login -->
+            <!-- Pop Up -->
               <article id="${contentID}">
                 <jsp:include page="${contentUrl}"/>
               </article>
@@ -46,7 +46,7 @@
 
         <!-- Footer -->
           <footer id="footer">
-            <p class="copyright">&copy; EAR. <a href="#">The king's ear is a donkey's ear</a>.</p>
+            <p class="copyright">&copy; <a href="#">The King with Donkey Ears</a>.</p>
           </footer>
 
       </div>

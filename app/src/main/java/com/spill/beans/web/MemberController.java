@@ -22,7 +22,7 @@ public class MemberController {
   @Autowired MemberDao memberDao;
   @Autowired ServletContext sc;
 
-  // 회원가입 폼
+  // 회원 가입 폼
   @GetMapping("/member/addForm")
   public ModelAndView addForm() {
 
@@ -35,8 +35,8 @@ public class MemberController {
     return mv;
   }
 
-  //----------------------------------------------------------------------------------------------------------
-  // 회원가입
+  // ------------------------------------------------------------------------------
+  // 회원 가입
   @PostMapping("/member/add")
   public ModelAndView add(MemberDTO member, String site, HttpSession session) throws Exception {
 
@@ -54,7 +54,7 @@ public class MemberController {
     return mv;
   }
 
-  // 팝업 띄우기 위해
+  // 회원 가입 팝업 띄우기 위해
   @GetMapping("/member/add")
   public ModelAndView add(HttpSession session) {
 
@@ -71,7 +71,7 @@ public class MemberController {
     return mv;
   }
 
-  //----------------------------------------------------------------------------------------------------------
+  // ------------------------------------------------------------------------------
 
   // 회원 목록
   @GetMapping("/member/list")
@@ -109,7 +109,7 @@ public class MemberController {
     return mv;
   }
 
-  // 회원 목록 폼
+  // 관리자용 회원 목록 - (팝업 띄우기 위해 별도 생성)
   @GetMapping("/member/listForm")
   public ModelAndView listForm(HttpSession session) throws Exception {
 
@@ -128,6 +128,8 @@ public class MemberController {
     return mv;
   }
 
+  // ------------------------------------------------------------------------------
+
   // 마이페이지 상세
   @GetMapping("/member/detail")
   public ModelAndView detail(HttpSession session) throws Exception {
@@ -135,9 +137,7 @@ public class MemberController {
     MemberDTO user = (MemberDTO) session.getAttribute("loginUser");
 
     if (user == null) {
-
       throw new Exception("해당 회원을 찾을 수 없습니다.");
-
     }
 
     ModelAndView mv = new ModelAndView();
@@ -157,9 +157,7 @@ public class MemberController {
     MemberDTO member = memberDao.findByNo(memberNo);
 
     if (member == null) {
-
       throw new Exception("해당 회원을 찾을 수 없습니다.");
-
     }
 
     ModelAndView mv = new ModelAndView();
@@ -173,7 +171,7 @@ public class MemberController {
     return mv;
   }
 
-  //----------------------------------------------------------------------------------------------------------
+  // ------------------------------------------------------------------------------
   // 회원 정보 수정 폼
   @PostMapping("/member/updateForm")
   public ModelAndView updateForm(MemberDTO member) throws Exception {
@@ -189,7 +187,7 @@ public class MemberController {
     return mv;
   }
 
-  // 경로 주소는 같지만 Post, Get이 달라서 실행은 됨,,,,,,,,,,
+  // 경로 주소는 위와 동일 - Post와 Get으로 구분
   @GetMapping("/member/updateForm")
   public ModelAndView updateForm(HttpSession session) throws Exception {
 
@@ -205,8 +203,8 @@ public class MemberController {
 
     return mv;
   }
-  //----------------------------------------------------------------------------------------------------------
 
+  // ------------------------------------------------------------------------------
   // 회원 정보 수정
   @PostMapping("/member/update")
   public ModelAndView update(MemberDTO member,HttpSession session) throws Exception {
@@ -220,7 +218,7 @@ public class MemberController {
     memberDao.updateMember(member);
     sqlSessionFactory.openSession().commit();
 
-    // 업데이트된 멤버를 세션에 다시 저장 (마이페이지 새로고침될때 필요)
+    // 업데이트된 멤버를 세션에 다시 저장 (마이페이지 새로고침 될 때 필요)
     session.setAttribute("loginUser", memberDao.findByNo(member.getNo()));
 
     ModelAndView mv = new ModelAndView();
@@ -230,9 +228,8 @@ public class MemberController {
     return mv;
   }
 
-
-
-  // 회원 탈퇴 폼 열기
+  // ------------------------------------------------------------------------------
+  // 회원 탈퇴 폼 열기 위한 경로
   @GetMapping("/member/deleteForm")
   public ModelAndView deleteForm() throws Exception {
 
@@ -252,21 +249,6 @@ public class MemberController {
     mv.addObject("pageTitle", "회원 탈퇴");
     mv.addObject("contentID", "deletePopUp");
     mv.addObject("contentUrl", "member/memberDeleteForm.jsp");
-    mv.setViewName("template1");
-
-    return mv;
-  }
-
-  // 관리자용 회원 탈퇴 폼
-  @GetMapping("/member/deleteMemberPopUp")
-  public ModelAndView deleteMemberPopUp(int memberNo) throws Exception {
-
-    ModelAndView mv = new ModelAndView();
-
-    mv.addObject("pageTitle", "회원 탈퇴");
-    mv.addObject("member", memberDao.findByNo(memberNo));
-    mv.addObject("contentID", "deleteMemberPopUp");
-    mv.addObject("contentUrl", "member/adminDeleteMember.jsp");
     mv.setViewName("template1");
 
     return mv;
@@ -302,7 +284,23 @@ public class MemberController {
     return mv;
   }
 
-  // 회원 탈퇴
+  // ------------------------------------------------------------------------------
+  // 관리자용 회원 탈퇴 폼
+  @GetMapping("/member/deleteMemberPopUp")
+  public ModelAndView deleteMemberPopUp(int memberNo) throws Exception {
+
+    ModelAndView mv = new ModelAndView();
+
+    mv.addObject("pageTitle", "회원 탈퇴");
+    mv.addObject("member", memberDao.findByNo(memberNo));
+    mv.addObject("contentID", "deleteMemberPopUp");
+    mv.addObject("contentUrl", "member/adminDeleteMember.jsp");
+    mv.setViewName("template1");
+
+    return mv;
+  }
+
+  // 관리자용 회원 탈퇴 시키기
   @GetMapping("/member/adminDeleteMember")
   public ModelAndView adminDeleteMember(int memberNo) throws Exception {
 
@@ -340,36 +338,36 @@ public class MemberController {
     return mv;
   }
 
-  // ------------------------------------------------------------------------------------------
-
+  // ------------------------------------------------------------------------------
   // 멤버 이메일 중복 확인
   @GetMapping("/member/checkEmail")
   @ResponseBody
   public String checkEmail(String email, String site) throws Exception {
 
-    System.out.println(email+site);
-
     MemberDTO member = memberDao.findByEmail(email+site);
+
     if (member == null) {
       return "false";
+
     } else {
       return "true";
     }
   }
 
-  //멤버 닉네임 중복 확인
+  // 멤버 닉네임 중복 확인
   @GetMapping("/member/checkNickname")
   @ResponseBody
   public String checkNickname(String nickname) throws Exception {
 
     MemberDTO member = memberDao.findByNickName(nickname);
+
     if (nickname.equalsIgnoreCase("null")) {
       return "true";
-    } 
-    else if (member == null) {
+
+    } else if (member == null) {
       return "false";
-    }
-    else {
+
+    } else {
       return "true";
     }
   }

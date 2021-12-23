@@ -27,7 +27,9 @@ public class BoardController {
   // 게시글 등록 폼
   @GetMapping("/board/form")
   public ModelAndView form() {
+
     ModelAndView mv = new ModelAndView();
+
     mv.addObject("pageTitle", "새 글");
     mv.addObject("contentUrl", "board/BoardForm.jsp");
     mv.setViewName("template2");
@@ -57,11 +59,13 @@ public class BoardController {
     return mv;
   }
 
+  // ------------------------------------------------------------------------------
   //게시글 목록
   @GetMapping("/board/list")
   public ModelAndView list(@RequestParam(defaultValue = "1") int pageNo, 
       @RequestParam(defaultValue = "8") int pageSize, HttpSession session) throws Exception {
 
+    // 페이징 처리 시작
     int count = boardDao.count();
 
     if (pageSize < 5 || pageSize > 8) {
@@ -80,6 +84,7 @@ public class BoardController {
     params.put("length", pageSize);
 
     List<BoardDTO> boardList = boardDao.findAll(params);
+    // 페이징 처리 끝
 
     ModelAndView mv = new ModelAndView();
 
@@ -95,6 +100,7 @@ public class BoardController {
     return mv;
   }
 
+  // ------------------------------------------------------------------------------
   // 게시글 상세
   @GetMapping("/board/detail")
   public ModelAndView detail(int no, HttpSession session) throws Exception {
@@ -115,9 +121,8 @@ public class BoardController {
     List<CommentDTO> replyList = commentDao.findAllReply(no);
     List<BoardLikeDTO> boardLikeList = boardDao.findLikeAll();
 
-    System.out.println(commentList);
-
-
+    // 로그인 유저가 좋아요 누른 게시글인지 아닌지 판단하기 위해 for문 작성
+    // 하나의 게시글에 좋아요는 한 번만 할 수 있기 때문!
     for (BoardLikeDTO list : boardLikeList) {
       if (list.getMemberNo() == member.getNo() && list.getBoardNo() == board.getNo()) {
         mv.addObject("list", list);
@@ -133,7 +138,8 @@ public class BoardController {
     return mv;
   }
 
-  // 게시글 업데이트
+  // ------------------------------------------------------------------------------
+  // 게시글 수정 폼
   @GetMapping("/board/updateForm")
   public ModelAndView updateForm(int no) throws Exception {
 
@@ -147,7 +153,7 @@ public class BoardController {
     return mv;
   }
 
-  // 게시글 업데이트
+  // 게시글 수정
   @PostMapping("/board/update")
   public ModelAndView update(BoardDTO board) throws Exception {
 
@@ -164,14 +170,17 @@ public class BoardController {
     return mv;
   }
 
+  // ------------------------------------------------------------------------------
   // 게시글 삭제
   @GetMapping("/board/delete")
   public ModelAndView delete(int no) throws Exception {
 
     BoardDTO board = boardDao.findByNo(no);
+
     if (board == null) {
       throw new Exception("해당 번호의 게시글이 없습니다.");
     }
+
     commentDao.deleteByBoardNo(no);
     boardDao.delete(no);
     sqlSessionFactory.openSession().commit();
@@ -181,13 +190,10 @@ public class BoardController {
     return mv;
   }
 
-
   // ---------------------------------------------------------------------------------
-
   // 게시글 검색
   @GetMapping("/board/search") 
   public ModelAndView search(String option, String keyword) throws Exception {
-
 
     if (option.equals("all")) {
       option = "b.title "+" like(concat('%'," +" '" +keyword+"' " +",'%'))"+" or m.nickname "+" like(concat('%'," +" '" +keyword+"' " +",'%'))";
@@ -210,8 +216,7 @@ public class BoardController {
   }
 
   // ---------------------------------------------------------------------------------
-
-  // 게시글 좋아요
+  // 게시글 좋아요 누르기 전
   @GetMapping("/board/like") 
   public ModelAndView like(int boardNo, int memberNo) throws Exception {
 
@@ -225,7 +230,7 @@ public class BoardController {
     return mv;
   }
 
-  // 게시글 좋아요 취소
+  // 게시글 좋아요 누른 후 취소하기
   @GetMapping("/board/unlike") 
   public ModelAndView unlike(int boardNo, int memberNo) throws Exception {
 

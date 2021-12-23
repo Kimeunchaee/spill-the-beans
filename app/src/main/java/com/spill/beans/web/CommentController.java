@@ -24,6 +24,7 @@ public class CommentController {
   @Autowired BoardDao boardDao;  
   @Autowired ServletContext sc;
 
+  // 원댓 등록
   @PostMapping("board/comment/add")
   public ModelAndView add(CommentDTO comment, HttpSession session) throws Exception {
 
@@ -42,12 +43,9 @@ public class CommentController {
     comment.setWriter((MemberDTO) session.getAttribute("loginUser"));
     comment.setReplyCount(0);
 
-    System.out.println("*******************코멘트 오더번호(원댓) : "+comment.getOrderNo());
-
     if(comment.getIsPublic() == 0) {
       comment.setIsPublic(1);
     }
-
 
     commentDao.insertComment(comment);
 
@@ -56,16 +54,17 @@ public class CommentController {
 
     sqlSessionFactory.openSession().commit();
 
-
     mv.setViewName("redirect:../detail?no=" + comment.getBoardNo());
     return mv;
   }
 
-  // 댓글 번호만 PopUp으로 전달
+  // ------------------------------------------------------------------------------
+  // 댓글 번호만 팝업으로 전달
   @GetMapping("board/comment/updateForm")
   public ModelAndView updateForm(int commentNo, RedirectAttributes redirectAttributes) throws Exception {
 
-    redirectAttributes.addAttribute("commentNo", commentNo); // 기본자료형만 가능함 (String, int ...)
+    // addAttribute : 기본 자료형만 가능함 (String, int ...)
+    redirectAttributes.addAttribute("commentNo", commentNo);
 
     ModelAndView mv = new ModelAndView();
 
@@ -74,7 +73,7 @@ public class CommentController {
     return mv;
   }
 
-  // 번호 받아서 코멘트 객체 찾아서 팝업 출력
+  // 위에서 댓글 번호 받아서 코멘트 객체 찾아서 팝업 출력
   @GetMapping("board/comment/updateForm/PopUp")
   public ModelAndView updateFormPopUp(@RequestParam("commentNo") int commentNo) throws Exception {
 
@@ -93,6 +92,8 @@ public class CommentController {
     return mv;
   }
 
+  // ------------------------------------------------------------------------------
+  // 원댓 수정
   @PostMapping("board/comment/update")
   public ModelAndView update(CommentDTO comment) throws Exception {
 
@@ -104,6 +105,7 @@ public class CommentController {
     return mv;
   }
 
+  // 원댓 삭제
   @GetMapping("board/comment/delete")
   public ModelAndView delete(int commentNo) throws Exception {
     CommentDTO comment = commentDao.findByNo(commentNo);

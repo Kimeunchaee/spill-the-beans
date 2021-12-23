@@ -37,23 +37,20 @@ document.querySelector("#login-form").onsubmit = () => {
 	  }
 	};
 	
-	// Articles.
-    $main_articles.each(function() {
+	// X 버튼 클릭 시 home으로 가게 설정하려고 했으나 먹히지 않음
+/*     $main_articles.each(function() {
 
       var $this = $(this);
 
-      // Close.
         $('<div class="close">Close</div>')
           .appendTo($this)
           .on('click', function() {
             location.hash = '${contextPath}/app/home';
           });
 
-      // Prevent clicks from inside article from bubbling.
         $this.on('click', function(event) {
           event.stopPropagation();
         });
-
-    });
+    }); */
 	
 </script>

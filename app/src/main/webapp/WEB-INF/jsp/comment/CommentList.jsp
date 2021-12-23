@@ -66,6 +66,15 @@
   display: inline;
 }
 
+.swal2-title {
+    font-size: 18px;
+}
+.swal2-styled.swal2-confirm {
+    line-height: 14px;
+    font-weight: bold;
+    background-color: rgb(31 71 63 / 100%);
+}
+
 </style>
 
   <div id="empty-comment">
@@ -139,7 +148,7 @@
                          <c:if test='${not empty loginUser}'>
                            <div class="col-sm-11">
                              <%-- 대댓글 입력 폼 --%>
-                             <form action='comment/reply/add' method="post">
+                             <form action='comment/reply/add' method="post" id="reply-form">
                                <input type="hidden" name="boardNo" value="${board.no}">
                                <input type="hidden" name="parentNo" value="${comment.no}">
                                <input type="hidden" name="groupNo" value="${comment.no}">
@@ -161,7 +170,7 @@
                                </span>
                                
                                <div class="comment-bottom">
-                                 <textarea id='f-comment-content' name='content' class="form-control col-md-6" rows="2" style="margin-right:5px;"></textarea>
+                                 <textarea id='f-reply-content' name='content' class="form-control col-md-6" rows="2" style="margin-right:5px;"></textarea>
                                  <button type="submit" class ="button" style="font-size: 14px; height: auto; line-height: 32px;">등록</button>
                                </div>
                              </form> <%-- 대댓글 입력 폼 end --%>
@@ -294,7 +303,7 @@
                                                          <c:if test='${not empty loginUser}'>
                                                            <div class="col-sm-11">
                                                              <%-- re:대대댓글 입력 폼 --%>
-                                                             <form action='comment/reply/add' method="post">
+                                                             <form action='comment/reply/add' method="post" id="re-comment-form">
                                                                <input type="hidden" name="boardNo" value="${board.no}">
                                                                <input type="hidden" name="parentNo" value="${reply.no}">
                                                                <input type="hidden" name="groupNo" value="${reply.parentNo}">
@@ -312,7 +321,7 @@
                                                                </span>
                                                                
                                                                <div class="comment-bottom">
-                                                                 <textarea id='f-comment-content' name='content' class="form-control col-md-6" rows="2" style="margin-right:5px;"></textarea>
+                                                                 <textarea id='f-re-comment-content' name='content' class="form-control col-md-6" rows="2" style="margin-right:5px;"></textarea>
                                                                  <button type="submit" class ="button" style="font-size: 14px; height: auto; line-height: 32px;">등록</button>
                                                                </div>
                                                              </form> <%-- re:대대댓글 입력 폼 end --%>
@@ -324,8 +333,6 @@
                                                      </div>
                                                    </div> <%-- re:대대댓글 보이기 end --%>
                                           
-                                          
-                                          
                                           </div>
                                        </div>
                                      </c:if>
@@ -335,17 +342,29 @@
                          
                        </div>
                      </div>
-            </div> <%-- 대댓글 보이기 end --%>
-            
-            
-            
-            
+                </div> <%-- 대댓글 보이기 end --%>
             
          </div>
        </div> <%-- 원댓글 end --%>
      </c:forEach> <%-- 원댓글 반복문 end --%>
   </div>
   
+<script>
+document.querySelector("#reply-form").onsubmit = () => {
+  if (document.querySelector("#f-reply-content").value == "") {
+    Swal.fire("댓글 내용을 입력해 주세요.")
+    return false;
+  }
+};
+
+document.querySelector("#re-comment-form").onsubmit = () => {
+	  if (document.querySelector("#f-re-comment-content").value == "") {
+	    Swal.fire("댓글 내용을 입력해 주세요.")
+	    return false;
+	  }
+	};
+</script>
+
 <script>
 var showType = true;
 var acc = document.getElementsByClassName("accordion");

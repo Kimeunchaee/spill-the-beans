@@ -31,9 +31,3 @@
 	  <br><br>
 	</c:otherwise>
 </c:choose>
-
-<script>
-
-
-
-</script>

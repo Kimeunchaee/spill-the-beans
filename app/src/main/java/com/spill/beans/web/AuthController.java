@@ -18,6 +18,7 @@ public class AuthController {
   @Autowired MemberDao memberDao;
   @Autowired ServletContext sc;
 
+  // 로그인 폼
   @GetMapping("/auth/loginForm")
   public ModelAndView loginForm() {
 
@@ -31,20 +32,27 @@ public class AuthController {
     return mv;
   }
 
+  // 로그인
   @RequestMapping("/auth/login")
-  public ModelAndView login(String email, String password, String saveEmail,
-      HttpServletResponse response, HttpSession session) throws Exception {
+  public ModelAndView login(String email, 
+      String password, 
+      String saveEmail,
+      HttpServletResponse response, 
+      HttpSession session) throws Exception {
 
     Cookie cookie = null;
+
     if (saveEmail != null) {
       cookie = new Cookie("email", email);
       cookie.setMaxAge(60 * 60 * 24 * 7);
-      //cookie.setPath(sc.getContextPath() + "/app/auth"); // 예) http://localhost:8080/pms/app/auth
+      // cookie.setPath(sc.getContextPath() + "/app/auth"); 
+      // 예) http://localhost:8080/pms/app/auth
 
     } else {
       cookie = new Cookie("email", "");
-      cookie.setMaxAge(0); // 유효기간을 0으로 설정하면 웹브라우저가 받는 즉시 무효한 쿠기가 된다.
+      cookie.setMaxAge(0); // 유효 기간을 0으로 설정하면 웹브라우저가 받는 즉시 무효한 쿠기가 된다.
     }
+
     response.addCookie(cookie);
 
     MemberDTO member = memberDao.findByEmailAndPassword(email, password);
@@ -62,6 +70,7 @@ public class AuthController {
     return mv;
   }
 
+  // 로그인 실패
   @GetMapping("/auth/loginFail")
   public ModelAndView loginFail() throws Exception {
 
@@ -76,6 +85,7 @@ public class AuthController {
     return mv;
   }
 
+  // 로그아웃
   @GetMapping("/auth/logout")
   public ModelAndView logout(HttpSession session) throws Exception {
 

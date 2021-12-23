@@ -3,12 +3,12 @@ package com.spill.beans.dto;
 import java.sql.Date;
 
 public class MemberDTO {
-  private int no;
-  private String nickname;
-  private String email;
-  private String password;
-  private Date registeredDate;
-  private int active; // 1: 멤버 2: 탈퇴 3: 관리자
+  private int no;                       // 멤버 번호
+  private String nickname;              // 닉네임
+  private String email;                 // 이메일
+  private String password;              // 비밀번호
+  private Date registeredDate;          // 가입일
+  private int active;                   // 1: 멤버 2: 탈퇴 3: 관리자
 
   @Override
   public String toString() {

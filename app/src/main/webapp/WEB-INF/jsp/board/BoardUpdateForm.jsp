@@ -50,17 +50,26 @@ input[type="checkbox"]:checked + label:before{
     padding-left: 1px;
 }
 
+.swal2-title {
+    font-size: 18px;
+}
+.swal2-styled.swal2-confirm {
+    line-height: 14px;
+    font-weight: bold;
+    background-color: rgb(31 71 63 / 100%);
+}
+
 </style>
 
 <h2 class="major">게시글</h2>
-<form action='update' method='post' style="width: 1000px;">
+<form action='update' method='post' style="width: 1000px;" id="board-form">
 
   <input id='f-no' type='hidden' name='no' class="form-control" value='${board.no}' readonly>
   
 	<div class="mb-3 row">
 	  <div class="col-sm-10">
 	    <h4>${board.category.label}</h4>
-	    <input type="text" name="title" value="${board.title}" style="font-size: 22px; margin: 0; font-weight: bold;">
+	    <input type="text" name="title" id="f-title" value="${board.title}" style="font-size: 22px; margin: 0; font-weight: bold;">
 	    <h4 style="margin-top: 6px;">${board.writer.nickname} | ${board.registeredDate} | 조회수:${board.viewCount} | 좋아요:${board.likeCount}</h4>
 	  </div>
 	</div>
@@ -88,7 +97,7 @@ input[type="checkbox"]:checked + label:before{
 </form>
 
 <script>
-document.querySelector("#member-form").onsubmit = () => {
+document.querySelector("#board-form").onsubmit = () => {
 	if (document.querySelector("#f-title").value == "" ||
 			document.querySelector("#f-content").value == "") {
 		Swal.fire("필수 입력 항목이 비어 있습니다.")

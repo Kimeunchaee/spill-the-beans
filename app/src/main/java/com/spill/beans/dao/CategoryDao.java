@@ -4,13 +4,9 @@ import java.util.List;
 import com.spill.beans.dto.CategoryDTO;
 
 // 역할
-// - 관리자만 사용 가능
 // - 카테고리 데이터를 처리하는 객체 사용법 정의
 public interface CategoryDao {
-  List<CategoryDTO> findAll() throws Exception;
 
-  void insert(CategoryDTO category) throws Exception;
-  void update(CategoryDTO category) throws Exception;
-  void delete(int no) throws Exception;
+  List<CategoryDTO> findAll() throws Exception;
 
 }

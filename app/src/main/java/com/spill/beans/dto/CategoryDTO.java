@@ -1,8 +1,8 @@
 package com.spill.beans.dto;
 
 public class CategoryDTO {
-  private int no;
-  private String label;
+  private int no;               // 카테고리 번호
+  private String label;         // 1: 일 2: 학업 3: 일상
 
   @Override
   public String toString() {
