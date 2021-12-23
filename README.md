@@ -23,6 +23,12 @@
 5. 기간 : 2021.12.06 ~ 2021.12.23 (약 2주)
 <br><br>
 
+## 팀원 소개
+| 🐳 이혜연 | 🐣 조솔 | 👻 김은채 | 
+| :-----------: | :------------: | :------------: | 
+| Front-End & Back-End |  Front-End & Back-End |  Front-End & Back-End | 
+| [lee-hyeyeon](https://github.com/lee-hyeyeon) | [jo-sol](https://github.com/jo-sol) | [Kimeunchaee](https://github.com/Kimeunchaee) |
+
 ## 프로젝트 일정
 <img src=app/docs/img/flow_chart_white.png>
 <br>
