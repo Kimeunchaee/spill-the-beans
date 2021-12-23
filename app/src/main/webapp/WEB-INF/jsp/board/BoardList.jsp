@@ -42,9 +42,8 @@ input[type=text] {
   line-height: 30px;
 }
 
-.home-wrap {
-    margin-right: 1119px;
-    margin-bottom: 17px;
+ .home-wrap {
+    width: 1180px;
     transition: 0.6;
     font-size: 20px;
 }
@@ -56,11 +55,12 @@ select option {
 
 </style>
 
-<h2 class="major" style="margin-bottom: 15px;"><a href="${contextPath}/app/board/list">게시글 목록</a></h2>
-
 <div class="home-wrap">
   <a href='${contextPath}/app/home'><i class="fas fa-home"></i></a>
+  <h2 class="major" style="display: inline-block; margin-left: 480px;">게시글 목록</h2>
 </div>
+
+
 <table class="table" style="width: 1200px;">
 <thead>
   <tr>
