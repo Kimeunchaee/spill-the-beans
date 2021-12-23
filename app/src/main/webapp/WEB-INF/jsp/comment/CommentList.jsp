@@ -60,20 +60,22 @@
              <c:choose>
                 <%-- 비밀 댓글일 때 출력--%>
                  <c:when test="${comment.isPublic == 2}">
-                 <c:choose>
-                 
-                   <%-- 내가 쓴 비밀댓글 & 게시글 작성자가 볼 수 있는 비밀 댓글--%>
-                   <c:when test="${comment.writer.no == loginUser.no or board.writer.no == loginUser.no}">
-                    <span style="font-size: 14px; color: white;">${comment.writer.nickname} | ${comment.registeredDate}</span><br>
-                    <span style="color: white"><i class="fas fa-lock"></i></span> <span>${comment.content} </span><br>
-                   </c:when>
-                   
-                   <%-- 다른 사람들이 보는 비밀댓글 출력문--%>
-                   <c:otherwise>
-                      <span><i class="fas fa-lock"></i> 비밀 댓글입니다.</span><br>
-                  </c:otherwise>
-                  </c:choose>
-                </c:when>
+	                 <c:choose>
+	                 
+	                   <%-- 내가 쓴 비밀댓글 & 게시글 작성자가 볼 수 있는 비밀 댓글--%>
+	                   <c:when test="${comment.writer.no == loginUser.no or board.writer.no == loginUser.no}">
+	                    <span style="font-size: 14px; color: white;">${comment.writer.nickname} | ${comment.registeredDate}</span><br>
+	                    <span style="color: white"><i class="fas fa-lock"></i></span> <span>${comment.content} </span><br>
+	                   </c:when>
+	                   
+	                   <%-- 다른 사람들이 보는 비밀댓글 출력문--%>
+	                   <c:otherwise>
+	                      <span style="display: inline-block; margin-bottom: 10px;">
+	                          <i class="fas fa-lock"></i> 비밀 댓글입니다.
+	                      </span><br>
+	                  </c:otherwise>
+	                 </c:choose>
+                 </c:when>
                 
                 <%-- 공개 댓글일 때 --%>
                  <c:otherwise>
@@ -94,11 +96,11 @@
                 
                 <%-- 대댓글 버튼 --%>
                 <c:if test="${(comment.isPublic == 2 and (comment.writer.no == loginUser.no or board.writer.no == loginUser.no)) or comment.isPublic == 1}">
-              <button class="accordion" style="font-size: 14px; color: white;">답글 ${comment.replyCount -1}개 ▼ | 답글 쓰기</button>
-            </c:if>
+		              <button class="accordion" style="font-size: 14px; color: white;">답글 ${comment.replyCount -1}개 ▼ | 답글 쓰기</button>
+		            </c:if>
             
                  <%-- 대댓글 보이기 --%>
-            <div class="panel">
+                  <div class="panel">
                      <div style="width: 810px;">
                        <div class="mb-3 row" style="width: 800px;">
                          <label for='f-comment-title' class="col-form-label">[답글]</label>
@@ -139,7 +141,7 @@
                          <div class="col-sm-12">
                               <div class="replyList-wrap">
                                    <c:forEach items="${replyList}" var="reply">
-                                    <c:if test="${comment.groupNo == reply.groupNo}">
+                                    <c:if test="${comment.no == reply.parentNo}">
                                      <div class="card2">
                                        <div class="card-body" style="padding: 5px 0;">
                                        
@@ -154,7 +156,9 @@
                                                </c:when>
                                                
                                                <c:otherwise>
-                                                   <span><i class="fas fa-lock"></i> 비밀 댓글입니다.</span><br>
+                                                   <span style="display: inline-block; margin-bottom: 10px;">
+                                                      <i class="fas fa-lock"></i> 비밀 댓글입니다.
+                                                   </span><br>
                                                </c:otherwise>
                                                </c:choose>
                                              </c:when>
@@ -176,8 +180,8 @@
                                           </c:if>
                                           
                                           
-                                          <%-- re:대대댓글 시작--%>
-                                             <%-- re:대대댓글 버튼 --%>
+		                                          <%-- re:대대댓글 시작--%>
+		                                               <%-- re:대대댓글 버튼 --%>
                                                    <c:if test="${(reply.isPublic == 2 and (reply.writer.no == loginUser.no or board.writer.no == loginUser.no)) or reply.isPublic == 1}">
                                                      <button class="accordion" style="font-size: 14px; color: white;">답글 쓰기</button>
                                                    </c:if>
@@ -220,7 +224,7 @@
                                                          <div class="col-sm-12">
                                                            <div class="replyList-wrap">
                                                                 <c:forEach items="${replyList}" var="re_reply">
-                                                                 <c:if test="${reply.groupNo == re_reply.groupNo}">
+                                                                 <c:if test="${reply.no == re_reply.parentNo}">
                                                                   <div class="card2">
                                                                     <div class="card-body" style="padding: 5px 0;">
                                                                     
@@ -235,7 +239,9 @@
                                                                             </c:when>
                                                                             
                                                                             <c:otherwise>
-                                                                                <span><i class="fas fa-lock"></i> 비밀 댓글입니다.</span><br>
+                                                                                <span style="display: inline-block; margin-bottom: 10px;">
+                                                                                    <i class="fas fa-lock"></i> 비밀 댓글입니다.
+                                                                                </span><br>
                                                                             </c:otherwise>
                                                                             </c:choose>
                                                                           </c:when>
