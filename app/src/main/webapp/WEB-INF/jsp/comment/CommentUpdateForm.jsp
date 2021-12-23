@@ -23,8 +23,8 @@
  <h2 class="major">댓글 수정</h2>
  
  <form action="../update" name='commentInfo' method="post" onsubmit="return check()">
-    <input type="hidden" style="color: white" value="${comment.no}" name="no">
-    <input type="hidden" style="color: white" value="${comment.boardNo}" name="boardNo">
+    <input type="hidden" name="no" value="${comment.no}" style="color: white">
+    <input type="hidden" name="boardNo" value="${comment.boardNo}" style="color: white">
 
     <input type="radio" id="demo-priority-low" name="isPublic" value="1" checked>
     <label for="demo-priority-low">공개</label>

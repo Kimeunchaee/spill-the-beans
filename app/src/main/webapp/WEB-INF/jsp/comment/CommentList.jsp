@@ -112,13 +112,13 @@
                                <input type="hidden" name="groupNo" value="${comment.no}">
                                <input type="hidden" name="classNo" value="${comment.classNo + 1}">
                                
-                        <c:if test="${comment.replyCount == 0}">
-                                  <input type="hidden" name="orderNo" value="${comment.replyCount + 2}">
-                        </c:if>
-                        
-                        <c:if test="${comment.replyCount > 0}">
-                            <input type="hidden" name="orderNo" value="${comment.replyCount + 1}">
-                        </c:if>
+				                       <c:if test="${comment.replyCount == 0}">
+				                          <input type="hidden" name="orderNo" value="${comment.replyCount + 2}">
+				                       </c:if>
+				                        
+				                       <c:if test="${comment.replyCount > 0}">
+				                          <input type="hidden" name="orderNo" value="${comment.replyCount + 1}">
+				                       </c:if>
                                
                                <span>
                                  작성자 : ${loginUser.nickname} &nbsp; | &nbsp;
